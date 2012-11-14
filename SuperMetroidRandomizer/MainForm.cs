@@ -2,7 +2,6 @@
 using System.Collections;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using SuperMetroidRandomizer.Properties;
 
@@ -42,6 +41,11 @@ namespace SuperMetroidRandomizer
         private const int RESERVE_MARIDIA_ADDR = 0x7c5e3;
         private const int SPRING_ADDR = 0x7c6e5;
         private const int SPACE_JUMP_ADDR = 0x7c7a7;
+
+        private const int SEG1_START = 0x78000;
+        private const int SEG1_END = 0x79192;
+        private const int SEG2_START = 0x7c215;
+        private const int SEG2_END = 0x7c7bb;
 
         private const string ETANK = "\xd7\xee";
         private const string MISSILE = "\xdb\xee";
@@ -201,7 +205,7 @@ namespace SuperMetroidRandomizer
             return 0;
         }
 
-        private string ReadMajorItem(BitArray bits, int arrayLoc)
+        private static string ReadMajorItem(BitArray bits, int arrayLoc)
         {
             if (!bits[arrayLoc] && !bits[arrayLoc + 1] && !bits[arrayLoc + 2] && !bits[arrayLoc + 3])
                 return CHOZO_CHARGE;
@@ -392,11 +396,11 @@ namespace SuperMetroidRandomizer
 
         private void WriteMinorItems(ref FileStream rom)
         {
-            rom.Seek(0x78000, SeekOrigin.Begin);
-            while (rom.Position < 0x79192)
+            rom.Seek(SEG1_START, SeekOrigin.Begin);
+            while (rom.Position < SEG1_END)
                 WriteMinorItem(ref rom);
-            rom.Seek(0x7c215, SeekOrigin.Begin);
-            while (rom.Position != 0x7c7bb)
+            rom.Seek(SEG2_START, SeekOrigin.Begin);
+            while (rom.Position != SEG2_END)
                 WriteMinorItem(ref rom);
         }
 
