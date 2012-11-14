@@ -1,0 +1,586 @@
+﻿using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using SuperMetroidRandomizer.Properties;
+
+namespace SuperMetroidRandomizer
+{
+    public enum Suitless
+    {
+        Disabled,
+        Possible,
+        Forced
+    }
+
+    public partial class MainForm : Form
+    {
+        const int ETANK_POS = 0;
+        const int MISSILE_POS = 1;
+        const int SUPER_POS = 2;
+        const int POWERBOMB_POS = 3;
+
+        //private const int BOMB_ADDR = 0x78404;
+        private const int RESREVE_BRINSTAR_ADDR = 0x7852c;
+        private const int CHARGE_ADDR = 0x78614;
+        //private const int MORPH_ADDR = 0x786de;
+        private const int XRAY_ADDR = 0x78876;
+        private const int SPAZER_ADDR = 0x7896e;
+        private const int VARIA_ADDR = 0x78aca;
+        private const int ICE_ADDR = 0x78b24;
+        private const int HIJUMP_ADDR = 0x78bac;
+        private const int GRAPPLE_ADDR = 0x78c36;
+        private const int RESERVE_NORFAIR_ADDR = 0x78c3e;
+        private const int SPEED_ADDR = 0x78c82;
+        private const int WAVE_ADDR = 0x78cca;
+        private const int SCREW_ADDR = 0x79110;
+        private const int RESERVE_WS_ADDR = 0x7c2e9;
+        private const int GRAVITY_ADDR = 0x7c36d;
+        private const int PLASMA_ADDR = 0x7c559;
+        private const int RESERVE_MARIDIA_ADDR = 0x7c5e3;
+        private const int SPRING_ADDR = 0x7c6e5;
+        private const int SPACE_JUMP_ADDR = 0x7c7a7;
+
+        private const string ETANK = "\xd7\xee";
+        private const string MISSILE = "\xdb\xee";
+        private const string SUPER = "\xdf\xee";
+        private const string PB = "\xe3\xee";
+        //private const string BOMBS = "\xe7\xee";
+        //private const string CHARGE = "\xeb\xee";
+        //private const string ICE = "\xef\xee";
+        //private const string HIJUMP = "\xf3\xee";
+        //private const string SPEED_BOOSTER = "\xf7\xee";
+        //private const string WAVE_BEAM = "\xfb\xee";
+        //private const string SPAZER = "\xff\xee";
+        //private const string SPRING = "\x03\xef";
+        //private const string VARIA = "\x07\xef";
+        //private const string PLASMA = "\x13\xef";
+        //private const string GRAPPLE = "\x17\xef";
+        //private const string MORPHBALL = "\x23\xef";
+        //private const string RESERVE = "\x27\xef";
+        //private const string GRAVITY = "\x0b\xef";
+        //private const string XRAY = "\x0f\xef";
+        //private const string SPACE_JUMP = "\x1b\xef";
+        //private const string SCREW_ATTACK = "\x1f\xef";
+        //private const string CHOZO_ETANK = "\x2b\xef";
+        //private const string CHOZO_MISSILE = "\x2f\xef";
+        //private const string CHOZO_SUPER = "\x33\xef";
+        //private const string CHOZO_PB = "\x37\xef";
+        //private const string CHOZO_BOMB = "\x3b\xef";
+        private const string CHOZO_CHARGE = "\x3f\xef";
+        private const string CHOZO_ICE = "\x43\xef";
+        private const string CHOZO_HIJUMP = "\x47\xef";
+        private const string CHOZO_SPEED = "\x4b\xef";
+        private const string CHOZO_WAVE = "\x4f\xef";
+        private const string CHOZO_SPAZER = "\x53\xef";
+        private const string CHOZO_SPRING = "\x57\xef";
+        private const string CHOZO_VARIA = "\x5b\xef";
+        private const string CHOZO_GRAVITY = "\x5f\xef";
+        private const string CHOZO_XRAY = "\x63\xef";
+        private const string CHOZO_PLASMA = "\x67\xef";
+        private const string CHOZO_GRAPPLE = "\x6b\xef";
+        private const string CHOZO_SPACE_JUMP = "\x6f\xef";
+        private const string CHOZO_SCREW_ATTACK = "\x73\xef";
+        //private const string CHOZO_MORPH = "\x77\xef";
+        private const string CHOZO_RESERVE = "\x7b\xef";
+        private const string HIDDEN_ETANK = "\x7f\xef";
+        private const string HIDDEN_MISSILE = "\x83\xef";
+        private const string HIDDEN_SUPER = "\x87\xef";
+        private const string HIDDEN_PB = "\x8b\xef";
+        //private const string HIDDEN_BOMBS = "\x8f\xef";
+        //private const string HIDDEN_CHARGE = "\x93\xef";
+        //private const string HIDDEN_ICE = "\x97\xef";
+        //private const string HIDDEN_SPEED = "\x9f\xef";
+        //private const string HIDDEN_WAVE = "\xa3\xef";
+        //private const string HIDDEN_SPAZER = "\xa7\xef";
+        //private const string HIDDEN_SPRING = "\xab\xef";
+        //private const string HIDDEN_VARIA = "\xaf\xef";
+        //private const string HIDDEN_GRAV = "\xb3\xef";
+        //private const string HIDDEN_XRAY = "\xb7\xef";
+        //private const string HIDDEN_PLASMA = "\xbb\xef";
+        //private const string HIDDEN_GRAPPLE = "\xbf\xef";
+        //private const string HIDDEN_SPACE = "\xc3\xef";
+        //private const string HIDDEN_MORPH = "\xc7\xef";
+        //private const string HIDDEN_RESERVE = "\xcf\xef";
+
+        // Item pickups
+        readonly string[] pickups = { ETANK, MISSILE, SUPER, PB };
+        readonly string[] hidden_pickups = { HIDDEN_ETANK, HIDDEN_MISSILE, HIDDEN_SUPER, HIDDEN_PB };
+
+        int[] items = new int[76];
+        int items_position;
+
+        // Major items
+        string[] majorItems = { CHOZO_CHARGE, CHOZO_ICE, CHOZO_HIJUMP, CHOZO_SPEED, CHOZO_WAVE, CHOZO_SPAZER, CHOZO_SPRING, CHOZO_VARIA, CHOZO_GRAVITY, CHOZO_XRAY, CHOZO_PLASMA, CHOZO_GRAPPLE, CHOZO_SPACE_JUMP, CHOZO_SCREW_ATTACK, CHOZO_RESERVE, CHOZO_RESERVE, CHOZO_RESERVE, CHOZO_RESERVE };
+
+        // Suitless stuff
+        Suitless suitless;
+
+        private static readonly Random random = new Random();
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void process_Click(object sender, EventArgs e)
+        {
+            string filename = outputFilename.Text;
+
+            //default to disabled in case they somehow uncheck all the buttons
+            if (suitlessPossible.Checked)
+                suitless = Suitless.Possible;
+            else if (suitlessForced.Checked)
+                suitless = Suitless.Forced;
+            else
+                suitless = Suitless.Disabled;
+
+
+            output.Text = "";
+            items_position = 0;
+
+            var rom = new FileStream(filename, FileMode.OpenOrCreate);
+            rom.Write(Resources.RomImage, 0, 3145728);
+
+            if (string.IsNullOrWhiteSpace(seed.Text))
+            {
+                output.Text += "Generating random item lists..." + Environment.NewLine;
+                GenerateItemList();
+            }
+            else
+            {
+                output.Text += "Parsing seed..." + Environment.NewLine;
+                ParseSeed();
+            }
+
+            output.Text += "Writing major items to file..." + Environment.NewLine;
+            WriteMajorItems(ref rom);
+
+            output.Text += "Writing minor items to file..." + Environment.NewLine;
+            WriteMinorItems(ref rom);
+
+            output.Text += "Done!" + Environment.NewLine;
+            rom.Close();
+
+            output.Text += string.Format("{1}{1}Seed: {0}{1}", GetSeed(), Environment.NewLine);
+
+        }
+
+        private void ParseSeed()
+        {
+            var parseSeed = seed.Text + "==";
+
+            var bytes = Convert.FromBase64String(parseSeed);
+            var bits = new BitArray(bytes);
+            int arrayLoc = 0;
+
+            for (int i = 0; i < majorItems.Length; i++)
+            {
+                majorItems[i] = ReadMajorItem(bits, arrayLoc);
+                arrayLoc += 4;
+            }
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i] = ReadMinorItem(bits, arrayLoc);
+                arrayLoc += 2;
+            }
+        }
+
+        private static int ReadMinorItem(BitArray bits, int arrayLoc)
+        {
+            if (!bits[arrayLoc] && !bits[arrayLoc + 1])
+                return 0;
+            if (!bits[arrayLoc] && bits[arrayLoc + 1])
+                return 1;
+            if (bits[arrayLoc] && !bits[arrayLoc + 1])
+                return 2;
+            if (bits[arrayLoc] && bits[arrayLoc + 1])
+                return 3;
+            return 0;
+        }
+
+        private string ReadMajorItem(BitArray bits, int arrayLoc)
+        {
+            if (!bits[arrayLoc] && !bits[arrayLoc + 1] && !bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_CHARGE;
+            if (!bits[arrayLoc] && !bits[arrayLoc + 1] && !bits[arrayLoc + 2] && bits[arrayLoc + 3])
+                return CHOZO_ICE;
+            if (!bits[arrayLoc] && !bits[arrayLoc + 1] && bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_HIJUMP;
+            if (!bits[arrayLoc] && !bits[arrayLoc + 1] && bits[arrayLoc + 2] && bits[arrayLoc + 3])
+                return CHOZO_SPEED;
+            if (!bits[arrayLoc] && bits[arrayLoc + 1] && !bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_WAVE;                                               
+            if (!bits[arrayLoc] && bits[arrayLoc + 1] && !bits[arrayLoc + 2] && bits[arrayLoc + 3])
+                return CHOZO_SPAZER;
+            if (!bits[arrayLoc] && bits[arrayLoc + 1] && bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_SPRING;
+            if (!bits[arrayLoc] && bits[arrayLoc + 1] && bits[arrayLoc + 2] && bits[arrayLoc + 3])
+                return CHOZO_VARIA;
+            if (bits[arrayLoc] && !bits[arrayLoc + 1] && !bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_GRAVITY;
+            if (bits[arrayLoc] && !bits[arrayLoc + 1] && !bits[arrayLoc + 2] && bits[arrayLoc + 3])
+                return CHOZO_XRAY;
+            if (bits[arrayLoc] && !bits[arrayLoc + 1] && bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_PLASMA;
+            if (bits[arrayLoc] && !bits[arrayLoc + 1] && bits[arrayLoc + 2] && bits[arrayLoc + 3])
+                return CHOZO_GRAPPLE;
+            if (bits[arrayLoc] && bits[arrayLoc + 1] && !bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_SPACE_JUMP;
+            if (bits[arrayLoc] && bits[arrayLoc + 1] && !bits[arrayLoc + 2] && bits[arrayLoc + 3])
+                return CHOZO_SCREW_ATTACK;
+            if (bits[arrayLoc] && bits[arrayLoc + 1] && bits[arrayLoc + 2] && !bits[arrayLoc + 3])
+                return CHOZO_RESERVE;
+            return CHOZO_CHARGE;
+        }
+
+        private string GetSeed()
+        {
+            var bits = new BitArray(224);
+            int arrayLoc = 0;
+
+            foreach (var item in majorItems)
+            {
+                WriteArrayValue(ref bits, arrayLoc, item);
+                arrayLoc += 4;
+            }
+            foreach (var item in items)
+            {
+                WriteArrayValue(ref bits, arrayLoc, item);
+                arrayLoc += 2;
+            }
+
+            var bytes = new byte[28];
+            bits.CopyTo(bytes, 0);
+            return Convert.ToBase64String(bytes).Substring(0, 38);
+        }
+
+        private static void WriteArrayValue(ref BitArray bits, int arrayLoc, int item)
+        {
+            if (item == 0)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = false;
+            }
+            if (item == 1)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = true;
+            }
+            if (item == 2)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = false;
+            }
+            if (item == 3)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = true;
+            }
+        }
+
+        private static void WriteArrayValue(ref BitArray bits, int arrayLoc, string item)
+        {
+            if (item == CHOZO_CHARGE)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = false;
+            }
+            if (item == CHOZO_ICE)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = true;
+            }
+            if (item == CHOZO_HIJUMP)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = true;
+                bits[arrayLoc + 3] = false;
+            }
+            if (item == CHOZO_SPEED)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = true;
+                bits[arrayLoc + 3] = true;
+            }
+            if (item == CHOZO_WAVE)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = true;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = false;
+            }
+            if (item == CHOZO_SPAZER)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = true;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = true;
+            }
+            if (item == CHOZO_SPRING)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = true;
+                bits[arrayLoc + 2] = true;
+                bits[arrayLoc + 3] = false;
+            }
+            if (item == CHOZO_VARIA)
+            {
+                bits[arrayLoc] = false;
+                bits[arrayLoc + 1] = true;
+                bits[arrayLoc + 2] = true;
+                bits[arrayLoc + 3] = true;
+            }
+            if (item == CHOZO_GRAVITY)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = false;
+            }
+            if (item == CHOZO_XRAY)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = true;
+            }
+            if (item == CHOZO_PLASMA)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = true;
+                bits[arrayLoc + 3] = false;
+            }
+            if (item == CHOZO_GRAPPLE)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = false;
+                bits[arrayLoc + 2] = true;
+                bits[arrayLoc + 3] = true;
+            }
+            if (item == CHOZO_SPACE_JUMP)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = true;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = false;
+            }
+            if (item == CHOZO_SCREW_ATTACK)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = true;
+                bits[arrayLoc + 2] = false;
+                bits[arrayLoc + 3] = true;
+            }
+            if (item == CHOZO_RESERVE)
+            {
+                bits[arrayLoc] = true;
+                bits[arrayLoc + 1] = true;
+                bits[arrayLoc + 2] = true;
+                bits[arrayLoc + 3] = false;
+            }
+        }
+
+        private void WriteMinorItems(ref FileStream rom)
+        {
+            rom.Seek(0x78000, SeekOrigin.Begin);
+            while (rom.Position < 0x79192)
+                WriteMinorItem(ref rom);
+            rom.Seek(0x7c215, SeekOrigin.Begin);
+            while (rom.Position != 0x7c7bb)
+                WriteMinorItem(ref rom);
+        }
+
+        private bool ItemsOkay()
+        {
+            //keep speed from spawning behind speed blocks
+            if (majorItems[12] == CHOZO_SPEED)
+                return false;
+
+            //keep gravity from spawning at spring ball spot
+            if (majorItems[16] == CHOZO_GRAVITY)
+                return false;
+
+            //keep gravity and hi-jump from both being in Maridia or LN
+            if ((majorItems[11] == CHOZO_HIJUMP || majorItems[14] == CHOZO_HIJUMP || majorItems[15] == CHOZO_HIJUMP || majorItems[16] == CHOZO_HIJUMP || majorItems[17] == CHOZO_HIJUMP) &&
+                (majorItems[11] == CHOZO_GRAVITY || majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY))
+                return false;
+
+            //both ice and speed can't appear behind draygon
+            if ((majorItems[14] == CHOZO_SPEED || majorItems[17] == CHOZO_SPEED) &&
+                (majorItems[14] == CHOZO_ICE || majorItems[17] == CHOZO_ICE))
+
+                //handle suitless
+                if (suitless == Suitless.Possible || suitless == Suitless.Forced)
+                {
+                    //X-Ray, Ice, Grapple, and Hi-Jump should appear outside of Maridia
+                    if (majorItems[14] == CHOZO_XRAY || majorItems[14] == CHOZO_ICE || majorItems[14] == CHOZO_GRAPPLE || majorItems[14] == CHOZO_HIJUMP ||
+                        majorItems[15] == CHOZO_XRAY || majorItems[15] == CHOZO_ICE || majorItems[15] == CHOZO_GRAPPLE || majorItems[15] == CHOZO_HIJUMP ||
+                        majorItems[16] == CHOZO_XRAY || majorItems[16] == CHOZO_ICE || majorItems[16] == CHOZO_GRAPPLE || majorItems[16] == CHOZO_HIJUMP ||
+                        majorItems[17] == CHOZO_XRAY || majorItems[17] == CHOZO_ICE || majorItems[17] == CHOZO_GRAPPLE || majorItems[17] == CHOZO_HIJUMP)
+                        return false;
+
+                    if (suitless == Suitless.Forced)
+                    {
+                        //make Gravity a reward for killing Draygon.
+                        if (majorItems[14] != CHOZO_GRAVITY && majorItems[17] != CHOZO_GRAVITY)
+                            return false;
+                    }
+                }
+                else
+                {
+                    //Gravity shouldn't spawn in Maridia (spring ball is already handled)
+                    if (majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY)
+                        return false;
+                }
+
+            return true;
+        }
+
+        private void WriteMajorItems(ref FileStream rom)
+        {
+            rom.Seek(RESREVE_BRINSTAR_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[0]);
+            rom.Seek(CHARGE_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[1]);
+            rom.Seek(XRAY_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[2]);
+            rom.Seek(SPAZER_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[3]);
+            rom.Seek(VARIA_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[4]);
+            rom.Seek(ICE_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[5]);
+            rom.Seek(HIJUMP_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[6]);
+            rom.Seek(GRAPPLE_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[7]);
+            rom.Seek(RESERVE_NORFAIR_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[8]);
+            rom.Seek(SPEED_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[9]);
+            rom.Seek(WAVE_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[10]);
+            rom.Seek(SCREW_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[11]);
+            rom.Seek(RESERVE_WS_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[12]);
+            rom.Seek(GRAVITY_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[13]);
+            rom.Seek(PLASMA_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[14]);
+            rom.Seek(RESERVE_MARIDIA_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[15]);
+            rom.Seek(SPRING_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[16]);
+            rom.Seek(SPACE_JUMP_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, majorItems[17]);
+        }
+
+        private static byte[] StringToByteArray(string input)
+        {
+            var retVal = new byte[input.Length];
+            var i = 0;
+
+            foreach (var ch in input)
+            {
+                retVal[i] = (byte)ch;
+                i++;
+            }
+
+            return retVal;
+        }
+
+        private void WriteMinorItem(ref FileStream rom)
+        {
+            var plm = new byte[2];
+            rom.Read(plm, 0, 2);
+
+            if (pickups.Any(c => plm[0] == c[0] && plm[1] == c[1]))
+            {
+                WriteItem(ref rom, pickups[items[items_position]]);
+                items_position++;
+                return;
+            }
+
+            if (hidden_pickups.Any(c => plm[0] == c[0] && plm[1] == c[1]))
+            {
+                WriteItem(ref rom, hidden_pickups[items[items_position]]);
+                items_position++;
+                return;
+            }
+        }
+
+        private static void WriteItem(ref FileStream rom, string item)
+        {
+            var newItem = StringToByteArray(item);
+            rom.Seek(-2, SeekOrigin.Current);
+            rom.Write(newItem, 0, 2);
+        }
+
+        private void GenerateItemList()
+        {
+            for (int i = 0; i < 6; i++)
+                items[i] = ETANK_POS;
+            for (int i = 6; i < 15; i += 3)
+            {
+                items[i] = MISSILE_POS;
+                items[i + 1] = SUPER_POS;
+                items[i + 2] = POWERBOMB_POS;
+            }
+            for (int i = 15; i < items.Length; i++)
+            {
+                items[i] = random.Next(4);
+            }
+
+            ShuffleArray(ref items);
+
+            do
+            {
+                ShuffleArray(ref majorItems);
+            } while (!ItemsOkay());
+
+        }
+
+        private static void ShuffleArray(ref int[] items)
+        {
+            items = items.OrderBy(a => Guid.NewGuid()).ToArray();
+        }
+
+        private static void ShuffleArray(ref string[] items)
+        {
+            items = items.OrderBy(a => Guid.NewGuid()).ToArray();
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            var info = new FileInfo(outputFilename.Text);
+            var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name};
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                outputFilename.Text = saveFileDialog.FileName;
+            }
+        }
+
+        private void outputFilename_TextChanged(object sender, EventArgs e)
+        {
+            Settings.Default.OutputFile = outputFilename.Text;
+            Settings.Default.Save();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            outputFilename.Text = Settings.Default.OutputFile;
+        }
+    }
+}
