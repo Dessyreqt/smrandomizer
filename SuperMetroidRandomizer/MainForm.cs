@@ -216,7 +216,7 @@ namespace SuperMetroidRandomizer
             if (!bits[arrayLoc] && !bits[arrayLoc + 1] && bits[arrayLoc + 2] && bits[arrayLoc + 3])
                 return CHOZO_SPEED;
             if (!bits[arrayLoc] && bits[arrayLoc + 1] && !bits[arrayLoc + 2] && !bits[arrayLoc + 3])
-                return CHOZO_WAVE;                                               
+                return CHOZO_WAVE;
             if (!bits[arrayLoc] && bits[arrayLoc + 1] && !bits[arrayLoc + 2] && bits[arrayLoc + 3])
                 return CHOZO_SPAZER;
             if (!bits[arrayLoc] && bits[arrayLoc + 1] && bits[arrayLoc + 2] && !bits[arrayLoc + 3])
@@ -422,30 +422,31 @@ namespace SuperMetroidRandomizer
             //both ice and speed can't appear behind draygon
             if ((majorItems[14] == CHOZO_SPEED || majorItems[17] == CHOZO_SPEED) &&
                 (majorItems[14] == CHOZO_ICE || majorItems[17] == CHOZO_ICE))
+                return false;
 
-                //handle suitless
-                if (suitless == Suitless.Possible || suitless == Suitless.Forced)
-                {
-                    //X-Ray, Ice, Grapple, and Hi-Jump should appear outside of Maridia
-                    if (majorItems[14] == CHOZO_XRAY || majorItems[14] == CHOZO_ICE || majorItems[14] == CHOZO_GRAPPLE || majorItems[14] == CHOZO_HIJUMP ||
-                        majorItems[15] == CHOZO_XRAY || majorItems[15] == CHOZO_ICE || majorItems[15] == CHOZO_GRAPPLE || majorItems[15] == CHOZO_HIJUMP ||
-                        majorItems[16] == CHOZO_XRAY || majorItems[16] == CHOZO_ICE || majorItems[16] == CHOZO_GRAPPLE || majorItems[16] == CHOZO_HIJUMP ||
-                        majorItems[17] == CHOZO_XRAY || majorItems[17] == CHOZO_ICE || majorItems[17] == CHOZO_GRAPPLE || majorItems[17] == CHOZO_HIJUMP)
-                        return false;
+            //handle suitless
+            if (suitless == Suitless.Possible || suitless == Suitless.Forced)
+            {
+                //X-Ray, Ice, Grapple, and Hi-Jump should appear outside of Maridia
+                if (majorItems[14] == CHOZO_XRAY || majorItems[14] == CHOZO_ICE || majorItems[14] == CHOZO_GRAPPLE || majorItems[14] == CHOZO_HIJUMP ||
+                    majorItems[15] == CHOZO_XRAY || majorItems[15] == CHOZO_ICE || majorItems[15] == CHOZO_GRAPPLE || majorItems[15] == CHOZO_HIJUMP ||
+                    majorItems[16] == CHOZO_XRAY || majorItems[16] == CHOZO_ICE || majorItems[16] == CHOZO_GRAPPLE || majorItems[16] == CHOZO_HIJUMP ||
+                    majorItems[17] == CHOZO_XRAY || majorItems[17] == CHOZO_ICE || majorItems[17] == CHOZO_GRAPPLE || majorItems[17] == CHOZO_HIJUMP)
+                    return false;
 
-                    if (suitless == Suitless.Forced)
-                    {
-                        //make Gravity a reward for killing Draygon.
-                        if (majorItems[14] != CHOZO_GRAVITY && majorItems[17] != CHOZO_GRAVITY)
-                            return false;
-                    }
-                }
-                else
+                if (suitless == Suitless.Forced)
                 {
-                    //Gravity shouldn't spawn in Maridia (spring ball is already handled)
-                    if (majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY)
+                    //make Gravity a reward for killing Draygon.
+                    if (majorItems[14] != CHOZO_GRAVITY && majorItems[17] != CHOZO_GRAVITY)
                         return false;
                 }
+            }
+            else
+            {
+                //Gravity shouldn't spawn in Maridia (spring ball is already handled)
+                if (majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY)
+                    return false;
+            }
 
             return true;
         }
@@ -552,7 +553,6 @@ namespace SuperMetroidRandomizer
             {
                 ShuffleArray(ref majorItems);
             } while (!ItemsOkay());
-
         }
 
         private static void ShuffleArray(ref int[] items)
@@ -568,7 +568,7 @@ namespace SuperMetroidRandomizer
         private void save_Click(object sender, EventArgs e)
         {
             var info = new FileInfo(outputFilename.Text);
-            var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name};
+            var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
