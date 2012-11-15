@@ -145,9 +145,6 @@ namespace SuperMetroidRandomizer
             output.Text = "";
             items_position = 0;
 
-            var rom = new FileStream(filename, FileMode.OpenOrCreate);
-            rom.Write(Resources.RomImage, 0, 3145728);
-
             if (string.IsNullOrWhiteSpace(seed.Text))
             {
                 output.Text += "Generating random item lists..." + Environment.NewLine;
@@ -158,6 +155,9 @@ namespace SuperMetroidRandomizer
                 output.Text += "Parsing seed..." + Environment.NewLine;
                 ParseSeed();
             }
+
+            var rom = new FileStream(filename.Replace("<seed>", GetSeed()), FileMode.OpenOrCreate);
+            rom.Write(Resources.RomImage, 0, 3145728);
 
             output.Text += "Writing major items to file..." + Environment.NewLine;
             WriteMajorItems(ref rom);
@@ -174,7 +174,7 @@ namespace SuperMetroidRandomizer
 
         private void ParseSeed()
         {
-            var parseSeed = seed.Text + "==";
+            var parseSeed = seed.Text.Replace('-','/') + "==";
 
             var bytes = Convert.FromBase64String(parseSeed);
             var bits = new BitArray(bytes);
@@ -258,7 +258,8 @@ namespace SuperMetroidRandomizer
 
             var bytes = new byte[28];
             bits.CopyTo(bytes, 0);
-            return Convert.ToBase64String(bytes).Substring(0, 38);
+            //make seed printable in a filename and remove the == at the end.
+            return Convert.ToBase64String(bytes).Substring(0, 38).Replace('/','-');
         }
 
         private static void WriteArrayValue(ref BitArray bits, int arrayLoc, int item)
@@ -567,12 +568,13 @@ namespace SuperMetroidRandomizer
 
         private void save_Click(object sender, EventArgs e)
         {
-            var info = new FileInfo(outputFilename.Text);
+            var info = new FileInfo(outputFilename.Text.Replace("<seed>", ""));
             var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 outputFilename.Text = saveFileDialog.FileName;
+                MessageBox.Show("Remember to hit \"create\" to create the rom.", "Remember to create the rom!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
 

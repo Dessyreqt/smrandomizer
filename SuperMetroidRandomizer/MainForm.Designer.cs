@@ -116,9 +116,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(111, 66);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.Size = new System.Drawing.Size(246, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Output Filename";
+            this.label1.Text = "Output Filename (<seed> is replaced with file seed)";
             // 
             // outputFilename
             // 
@@ -128,7 +128,7 @@
             this.outputFilename.Name = "outputFilename";
             this.outputFilename.Size = new System.Drawing.Size(297, 20);
             this.outputFilename.TabIndex = 6;
-            this.outputFilename.Text = "random.sfc";
+            this.outputFilename.Text = "SM Random <seed>.sfc";
             this.outputFilename.TextChanged += new System.EventHandler(this.outputFilename_TextChanged);
             // 
             // save
