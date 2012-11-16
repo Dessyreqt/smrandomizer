@@ -42,6 +42,8 @@ namespace SuperMetroidRandomizer
         private const int SPRING_ADDR = 0x7c6e5;
         private const int SPACE_JUMP_ADDR = 0x7c7a7;
 
+        private const int EXTRA_CHOZO_PB_ADDR = 0x784ac;
+
         private const int SEG1_START = 0x78000;
         private const int SEG1_END = 0x79192;
         private const int SEG2_START = 0x7c215;
@@ -68,10 +70,10 @@ namespace SuperMetroidRandomizer
         //private const string XRAY = "\x0f\xef";
         //private const string SPACE_JUMP = "\x1b\xef";
         //private const string SCREW_ATTACK = "\x1f\xef";
-        //private const string CHOZO_ETANK = "\x2b\xef";
-        //private const string CHOZO_MISSILE = "\x2f\xef";
-        //private const string CHOZO_SUPER = "\x33\xef";
-        //private const string CHOZO_PB = "\x37\xef";
+        private const string CHOZO_ETANK = "\x2b\xef";
+        private const string CHOZO_MISSILE = "\x2f\xef";
+        private const string CHOZO_SUPER = "\x33\xef";
+        private const string CHOZO_PB = "\x37\xef";
         //private const string CHOZO_BOMB = "\x3b\xef";
         private const string CHOZO_CHARGE = "\x3f\xef";
         private const string CHOZO_ICE = "\x43\xef";
@@ -111,16 +113,18 @@ namespace SuperMetroidRandomizer
 
         // Item pickups
         readonly string[] pickups = { ETANK, MISSILE, SUPER, PB };
-        readonly string[] hidden_pickups = { HIDDEN_ETANK, HIDDEN_MISSILE, HIDDEN_SUPER, HIDDEN_PB };
+        readonly string[] chozoPickups = { CHOZO_ETANK, CHOZO_MISSILE, CHOZO_SUPER, CHOZO_PB }; 
+        readonly string[] hiddenPickups = { HIDDEN_ETANK, HIDDEN_MISSILE, HIDDEN_SUPER, HIDDEN_PB };
 
-        int[] items = new int[76];
-        int items_position;
+        int[] items = new int[77];
+        int itemsPos;
 
         // Major items
         string[] majorItems = { CHOZO_CHARGE, CHOZO_ICE, CHOZO_HIJUMP, CHOZO_SPEED, CHOZO_WAVE, CHOZO_SPAZER, CHOZO_SPRING, CHOZO_VARIA, CHOZO_GRAVITY, CHOZO_XRAY, CHOZO_PLASMA, CHOZO_GRAPPLE, CHOZO_SPACE_JUMP, CHOZO_SCREW_ATTACK, CHOZO_RESERVE, CHOZO_RESERVE, CHOZO_RESERVE, CHOZO_RESERVE };
 
-        // Suitless stuff
-        Suitless suitless;
+        public bool IsConsole { get; set; }
+        public string FileName { get; set; }
+        public Suitless IsSuitless { get; set; }
 
         private static readonly Random random = new Random();
 
@@ -131,50 +135,71 @@ namespace SuperMetroidRandomizer
 
         private void process_Click(object sender, EventArgs e)
         {
-            string filename = outputFilename.Text;
+            FileName = outputFilename.Text;
+            IsConsole = false;
 
             //default to disabled in case they somehow uncheck all the buttons
             if (suitlessPossible.Checked)
-                suitless = Suitless.Possible;
+                IsSuitless = Suitless.Possible;
             else if (suitlessForced.Checked)
-                suitless = Suitless.Forced;
+                IsSuitless = Suitless.Forced;
             else
-                suitless = Suitless.Disabled;
+                IsSuitless = Suitless.Disabled;
 
+            CreateRom();
+        }
 
+        public void CreateRom()
+        {
+            ClearOutput();
             output.Text = "";
-            items_position = 0;
+            itemsPos = 0;
 
             if (string.IsNullOrWhiteSpace(seed.Text))
             {
-                output.Text += "Generating random item lists..." + Environment.NewLine;
+                WriteOutput("Generating random item lists..." + Environment.NewLine);
                 GenerateItemList();
             }
             else
             {
-                output.Text += "Parsing seed..." + Environment.NewLine;
+                WriteOutput("Parsing seed..." + Environment.NewLine);
                 ParseSeed();
             }
 
-            var rom = new FileStream(filename.Replace("<seed>", GetSeed()), FileMode.OpenOrCreate);
+            var rom = new FileStream(FileName.Replace("<seed>", GetSeed()), FileMode.OpenOrCreate);
             rom.Write(Resources.RomImage, 0, 3145728);
 
-            output.Text += "Writing major items to file..." + Environment.NewLine;
+            WriteOutput("Writing major items to file..." + Environment.NewLine);
             WriteMajorItems(ref rom);
 
-            output.Text += "Writing minor items to file..." + Environment.NewLine;
+            WriteOutput("Writing minor items to file..." + Environment.NewLine);
             WriteMinorItems(ref rom);
 
-            output.Text += "Done!" + Environment.NewLine;
+            WriteOutput("Writing etecoon's item to file..." + Environment.NewLine);
+            rom.Seek(EXTRA_CHOZO_PB_ADDR + 2, SeekOrigin.Begin);
+            WriteItem(ref rom, chozoPickups[items[itemsPos]]);
+
+            WriteOutput("Done!" + Environment.NewLine);
             rom.Close();
 
-            output.Text += string.Format("{1}{1}Seed: {0}{1}", GetSeed(), Environment.NewLine);
+            WriteOutput(string.Format("{1}{1}Seed: {0}{1}", GetSeed(), Environment.NewLine));
+        }
 
+        private void WriteOutput(string text)
+        {
+            if (!IsConsole)
+                output.Text += text;
+        }
+
+        private void ClearOutput()
+        {
+            if (!IsConsole)
+                output.Text = "";
         }
 
         private void ParseSeed()
         {
-            var parseSeed = seed.Text.Replace('-','/') + "==";
+            var parseSeed = seed.Text.Replace('-', '/') + "=";
 
             var bytes = Convert.FromBase64String(parseSeed);
             var bits = new BitArray(bytes);
@@ -192,11 +217,9 @@ namespace SuperMetroidRandomizer
             }
 
             if (majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[16] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY)
-                output.Text += string.Format("{0}Warning: Seed requires suitless Maridia!{0}{0}", Environment.NewLine);
+                WriteOutput(string.Format("{0}Warning: Seed requires suitless Maridia!{0}{0}", Environment.NewLine));
             else
-                output.Text += string.Format("Seed does not require suitless Maridia.{0}", Environment.NewLine);
-
-
+                WriteOutput(string.Format("Seed does not require suitless Maridia.{0}", Environment.NewLine));
         }
 
         private static int ReadMinorItem(BitArray bits, int arrayLoc)
@@ -249,7 +272,7 @@ namespace SuperMetroidRandomizer
 
         private string GetSeed()
         {
-            var bits = new BitArray(224);
+            var bits = new BitArray(226);
             int arrayLoc = 0;
 
             foreach (var item in majorItems)
@@ -263,10 +286,10 @@ namespace SuperMetroidRandomizer
                 arrayLoc += 2;
             }
 
-            var bytes = new byte[28];
+            var bytes = new byte[29]; 
             bits.CopyTo(bytes, 0);
-            //make seed printable in a filename and remove the == at the end.
-            return Convert.ToBase64String(bytes).Substring(0, 38).Replace('/','-');
+           //make seed printable in a filename and remove the = at the end.
+           return Convert.ToBase64String(bytes).Substring(0, 39).Replace('/','-');        
         }
 
         private static void WriteArrayValue(ref BitArray bits, int arrayLoc, int item)
@@ -433,7 +456,7 @@ namespace SuperMetroidRandomizer
                 return false;
 
             //handle suitless
-            if (suitless == Suitless.Possible || suitless == Suitless.Forced)
+            if (IsSuitless == Suitless.Possible || IsSuitless == Suitless.Forced)
             {
                 //X-Ray, Ice, Grapple, and Hi-Jump should appear outside of Maridia
                 if (majorItems[14] == CHOZO_XRAY || majorItems[14] == CHOZO_ICE || majorItems[14] == CHOZO_GRAPPLE || majorItems[14] == CHOZO_HIJUMP ||
@@ -442,7 +465,7 @@ namespace SuperMetroidRandomizer
                     majorItems[17] == CHOZO_XRAY || majorItems[17] == CHOZO_ICE || majorItems[17] == CHOZO_GRAPPLE || majorItems[17] == CHOZO_HIJUMP)
                     return false;
 
-                if (suitless == Suitless.Forced)
+                if (IsSuitless == Suitless.Forced)
                 {
                     //make Gravity a reward for killing Draygon.
                     if (majorItems[14] != CHOZO_GRAVITY && majorItems[17] != CHOZO_GRAVITY)
@@ -520,15 +543,15 @@ namespace SuperMetroidRandomizer
 
             if (pickups.Any(c => plm[0] == c[0] && plm[1] == c[1]))
             {
-                WriteItem(ref rom, pickups[items[items_position]]);
-                items_position++;
+                WriteItem(ref rom, pickups[items[itemsPos]]);
+                itemsPos++;
                 return;
             }
 
-            if (hidden_pickups.Any(c => plm[0] == c[0] && plm[1] == c[1]))
+            if (hiddenPickups.Any(c => plm[0] == c[0] && plm[1] == c[1]))
             {
-                WriteItem(ref rom, hidden_pickups[items[items_position]]);
-                items_position++;
+                WriteItem(ref rom, hiddenPickups[items[itemsPos]]);
+                itemsPos++;
                 return;
             }
         }

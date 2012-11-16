@@ -174,7 +174,7 @@
             this.Controls.Add(this.process);
             this.Controls.Add(this.output);
             this.Name = "MainForm";
-            this.Text = "Super Metroid Randomizer v4";
+            this.Text = "Super Metroid Randomizer v5";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
