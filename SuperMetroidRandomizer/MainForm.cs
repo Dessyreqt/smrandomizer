@@ -190,6 +190,13 @@ namespace SuperMetroidRandomizer
                 items[i] = ReadMinorItem(bits, arrayLoc);
                 arrayLoc += 2;
             }
+
+            if (majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[16] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY)
+                output.Text += string.Format("{0}Warning: Seed requires suitless Maridia!{0}{0}", Environment.NewLine);
+            else
+                output.Text += string.Format("Seed does not require suitless Maridia.{0}", Environment.NewLine);
+
+
         }
 
         private static int ReadMinorItem(BitArray bits, int arrayLoc)
