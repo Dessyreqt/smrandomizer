@@ -113,7 +113,7 @@ namespace SuperMetroidRandomizer
 
         // Item pickups
         readonly string[] pickups = { ETANK, MISSILE, SUPER, PB };
-        readonly string[] chozoPickups = { CHOZO_ETANK, CHOZO_MISSILE, CHOZO_SUPER, CHOZO_PB }; 
+        readonly string[] chozoPickups = { CHOZO_ETANK, CHOZO_MISSILE, CHOZO_SUPER, CHOZO_PB };
         readonly string[] hiddenPickups = { HIDDEN_ETANK, HIDDEN_MISSILE, HIDDEN_SUPER, HIDDEN_PB };
 
         int[] items = new int[77];
@@ -199,6 +199,8 @@ namespace SuperMetroidRandomizer
 
         private void ParseSeed()
         {
+            if (seed.Text.Length == 38)
+                seed.Text += "M";
             var parseSeed = seed.Text.Replace('-', '/') + "=";
 
             var bytes = Convert.FromBase64String(parseSeed);
@@ -286,10 +288,10 @@ namespace SuperMetroidRandomizer
                 arrayLoc += 2;
             }
 
-            var bytes = new byte[29]; 
+            var bytes = new byte[29];
             bits.CopyTo(bytes, 0);
-           //make seed printable in a filename and remove the = at the end.
-           return Convert.ToBase64String(bytes).Substring(0, 39).Replace('/','-');        
+            //make seed printable in a filename and remove the = at the end.
+            return Convert.ToBase64String(bytes).Substring(0, 39).Replace('/', '-');
         }
 
         private static void WriteArrayValue(ref BitArray bits, int arrayLoc, int item)
@@ -438,48 +440,76 @@ namespace SuperMetroidRandomizer
         private bool ItemsOkay()
         {
             //keep speed from spawning behind speed blocks
-            if (majorItems[12] == CHOZO_SPEED)
+            if (AtWsReserve(CHOZO_SPEED))
                 return false;
 
             //keep gravity from spawning at spring ball spot
-            if (majorItems[16] == CHOZO_GRAVITY)
+            if (AtSpringball(CHOZO_GRAVITY))
                 return false;
 
             //keep gravity and hi-jump from both being in Maridia or LN
-            if ((majorItems[11] == CHOZO_HIJUMP || majorItems[14] == CHOZO_HIJUMP || majorItems[15] == CHOZO_HIJUMP || majorItems[16] == CHOZO_HIJUMP || majorItems[17] == CHOZO_HIJUMP) &&
-                (majorItems[11] == CHOZO_GRAVITY || majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY))
+            if ((AtScrewAttack(CHOZO_HIJUMP) || InMaridia(CHOZO_HIJUMP)) && (AtScrewAttack(CHOZO_GRAVITY) || InMaridia(CHOZO_GRAVITY)))
                 return false;
 
             //both ice and speed can't appear behind draygon
-            if ((majorItems[14] == CHOZO_SPEED || majorItems[17] == CHOZO_SPEED) &&
-                (majorItems[14] == CHOZO_ICE || majorItems[17] == CHOZO_ICE))
+            if (BehindDraygon(CHOZO_SPEED) && BehindDraygon(CHOZO_ICE))
                 return false;
 
             //handle suitless
             if (IsSuitless == Suitless.Possible || IsSuitless == Suitless.Forced)
             {
                 //X-Ray, Ice, Grapple, and Hi-Jump should appear outside of Maridia
-                if (majorItems[14] == CHOZO_XRAY || majorItems[14] == CHOZO_ICE || majorItems[14] == CHOZO_GRAPPLE || majorItems[14] == CHOZO_HIJUMP ||
-                    majorItems[15] == CHOZO_XRAY || majorItems[15] == CHOZO_ICE || majorItems[15] == CHOZO_GRAPPLE || majorItems[15] == CHOZO_HIJUMP ||
-                    majorItems[16] == CHOZO_XRAY || majorItems[16] == CHOZO_ICE || majorItems[16] == CHOZO_GRAPPLE || majorItems[16] == CHOZO_HIJUMP ||
-                    majorItems[17] == CHOZO_XRAY || majorItems[17] == CHOZO_ICE || majorItems[17] == CHOZO_GRAPPLE || majorItems[17] == CHOZO_HIJUMP)
+                if (InMaridia(CHOZO_XRAY) || InMaridia(CHOZO_ICE) || InMaridia(CHOZO_GRAPPLE) || InMaridia(CHOZO_HIJUMP))
+                    return false;
+
+                //This scenario could lead to bad times
+                if (InMaridia(CHOZO_SPEED) && (AtWsReserve(CHOZO_XRAY) || AtWsReserve(CHOZO_ICE) || AtWsReserve(CHOZO_GRAPPLE) || AtWsReserve(CHOZO_HIJUMP)))
                     return false;
 
                 if (IsSuitless == Suitless.Forced)
                 {
                     //make Gravity a reward for killing Draygon.
-                    if (majorItems[14] != CHOZO_GRAVITY && majorItems[17] != CHOZO_GRAVITY)
+                    if (!BehindDraygon(CHOZO_GRAVITY))
                         return false;
                 }
             }
             else
             {
-                //Gravity shouldn't spawn in Maridia (spring ball is already handled)
-                if (majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY)
+                //Gravity shouldn't spawn in Maridia
+                if (InMaridia(CHOZO_GRAVITY))
+                    return false;
+
+                //Can't trap gravity behind speed blocks if speed is also in maridia
+                if (InMaridia(CHOZO_SPEED) && AtWsReserve(CHOZO_GRAVITY))
                     return false;
             }
 
             return true;
+        }
+
+        private bool AtWsReserve(string item)
+        {
+            return majorItems[12] == item;
+        }
+
+        private bool AtScrewAttack(string item)
+        {
+            return majorItems[11] == item;
+        }
+
+        private bool AtSpringball(string item)
+        {
+            return majorItems[16] == item;
+        }
+
+        private bool BehindDraygon(string item)
+        {
+            return majorItems[14] == item || majorItems[17] == item;
+        }
+
+        private bool InMaridia(string item)
+        {
+            return majorItems[14] == item || majorItems[15] == item || majorItems[16] == item || majorItems[17] == item;
         }
 
         private void WriteMajorItems(ref FileStream rom)
