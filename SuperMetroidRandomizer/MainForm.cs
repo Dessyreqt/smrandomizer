@@ -479,8 +479,8 @@ namespace SuperMetroidRandomizer
                 if (InMaridia(CHOZO_GRAVITY))
                     return false;
 
-                //Can't trap gravity behind speed blocks if speed is also in maridia
-                if (InMaridia(CHOZO_SPEED) && AtWsReserve(CHOZO_GRAVITY))
+                //Can't trap gravity or Hi-Jump behind speed blocks if speed is also in maridia
+                if (InMaridia(CHOZO_SPEED) && (AtWsReserve(CHOZO_GRAVITY) || AtWsReserve(CHOZO_HIJUMP)))
                     return false;
             }
 
