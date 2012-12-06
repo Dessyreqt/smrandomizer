@@ -452,7 +452,7 @@ namespace SuperMetroidRandomizer
                 return false;
 
             //both ice and speed can't appear behind draygon
-            if (BehindDraygon(CHOZO_SPEED) && BehindDraygon(CHOZO_ICE))
+            if ((BehindDraygon(CHOZO_SPEED) && BehindDraygon(CHOZO_ICE)) || BehindDraygon(CHOZO_SPEED) && AtWsReserve(CHOZO_ICE))
                 return false;
 
             //handle suitless
