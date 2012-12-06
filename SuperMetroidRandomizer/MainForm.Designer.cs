@@ -45,9 +45,9 @@
             // output
             // 
             this.output.AcceptsReturn = true;
-            this.output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.output.Location = new System.Drawing.Point(12, 108);
             this.output.Multiline = true;
             this.output.Name = "output";
@@ -122,8 +122,8 @@
             // 
             // outputFilename
             // 
-            this.outputFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.outputFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.outputFilename.Location = new System.Drawing.Point(114, 82);
             this.outputFilename.Name = "outputFilename";
             this.outputFilename.Size = new System.Drawing.Size(297, 20);
@@ -144,8 +144,8 @@
             // 
             // seed
             // 
-            this.seed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.seed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.seed.Location = new System.Drawing.Point(114, 43);
             this.seed.Name = "seed";
             this.seed.Size = new System.Drawing.Size(328, 20);
@@ -174,7 +174,7 @@
             this.Controls.Add(this.process);
             this.Controls.Add(this.output);
             this.Name = "MainForm";
-            this.Text = "Super Metroid Randomizer v7";
+            this.Text = "Super Metroid Randomizer v8";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
