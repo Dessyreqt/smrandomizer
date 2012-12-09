@@ -175,7 +175,7 @@ namespace SuperMetroidRandomizer
             WriteOutput("Writing minor items to file..." + Environment.NewLine);
             WriteMinorItems(ref rom);
 
-            WriteOutput("Writing etecoon's item to file..." + Environment.NewLine);
+            //Handle the Etecoon's item
             rom.Seek(EXTRA_CHOZO_PB_ADDR + 2, SeekOrigin.Begin);
             WriteItem(ref rom, chozoPickups[items[itemsPos]]);
 
@@ -218,10 +218,13 @@ namespace SuperMetroidRandomizer
                 arrayLoc += 2;
             }
 
-            if (majorItems[14] == CHOZO_GRAVITY || majorItems[15] == CHOZO_GRAVITY || majorItems[16] == CHOZO_GRAVITY || majorItems[17] == CHOZO_GRAVITY)
+            if (InMaridia(CHOZO_GRAVITY))
                 WriteOutput(string.Format("{0}Warning: Seed requires suitless Maridia!{0}{0}", Environment.NewLine));
             else
                 WriteOutput(string.Format("Seed does not require suitless Maridia.{0}", Environment.NewLine));
+
+            if (!ItemsOkay())
+                WriteOutput(string.Format("{0}Warning: Seed is likely impossible!{0}{0}", Environment.NewLine));
         }
 
         private static int ReadMinorItem(BitArray bits, int arrayLoc)
@@ -463,7 +466,7 @@ namespace SuperMetroidRandomizer
                     return false;
 
                 //This scenario could lead to bad times
-                if (InMaridia(CHOZO_SPEED) && (AtWsReserve(CHOZO_XRAY) || AtWsReserve(CHOZO_ICE) || AtWsReserve(CHOZO_GRAPPLE) || AtWsReserve(CHOZO_HIJUMP)))
+                if ((InMaridia(CHOZO_SPEED) || AtScrewAttack(CHOZO_SPEED)) && (AtWsReserve(CHOZO_XRAY) || AtWsReserve(CHOZO_ICE) || AtWsReserve(CHOZO_GRAPPLE) || AtWsReserve(CHOZO_HIJUMP)))
                     return false;
 
                 if (IsSuitless == Suitless.Forced)
