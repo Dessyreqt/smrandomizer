@@ -458,15 +458,15 @@ namespace SuperMetroidRandomizer
             if ((BehindDraygon(CHOZO_SPEED) && BehindDraygon(CHOZO_ICE)) || BehindDraygon(CHOZO_SPEED) && AtWsReserve(CHOZO_ICE))
                 return false;
 
+            //This scenario could lead to bad times
+            if ((InMaridia(CHOZO_SPEED) || AtScrewAttack(CHOZO_SPEED)) && (AtWsReserve(CHOZO_XRAY) || AtWsReserve(CHOZO_ICE) || AtWsReserve(CHOZO_GRAPPLE) || AtWsReserve(CHOZO_HIJUMP)))
+                return false;
+
             //handle suitless
             if (IsSuitless == Suitless.Possible || IsSuitless == Suitless.Forced)
             {
                 //X-Ray, Ice, Grapple, and Hi-Jump should appear outside of Maridia
                 if (InMaridia(CHOZO_XRAY) || InMaridia(CHOZO_ICE) || InMaridia(CHOZO_GRAPPLE) || InMaridia(CHOZO_HIJUMP))
-                    return false;
-
-                //This scenario could lead to bad times
-                if ((InMaridia(CHOZO_SPEED) || AtScrewAttack(CHOZO_SPEED)) && (AtWsReserve(CHOZO_XRAY) || AtWsReserve(CHOZO_ICE) || AtWsReserve(CHOZO_GRAPPLE) || AtWsReserve(CHOZO_HIJUMP)))
                     return false;
 
                 if (IsSuitless == Suitless.Forced)
