@@ -36,9 +36,9 @@
             this.suitlessDisabled = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.outputFilename = new System.Windows.Forms.TextBox();
-            this.save = new System.Windows.Forms.Button();
             this.seed = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.save = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,17 +131,6 @@
             this.outputFilename.Text = "SM Random <seed>.sfc";
             this.outputFilename.TextChanged += new System.EventHandler(this.outputFilename_TextChanged);
             // 
-            // save
-            // 
-            this.save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.save.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
-            this.save.Location = new System.Drawing.Point(417, 79);
-            this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(25, 25);
-            this.save.TabIndex = 7;
-            this.save.UseVisualStyleBackColor = true;
-            this.save.Click += new System.EventHandler(this.save_Click);
-            // 
             // seed
             // 
             this.seed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -160,6 +149,17 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Seed (leave blank to generate new random ROM)";
             // 
+            // save
+            // 
+            this.save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.save.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
+            this.save.Location = new System.Drawing.Point(417, 79);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(25, 25);
+            this.save.TabIndex = 7;
+            this.save.UseVisualStyleBackColor = true;
+            this.save.Click += new System.EventHandler(this.save_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,7 +174,7 @@
             this.Controls.Add(this.process);
             this.Controls.Add(this.output);
             this.Name = "MainForm";
-            this.Text = "Super Metroid Randomizer v9";
+            this.Text = "Super Metroid Randomizer v10";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
