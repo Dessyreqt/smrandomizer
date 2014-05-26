@@ -5,5 +5,8 @@
     <Setting Name="OutputFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">random.sfc</Value>
     </Setting>
+    <Setting Name="OutputFileV11" Type="System.String" Scope="User">
+      <Value Profile="(Default)">random.sfc</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
