@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using SuperMetroidRandomizer.Properties;
 
@@ -16,7 +14,6 @@ namespace SuperMetroidRandomizer
 
     public partial class MainForm : Form
     {
-
         public MainForm()
         {
             InitializeComponent();
@@ -39,20 +36,14 @@ namespace SuperMetroidRandomizer
             WriteOutput(string.Format("Done!{1}{1}{1}Seed: {0}{1}", outSeed, Environment.NewLine));
             if (!string.IsNullOrWhiteSpace(seed.Text))
             {
-                if (randomizerV10.RequiresSuitless())
-                {
-                    WriteOutput(string.Format("{0}Warning: Seed requires suitless Maridia!{0}{0}", Environment.NewLine));
-                }
-                else
-                {
-                    WriteOutput(string.Format("{0}Seed does not require suitless Maridia.{0}{0}", Environment.NewLine));
-                }
+                WriteOutput(randomizerV10.RequiresSuitless()
+                                ? string.Format("{0}Warning: Seed requires suitless Maridia!{0}{0}", Environment.NewLine)
+                                : string.Format("{0}Seed does not require suitless Maridia.{0}{0}", Environment.NewLine));
 
                 if (randomizerV10.LikelyImpossible())
                 {
                     WriteOutput(string.Format("{0}Warning: Seed is likely impossible!{0}{0}", Environment.NewLine));
                 }
-
             }
         }
 
@@ -109,7 +100,7 @@ namespace SuperMetroidRandomizer
                 var randomizerV11 = new RandomizerV11(parsedSeed);
                 randomizerV11.CreateRom(filenameV11.Text);
 
-                WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000}{1}", parsedSeed, Environment.NewLine));
+                WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000}{1}{1}", parsedSeed, Environment.NewLine));
             }
         }
 
@@ -125,12 +116,12 @@ namespace SuperMetroidRandomizer
 
         private void browseV11_Click(object sender, EventArgs e)
         {
-            var info = new FileInfo(outputFilename.Text.Replace("<seed>", ""));
+            var info = new FileInfo(filenameV11.Text.Replace("<seed>", ""));
             var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                outputFilename.Text = saveFileDialog.FileName;
+                filenameV11.Text = saveFileDialog.FileName;
                 MessageBox.Show("Remember to hit \"create\" to create the rom.", "Remember to create the rom!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
