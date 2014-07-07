@@ -10,7 +10,7 @@ namespace SuperMetroidRandomizer
 {
     public class RandomizerV10
     {
-        private static readonly SeedRandom _seedRandom = new SeedRandom();
+        private static readonly SeedRandom random = new SeedRandom();
 
         private const int ETANK_POS = 0;
         private const int MISSILE_POS = 1;
@@ -561,7 +561,7 @@ namespace SuperMetroidRandomizer
             }
             for (int i = 15; i < items.Length; i++)
             {
-                items[i] = _seedRandom.Next(4);
+                items[i] = random.Next(4);
             }
 
             ShuffleArray(ref items);

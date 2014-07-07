@@ -9,7 +9,7 @@ namespace SuperMetroidRandomizer
 {
     public class RandomizerV11
     {
-        private static SeedRandom _seedRandom;
+        private static SeedRandom random;
         private List<ItemType> haveItems;
         private List<ItemType> itemPool;
         private int seed;
@@ -18,7 +18,7 @@ namespace SuperMetroidRandomizer
 
         public RandomizerV11(int seed)
         {
-            _seedRandom = new SeedRandom(seed);
+            random = new SeedRandom(seed);
             this.seed = seed;
         }
 
@@ -92,18 +92,18 @@ namespace SuperMetroidRandomizer
 
                 if (candidateItemList.Count > 0)
                 {
-                    var insertedItem = candidateItemList[_seedRandom.Next(candidateItemList.Count)];
+                    var insertedItem = candidateItemList[random.Next(candidateItemList.Count)];
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
-                    var insertedPlm = _seedRandom.Next(currentPlms.Count);
+                    var insertedPlm = random.Next(currentPlms.Count);
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
                 else
                 {
-                    var insertedItem = itemPool[_seedRandom.Next(itemPool.Count)];
+                    var insertedItem = itemPool[random.Next(itemPool.Count)];
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
-                    var insertedPlm = _seedRandom.Next(currentPlms.Count);
+                    var insertedPlm = random.Next(currentPlms.Count);
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
 
@@ -154,7 +154,7 @@ namespace SuperMetroidRandomizer
 
             for (int i = 0; i < 66; i++)
             {
-                var nextItem = _seedRandom.Next(4);
+                var nextItem = random.Next(4);
                 switch (nextItem)
                 {
                     case 0:
