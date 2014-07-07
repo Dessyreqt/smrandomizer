@@ -59,6 +59,7 @@
     <Compile Include="RandomizerV10.cs" />
     <Compile Include="RandomizerV11.cs" />
     <Compile Include="RomPlms.cs" />
+    <Compile Include="SeedRandom.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

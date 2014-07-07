@@ -84,7 +84,7 @@ namespace SuperMetroidRandomizer
         private void createV11_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(seedV11.Text))
-                seedV11.Text = string.Format("{0:0000000}", (new Random()).Next(10000000));
+                seedV11.Text = string.Format("{0:0000000}", (new SeedRandom()).Next(10000000));
 
             ClearOutputV11();
             
