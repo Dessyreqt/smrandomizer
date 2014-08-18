@@ -106,7 +106,6 @@ namespace SuperMetroidRandomizer
                     var insertedPlm = random.Next(currentPlms.Count);
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
-
             } while (itemPool.Count > 0);
         }
 

@@ -25,7 +25,7 @@ namespace SuperMetroidRandomizer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("random.sfc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SM Random - <seed>.sfc")]
         public string OutputFile {
             get {
                 return ((string)(this["OutputFile"]));
@@ -37,7 +37,7 @@ namespace SuperMetroidRandomizer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("random.sfc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SM Random - <seed>.sfc")]
         public string OutputFileV11 {
             get {
                 return ((string)(this["OutputFileV11"]));
