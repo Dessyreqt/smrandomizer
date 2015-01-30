@@ -28,6 +28,7 @@ namespace SuperMetroidRandomizer
         PowerBomb,
         EnergyTank,
         ReserveTank,
+        Nothing,
     }
 
 
@@ -148,6 +149,11 @@ namespace SuperMetroidRandomizer
                         Normal = RESERVE;
                         Hidden = HIDDEN_RESERVE;
                         Chozo = CHOZO_RESERVE;
+                        break;
+                    case ItemType.Nothing:
+                        Normal = MISSILE;
+                        Hidden = HIDDEN_MISSILE;
+                        Chozo = CHOZO_MISSILE;
                         break;
                 }
 

@@ -302,7 +302,7 @@
             this.ClientSize = new System.Drawing.Size(497, 374);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
-            this.Text = "Super Metroid Randomizer v13";
+            this.Text = "Super Metroid Randomizer v14";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

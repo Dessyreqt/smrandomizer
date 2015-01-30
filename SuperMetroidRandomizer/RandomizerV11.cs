@@ -24,6 +24,9 @@ namespace SuperMetroidRandomizer
 
         public void CreateRom(string filename)
         {
+            if (!Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
+                Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
+
             GenerateItemList();
             GenerateItemPositions();
             WriteRom(filename);
@@ -38,6 +41,24 @@ namespace SuperMetroidRandomizer
             {
                 rom.Seek(plm.Address, SeekOrigin.Begin);
                 var newItem = new byte[2];
+
+                var noHidden = new List<string>
+                                   {
+                                       "morphing ball",
+                                       "energy tank (crateria tunnel to brinstar)",
+                                       "missile (gravity suit)",
+                                   };
+
+
+                if (!noHidden.Contains(plm.Name) && plm.Item.Type != ItemType.Nothing && plm.ItemStorageType == ItemStorageType.Normal)
+                {
+                    // hide the item half of the time (to be a jerk)
+                    if (random.Next(2) == 0)
+                    {
+                        plm.ItemStorageType = ItemStorageType.Hidden;
+                    }
+                }
+
                 switch (plm.ItemStorageType)
                 {
                     case ItemStorageType.Normal:
@@ -52,6 +73,20 @@ namespace SuperMetroidRandomizer
                 }
 
                 rom.Write(newItem, 0, 2);
+
+                if (plm.Item.Type == ItemType.Nothing)
+                {
+                    // give same index as morph ball
+                    rom.Seek(plm.Address + 4, SeekOrigin.Begin);
+                    rom.Write(StringToByteArray("\x1a"), 0, 1);
+                }
+
+                if (plm.Item.Type == ItemType.ChargeBeam)
+                {
+                    // we have 4 copies of charge to reduce tedium, give them all the same index
+                    rom.Seek(plm.Address + 4, SeekOrigin.Begin);
+                    rom.Write(StringToByteArray("\xff"), 0, 1);
+                }
             }
 
             rom.Close();
@@ -118,6 +153,9 @@ namespace SuperMetroidRandomizer
                                ItemType.MorphingBall,
                                ItemType.Bomb,
                                ItemType.ChargeBeam,
+                               ItemType.ChargeBeam,
+                               ItemType.ChargeBeam,
+                               ItemType.ChargeBeam,
                                ItemType.Spazer,
                                ItemType.VariaSuit,
                                ItemType.HiJumpBoots,
@@ -138,12 +176,25 @@ namespace SuperMetroidRandomizer
                                ItemType.Missile,
                                ItemType.Missile,
                                ItemType.Missile,
+                               ItemType.Missile,
+                               ItemType.Missile,
+                               ItemType.Missile,
+                               ItemType.Missile,
+                               ItemType.Missile,
+                               ItemType.Missile,
+                               ItemType.Missile,
+                               ItemType.SuperMissile,
+                               ItemType.SuperMissile,
+                               ItemType.SuperMissile,
                                ItemType.SuperMissile,
                                ItemType.SuperMissile,
                                ItemType.SuperMissile,
                                ItemType.PowerBomb,
                                ItemType.PowerBomb,
                                ItemType.PowerBomb,
+                               ItemType.PowerBomb,
+                               ItemType.EnergyTank,
+                               ItemType.EnergyTank,
                                ItemType.EnergyTank,
                                ItemType.EnergyTank,
                                ItemType.EnergyTank,
@@ -151,24 +202,9 @@ namespace SuperMetroidRandomizer
                                ItemType.EnergyTank,
                            };
 
-            for (int i = 0; i < 66; i++)
+            for (int i = itemPool.Count; i < 100; i++)
             {
-                var nextItem = random.Next(4);
-                switch (nextItem)
-                {
-                    case 0:
-                        itemPool.Add(ItemType.Missile);
-                        break;
-                    case 1:
-                        itemPool.Add(ItemType.SuperMissile);
-                        break;
-                    case 2:
-                        itemPool.Add(ItemType.PowerBomb);
-                        break;
-                    case 3:
-                        itemPool.Add(ItemType.EnergyTank);
-                        break;
-                }
+                itemPool.Add(ItemType.Nothing);
             }
 
         }
