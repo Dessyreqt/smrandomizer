@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using SuperMetroidRandomizer.Properties;
 
@@ -14,9 +17,58 @@ namespace SuperMetroidRandomizer
 
     public partial class MainForm : Form
     {
+        private Thread checkUpdateThread;
+        public static string Version = "15";
+
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void RunCheckUpdate()
+        {
+            checkUpdateThread = new Thread(CheckUpdate);
+            checkUpdateThread.SetApartmentState(ApartmentState.STA);
+            checkUpdateThread.Start();
+        }
+
+        private void CheckUpdate()
+        {
+            var response = GetResponse("https://smrandomizer.codeplex.com/");
+
+            if (string.IsNullOrWhiteSpace(response))
+                return;
+
+            var pattern = "<TD>Super Metroid Randomizer v(?<version>\\S+) </TD>";
+            var match = Regex.Match(response, pattern);
+
+            if (match.Success)
+            {
+                var currentVersion = match.Groups["version"].Value;
+                if (int.Parse(Version) < int.Parse(currentVersion))
+                {
+                    var result =
+                        MessageBox.Show(
+                            string.Format("You have v{0} and the current version is v{1}. Would you like to update?", Version, currentVersion), "Version Update", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                        Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                }
+
+            }
+
+        }
+
+        private static string GetResponse(string address)
+        {
+            if (!address.Contains("smrandomizer.codeplex.com"))
+                return "";
+
+            var webBrowser = new WebBrowser {ScrollBarsEnabled = false, ScriptErrorsSuppressed = true};
+            webBrowser.Navigate(address);
+            while (webBrowser.ReadyState != WebBrowserReadyState.Complete) { Application.DoEvents(); }
+
+            return webBrowser.Document.Body.InnerHtml;
         }
 
         private void process_Click(object sender, EventArgs e)
@@ -79,6 +131,8 @@ namespace SuperMetroidRandomizer
         {
             outputFilename.Text = Settings.Default.OutputFile;
             filenameV11.Text = Settings.Default.OutputFileV11;
+            Text = string.Format("Super Metroid Randomizer v{0}", Version);
+            RunCheckUpdate();
         }
 
         private void createV11_Click(object sender, EventArgs e)

@@ -24,7 +24,7 @@ namespace SuperMetroidRandomizer
 
         public void CreateRom(string filename)
         {
-            if (!Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
+            if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
                 Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
 
             GenerateItemList();
@@ -47,10 +47,12 @@ namespace SuperMetroidRandomizer
                                        "morphing ball",
                                        "energy tank (crateria tunnel to brinstar)",
                                        "missile (gravity suit)",
+                                       "missile (crateria moat)",
+                                       "missile (green maridia shinespark)",
                                    };
 
 
-                if (!noHidden.Contains(plm.Name) && plm.Item.Type != ItemType.Nothing && plm.ItemStorageType == ItemStorageType.Normal)
+                if (!noHidden.Contains(plm.Name) && plm.Item.Type != ItemType.Nothing && plm.Item.Type != ItemType.ChargeBeam && plm.ItemStorageType == ItemStorageType.Normal)
                 {
                     // hide the item half of the time (to be a jerk)
                     if (random.Next(2) == 0)
@@ -206,7 +208,6 @@ namespace SuperMetroidRandomizer
             {
                 itemPool.Add(ItemType.Nothing);
             }
-
         }
     }
 }

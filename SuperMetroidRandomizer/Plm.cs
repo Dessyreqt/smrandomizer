@@ -12,6 +12,16 @@ namespace SuperMetroidRandomizer
         Chozo,
     }
 
+    public enum Region
+    {
+        Crateria,
+        Brinstar,
+        Norfair,
+        LowerNorfair,
+        WreckedShip,
+        Maridia,
+    }
+
     public delegate bool Access(List<ItemType> have);
 
     public class Plm
@@ -21,6 +31,7 @@ namespace SuperMetroidRandomizer
         public ItemStorageType ItemStorageType { get; set; }
         public Access CanAccess { get; set; }
         public Item Item { get; set; }
+        public Region Region { get; set; }
         
         public Plm()
         {
