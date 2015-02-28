@@ -42,17 +42,7 @@ namespace SuperMetroidRandomizer
                 rom.Seek(plm.Address, SeekOrigin.Begin);
                 var newItem = new byte[2];
 
-                var noHidden = new List<string>
-                                   {
-                                       "morphing ball",
-                                       "energy tank (crateria tunnel to brinstar)",
-                                       "missile (gravity suit)",
-                                       "missile (crateria moat)",
-                                       "missile (green maridia shinespark)",
-                                   };
-
-
-                if (!noHidden.Contains(plm.Name) && plm.Item.Type != ItemType.Nothing && plm.Item.Type != ItemType.ChargeBeam && plm.ItemStorageType == ItemStorageType.Normal)
+                if (!plm.NoHidden && plm.Item.Type != ItemType.Nothing && plm.Item.Type != ItemType.ChargeBeam && plm.ItemStorageType == ItemStorageType.Normal)
                 {
                     // hide the item half of the time (to be a jerk)
                     if (random.Next(2) == 0)
@@ -122,7 +112,12 @@ namespace SuperMetroidRandomizer
                     var newPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems);
 
                     if (newPlms.Count > currentPlms.Count)
-                        candidateItemList.Add(candidateItem);
+                    {
+                        if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)))
+                        {
+                            candidateItemList.Add(candidateItem);
+                        }
+                    }
 
                     haveItems.Remove(candidateItem);
                 }
@@ -130,17 +125,38 @@ namespace SuperMetroidRandomizer
                 if (candidateItemList.Count > 0)
                 {
                     var insertedItem = candidateItemList[random.Next(candidateItemList.Count)];
+
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
-                    var insertedPlm = random.Next(currentPlms.Count);
+  
+                    int insertedPlm;
+
+                    do
+                    {
+                        insertedPlm = random.Next(currentPlms.Count);
+                    } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
+                    
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
                 else
                 {
-                    var insertedItem = itemPool[random.Next(itemPool.Count)];
+                    ItemType insertedItem;
+
+                    do
+                    {
+                        insertedItem = itemPool[random.Next(itemPool.Count)];
+                    } while (insertedItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay));
+
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
-                    var insertedPlm = random.Next(currentPlms.Count);
+
+                    int insertedPlm;
+
+                    do
+                    {
+                        insertedPlm = random.Next(currentPlms.Count);
+                    } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
+
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
             } while (itemPool.Count > 0);
