@@ -18,7 +18,7 @@ namespace SuperMetroidRandomizer
     public partial class MainForm : Form
     {
         private Thread checkUpdateThread;
-        public static string Version = "16";
+        public static string Version = "17";
 
         public MainForm()
         {

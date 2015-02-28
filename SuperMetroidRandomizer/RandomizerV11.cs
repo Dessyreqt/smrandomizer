@@ -81,7 +81,18 @@ namespace SuperMetroidRandomizer
                 }
             }
 
+            WriteSeedInRom(rom);
+
             rom.Close();
+        }
+
+        private void WriteSeedInRom(FileStream rom)
+        {
+            var seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString("0000000")).PadRight(21).Substring(0, 21);
+            
+            rom.Seek(0x7fc0, SeekOrigin.Begin);
+
+            rom.Write(StringToByteArray(seedStr), 0, 21);
         }
 
         private static byte[] StringToByteArray(string input)
