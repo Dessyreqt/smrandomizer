@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SMRandomizer.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller.cs" />
+    <Compile Include="Controls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls.Designer.cs">
+      <DependentUpon>Controls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -60,6 +70,9 @@
     <Compile Include="RandomizerV11.cs" />
     <Compile Include="RomPlms.cs" />
     <Compile Include="SeedRandom.cs" />
+    <EmbeddedResource Include="Controls.resx">
+      <DependentUpon>Controls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,6 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MenuFileSaveIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SMRandomizer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

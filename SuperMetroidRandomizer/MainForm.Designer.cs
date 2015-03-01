@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.output = new System.Windows.Forms.TextBox();
             this.process = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -40,7 +41,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.browseV11 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.outputV11 = new System.Windows.Forms.TextBox();
             this.seedV11 = new System.Windows.Forms.TextBox();
@@ -48,7 +48,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.filenameV11 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.controlsV11 = new System.Windows.Forms.Button();
+            this.browseV11 = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
+            this.controls = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -65,13 +68,13 @@
             this.output.Multiline = true;
             this.output.Name = "output";
             this.output.ReadOnly = true;
-            this.output.Size = new System.Drawing.Size(479, 236);
+            this.output.Size = new System.Drawing.Size(514, 236);
             this.output.TabIndex = 1;
             // 
             // process
             // 
             this.process.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.process.Location = new System.Drawing.Point(410, 8);
+            this.process.Location = new System.Drawing.Point(445, 8);
             this.process.Name = "process";
             this.process.Size = new System.Drawing.Size(75, 23);
             this.process.TabIndex = 2;
@@ -139,7 +142,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.outputFilename.Location = new System.Drawing.Point(108, 76);
             this.outputFilename.Name = "outputFilename";
-            this.outputFilename.Size = new System.Drawing.Size(346, 20);
+            this.outputFilename.Size = new System.Drawing.Size(381, 20);
             this.outputFilename.TabIndex = 6;
             this.outputFilename.Text = "SM Random <seed>.sfc";
             this.outputFilename.TextChanged += new System.EventHandler(this.outputFilename_TextChanged);
@@ -150,7 +153,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.seed.Location = new System.Drawing.Point(108, 37);
             this.seed.Name = "seed";
-            this.seed.Size = new System.Drawing.Size(377, 20);
+            this.seed.Size = new System.Drawing.Size(412, 20);
             this.seed.TabIndex = 8;
             // 
             // label2
@@ -173,11 +176,12 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(499, 373);
+            this.tabControl1.Size = new System.Drawing.Size(534, 373);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.controlsV11);
             this.tabPage1.Controls.Add(this.browseV11);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.outputV11);
@@ -188,21 +192,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(491, 344);
+            this.tabPage1.Size = new System.Drawing.Size(526, 344);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Current Randomizer";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // browseV11
-            // 
-            this.browseV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseV11.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
-            this.browseV11.Location = new System.Drawing.Point(460, 73);
-            this.browseV11.Name = "browseV11";
-            this.browseV11.Size = new System.Drawing.Size(25, 25);
-            this.browseV11.TabIndex = 15;
-            this.browseV11.UseVisualStyleBackColor = true;
-            this.browseV11.Click += new System.EventHandler(this.browseV11_Click);
             // 
             // label3
             // 
@@ -223,7 +216,7 @@
             this.outputV11.Multiline = true;
             this.outputV11.Name = "outputV11";
             this.outputV11.ReadOnly = true;
-            this.outputV11.Size = new System.Drawing.Size(479, 236);
+            this.outputV11.Size = new System.Drawing.Size(514, 236);
             this.outputV11.TabIndex = 10;
             // 
             // seedV11
@@ -232,13 +225,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.seedV11.Location = new System.Drawing.Point(6, 37);
             this.seedV11.Name = "seedV11";
-            this.seedV11.Size = new System.Drawing.Size(479, 20);
+            this.seedV11.Size = new System.Drawing.Size(514, 20);
             this.seedV11.TabIndex = 16;
             // 
             // createV11
             // 
             this.createV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createV11.Location = new System.Drawing.Point(410, 8);
+            this.createV11.Location = new System.Drawing.Point(445, 8);
             this.createV11.Name = "createV11";
             this.createV11.Size = new System.Drawing.Size(75, 23);
             this.createV11.TabIndex = 11;
@@ -261,13 +254,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.filenameV11.Location = new System.Drawing.Point(6, 76);
             this.filenameV11.Name = "filenameV11";
-            this.filenameV11.Size = new System.Drawing.Size(448, 20);
+            this.filenameV11.Size = new System.Drawing.Size(483, 20);
             this.filenameV11.TabIndex = 14;
             this.filenameV11.Text = "SM Random <seed>.sfc";
             this.filenameV11.TextChanged += new System.EventHandler(this.filenameV11_TextChanged);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.controls);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.output);
@@ -279,28 +273,62 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(491, 344);
+            this.tabPage2.Size = new System.Drawing.Size(526, 344);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Old Randomizer";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // controlsV11
+            // 
+            this.controlsV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlsV11.Location = new System.Drawing.Point(364, 8);
+            this.controlsV11.Name = "controlsV11";
+            this.controlsV11.Size = new System.Drawing.Size(75, 23);
+            this.controlsV11.TabIndex = 18;
+            this.controlsV11.Text = "Controls";
+            this.controlsV11.UseVisualStyleBackColor = true;
+            this.controlsV11.Click += new System.EventHandler(this.controlsV11_Click);
+            // 
+            // browseV11
+            // 
+            this.browseV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.browseV11.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
+            this.browseV11.Location = new System.Drawing.Point(495, 73);
+            this.browseV11.Name = "browseV11";
+            this.browseV11.Size = new System.Drawing.Size(25, 25);
+            this.browseV11.TabIndex = 15;
+            this.browseV11.UseVisualStyleBackColor = true;
+            this.browseV11.Click += new System.EventHandler(this.browseV11_Click);
             // 
             // save
             // 
             this.save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.save.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
-            this.save.Location = new System.Drawing.Point(460, 73);
+            this.save.Location = new System.Drawing.Point(495, 73);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(25, 25);
             this.save.TabIndex = 7;
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
+            // controls
+            // 
+            this.controls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.controls.Location = new System.Drawing.Point(364, 8);
+            this.controls.Name = "controls";
+            this.controls.Size = new System.Drawing.Size(75, 23);
+            this.controls.TabIndex = 19;
+            this.controls.Text = "Controls";
+            this.controls.UseVisualStyleBackColor = true;
+            this.controls.Click += new System.EventHandler(this.controls_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 374);
+            this.ClientSize = new System.Drawing.Size(532, 374);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Super Metroid Randomizer v14";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -338,6 +366,8 @@
         private System.Windows.Forms.Button createV11;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox filenameV11;
+        private System.Windows.Forms.Button controlsV11;
+        private System.Windows.Forms.Button controls;
     }
 }
 

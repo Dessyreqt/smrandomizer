@@ -8,5 +8,26 @@
     <Setting Name="OutputFileV11" Type="System.String" Scope="User">
       <Value Profile="(Default)">SM Random - &lt;seed&gt;.sfc</Value>
     </Setting>
+    <Setting Name="ControlsShot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">X</Value>
+    </Setting>
+    <Setting Name="ControlsJump" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
+    <Setting Name="ControlsDash" Type="System.String" Scope="User">
+      <Value Profile="(Default)">B</Value>
+    </Setting>
+    <Setting Name="ControlsItemSelect" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Select</Value>
+    </Setting>
+    <Setting Name="ControlsItemCancel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Y</Value>
+    </Setting>
+    <Setting Name="ControlsAngleUp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">R</Value>
+    </Setting>
+    <Setting Name="ControlsAngleDown" Type="System.String" Scope="User">
+      <Value Profile="(Default)">L</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

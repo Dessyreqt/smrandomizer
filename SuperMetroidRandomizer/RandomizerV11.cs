@@ -82,8 +82,61 @@ namespace SuperMetroidRandomizer
             }
 
             WriteSeedInRom(rom);
+            WriteControls(rom);
 
             rom.Close();
+        }
+
+        private void WriteControls(FileStream rom)
+        {
+            foreach (var address in Controller.ShotAddresses)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+
+                rom.Write(StringToByteArray(Controller.Buttons[Settings.Default.ControlsShot]), 0, 2);
+            }
+
+            foreach (var address in Controller.JumpAddresses)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+
+                rom.Write(StringToByteArray(Controller.Buttons[Settings.Default.ControlsJump]), 0, 2);
+            }
+
+            foreach (var address in Controller.DashAddresses)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+
+                rom.Write(StringToByteArray(Controller.Buttons[Settings.Default.ControlsDash]), 0, 2);
+            }
+
+            foreach (var address in Controller.ItemSelectAddresses)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+
+                rom.Write(StringToByteArray(Controller.Buttons[Settings.Default.ControlsItemSelect]), 0, 2);
+            }
+
+            foreach (var address in Controller.ItemCancelAddresses)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+
+                rom.Write(StringToByteArray(Controller.Buttons[Settings.Default.ControlsItemCancel]), 0, 2);
+            }
+
+            foreach (var address in Controller.AngleUpAddresses)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+
+                rom.Write(StringToByteArray(Controller.Buttons[Settings.Default.ControlsAngleUp]), 0, 2);
+            }
+
+            foreach (var address in Controller.AngleDownAddresses)
+            {
+                rom.Seek(address, SeekOrigin.Begin);
+
+                rom.Write(StringToByteArray(Controller.Buttons[Settings.Default.ControlsAngleDown]), 0, 2);
+            }
         }
 
         private void WriteSeedInRom(FileStream rom)

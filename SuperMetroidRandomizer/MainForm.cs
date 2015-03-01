@@ -45,14 +45,34 @@ namespace SuperMetroidRandomizer
             if (match.Success)
             {
                 var currentVersion = match.Groups["version"].Value;
-                if (int.Parse(Version) < int.Parse(currentVersion))
-                {
-                    var result =
-                        MessageBox.Show(
-                            string.Format("You have v{0} and the current version is v{1}. Would you like to update?", Version, currentVersion), "Version Update", MessageBoxButtons.YesNo);
+                             int versionNum;
+                int currentVersionNum;
 
-                    if (result == DialogResult.Yes)
-                        Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                if (int.TryParse(Version, out versionNum) && int.TryParse(currentVersion, out currentVersionNum))
+                {
+                    if (int.Parse(Version) < int.Parse(currentVersion))
+                    {
+                        var result =
+                            MessageBox.Show(
+                                string.Format(
+                                    "You have v{0} and the current version is v{1}. Would you like to update?", Version,
+                                    currentVersion), "Version Update", MessageBoxButtons.YesNo);
+
+                        if (result == DialogResult.Yes)
+                            Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                    }
+                }
+                else
+                {
+                    if (Version != currentVersion)
+                    {
+                        var result =
+                            MessageBox.Show(
+                                string.Format("You have v{0} and the current version is v{1}. Would you like to update?", Version, currentVersion), "Version Update", MessageBoxButtons.YesNo);
+
+                        if (result == DialogResult.Yes)
+                            Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                    }
                 }
 
             }
@@ -184,6 +204,18 @@ namespace SuperMetroidRandomizer
         {
             Settings.Default.OutputFileV11 = filenameV11.Text;
             Settings.Default.Save();
+        }
+
+        private void controlsV11_Click(object sender, EventArgs e)
+        {
+            var controlsDialog = new Controls();
+            controlsDialog.ShowDialog();
+        }
+
+        private void controls_Click(object sender, EventArgs e)
+        {
+            var controlsDialog = new Controls();
+            controlsDialog.ShowDialog();
         }
     }
 }
