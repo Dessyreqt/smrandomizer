@@ -43,7 +43,7 @@ namespace SuperMetroidRandomizer
         {
             var senderBox = (ComboBox) sender;
             
-            if (senderBox.Items.Contains("Off") && senderBox.SelectedItem != "Off")
+            if (senderBox.Items.Contains("Off") && senderBox.SelectedItem.ToString() != "Off")
             {
                 senderBox.Items.Remove("Off");
             }

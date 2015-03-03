@@ -158,20 +158,37 @@ namespace SuperMetroidRandomizer
         private void createV11_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(seedV11.Text))
-                seedV11.Text = string.Format("{0:0000000}", (new SeedRandom()).Next(10000000));
+            {
+                if (easyMode.Checked)
+                {
+                    seedV11.Text = string.Format("♥{0:0000000}♥", (new SeedRandom()).Next(10000000));
+                }
+                else
+                {
+                    seedV11.Text = string.Format("{0:0000000}", (new SeedRandom()).Next(10000000));
+                }
+            }
 
             ClearOutputV11();
             
             int parsedSeed;
+            bool easySeed = false;
+            var seedText = seedV11.Text;
 
-            if (!int.TryParse(seedV11.Text, out parsedSeed))
+            if (seedText.Contains("♥"))
+            {
+                seedText = seedText.Replace("♥", "");
+                easySeed = true;
+            }
+
+            if (!int.TryParse(seedText, out parsedSeed))
             {
                 MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 WriteOutputV11("Seed must be numeric or blank.");
             }
             else
             {
-                var randomizerV11 = new RandomizerV11(parsedSeed);
+                var randomizerV11 = new RandomizerV11(parsedSeed, easySeed);
                 randomizerV11.CreateRom(filenameV11.Text);
 
                 WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000}{1}{1}", parsedSeed, Environment.NewLine));
@@ -216,6 +233,16 @@ namespace SuperMetroidRandomizer
         {
             var controlsDialog = new Controls();
             controlsDialog.ShowDialog();
+        }
+
+        private void filename_Leave(object sender, EventArgs e)
+        {
+            var senderText = (TextBox) sender;
+
+            if (!senderText.Text.Contains("."))
+            {
+                senderText.Text += ".sfc";
+            }
         }
     }
 }

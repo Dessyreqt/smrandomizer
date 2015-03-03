@@ -12,14 +12,16 @@ namespace SuperMetroidRandomizer
         private static SeedRandom random;
         private List<ItemType> haveItems;
         private List<ItemType> itemPool;
-        private int seed;
+        private readonly int seed;
+        private bool easyMode;
 
         public Suitless IsSuitless { get; set; }
 
-        public RandomizerV11(int seed)
+        public RandomizerV11(int seed, bool easySeed = false)
         {
             random = new SeedRandom(seed);
             this.seed = seed;
+            easyMode = easySeed;
         }
 
         public void CreateRom(string filename)
@@ -34,7 +36,17 @@ namespace SuperMetroidRandomizer
 
         private void WriteRom(string filename)
         {
-            var rom = new FileStream(filename.Replace("<seed>", string.Format("{0:0000000}", seed)), FileMode.OpenOrCreate);
+            string usedFilename;
+            if (easyMode)
+            {
+                usedFilename = filename.Replace("<seed>", string.Format("♥{0:0000000}♥", seed));
+            }
+            else
+            {
+                usedFilename = filename.Replace("<seed>", string.Format("{0:0000000}", seed));
+            }
+
+            var rom = new FileStream(usedFilename, FileMode.OpenOrCreate);
             rom.Write(Resources.RomImageV11, 0, 3145728);
 
             foreach (var plm in RomPlms.GetRomPlms().Plms)
@@ -141,7 +153,7 @@ namespace SuperMetroidRandomizer
 
         private void WriteSeedInRom(FileStream rom)
         {
-            var seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString("0000000")).PadRight(21).Substring(0, 21);
+            var seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
             
             rom.Seek(0x7fc0, SeekOrigin.Begin);
 
@@ -283,6 +295,35 @@ namespace SuperMetroidRandomizer
                                ItemType.EnergyTank,
                                ItemType.EnergyTank,
                            };
+
+            if (easyMode)
+            {
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.Missile);
+                itemPool.Add(ItemType.SuperMissile);
+                itemPool.Add(ItemType.SuperMissile);
+                itemPool.Add(ItemType.SuperMissile);
+                itemPool.Add(ItemType.SuperMissile);
+                itemPool.Add(ItemType.PowerBomb);
+                itemPool.Add(ItemType.PowerBomb);
+                itemPool.Add(ItemType.PowerBomb);
+                itemPool.Add(ItemType.PowerBomb);
+                itemPool.Add(ItemType.EnergyTank);
+                itemPool.Add(ItemType.EnergyTank);
+                itemPool.Add(ItemType.EnergyTank);
+                itemPool.Add(ItemType.EnergyTank);
+                itemPool.Add(ItemType.EnergyTank);
+                itemPool.Add(ItemType.EnergyTank);
+                itemPool.Add(ItemType.EnergyTank);
+            }
 
             for (int i = itemPool.Count; i < 100; i++)
             {

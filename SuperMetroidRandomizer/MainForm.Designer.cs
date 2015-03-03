@@ -41,6 +41,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.controlsV11 = new System.Windows.Forms.Button();
+            this.browseV11 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.outputV11 = new System.Windows.Forms.TextBox();
             this.seedV11 = new System.Windows.Forms.TextBox();
@@ -48,10 +50,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.filenameV11 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.controlsV11 = new System.Windows.Forms.Button();
-            this.browseV11 = new System.Windows.Forms.Button();
-            this.save = new System.Windows.Forms.Button();
             this.controls = new System.Windows.Forms.Button();
+            this.save = new System.Windows.Forms.Button();
+            this.easyMode = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -146,6 +147,7 @@
             this.outputFilename.TabIndex = 6;
             this.outputFilename.Text = "SM Random <seed>.sfc";
             this.outputFilename.TextChanged += new System.EventHandler(this.outputFilename_TextChanged);
+            this.outputFilename.Leave += new System.EventHandler(this.filename_Leave);
             // 
             // seed
             // 
@@ -181,6 +183,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.easyMode);
             this.tabPage1.Controls.Add(this.controlsV11);
             this.tabPage1.Controls.Add(this.browseV11);
             this.tabPage1.Controls.Add(this.label3);
@@ -196,6 +199,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Current Randomizer";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // controlsV11
+            // 
+            this.controlsV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlsV11.Location = new System.Drawing.Point(364, 8);
+            this.controlsV11.Name = "controlsV11";
+            this.controlsV11.Size = new System.Drawing.Size(75, 23);
+            this.controlsV11.TabIndex = 18;
+            this.controlsV11.Text = "Controls";
+            this.controlsV11.UseVisualStyleBackColor = true;
+            this.controlsV11.Click += new System.EventHandler(this.controlsV11_Click);
+            // 
+            // browseV11
+            // 
+            this.browseV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.browseV11.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
+            this.browseV11.Location = new System.Drawing.Point(495, 73);
+            this.browseV11.Name = "browseV11";
+            this.browseV11.Size = new System.Drawing.Size(25, 25);
+            this.browseV11.TabIndex = 15;
+            this.browseV11.UseVisualStyleBackColor = true;
+            this.browseV11.Click += new System.EventHandler(this.browseV11_Click);
             // 
             // label3
             // 
@@ -258,6 +283,7 @@
             this.filenameV11.TabIndex = 14;
             this.filenameV11.Text = "SM Random <seed>.sfc";
             this.filenameV11.TextChanged += new System.EventHandler(this.filenameV11_TextChanged);
+            this.filenameV11.Leave += new System.EventHandler(this.filename_Leave);
             // 
             // tabPage2
             // 
@@ -278,27 +304,16 @@
             this.tabPage2.Text = "Old Randomizer";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // controlsV11
+            // controls
             // 
-            this.controlsV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.controlsV11.Location = new System.Drawing.Point(364, 8);
-            this.controlsV11.Name = "controlsV11";
-            this.controlsV11.Size = new System.Drawing.Size(75, 23);
-            this.controlsV11.TabIndex = 18;
-            this.controlsV11.Text = "Controls";
-            this.controlsV11.UseVisualStyleBackColor = true;
-            this.controlsV11.Click += new System.EventHandler(this.controlsV11_Click);
-            // 
-            // browseV11
-            // 
-            this.browseV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseV11.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
-            this.browseV11.Location = new System.Drawing.Point(495, 73);
-            this.browseV11.Name = "browseV11";
-            this.browseV11.Size = new System.Drawing.Size(25, 25);
-            this.browseV11.TabIndex = 15;
-            this.browseV11.UseVisualStyleBackColor = true;
-            this.browseV11.Click += new System.EventHandler(this.browseV11_Click);
+            this.controls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.controls.Location = new System.Drawing.Point(364, 8);
+            this.controls.Name = "controls";
+            this.controls.Size = new System.Drawing.Size(75, 23);
+            this.controls.TabIndex = 19;
+            this.controls.Text = "Controls";
+            this.controls.UseVisualStyleBackColor = true;
+            this.controls.Click += new System.EventHandler(this.controls_Click);
             // 
             // save
             // 
@@ -311,16 +326,15 @@
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
-            // controls
+            // easyMode
             // 
-            this.controls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.controls.Location = new System.Drawing.Point(364, 8);
-            this.controls.Name = "controls";
-            this.controls.Size = new System.Drawing.Size(75, 23);
-            this.controls.TabIndex = 19;
-            this.controls.Text = "Controls";
-            this.controls.UseVisualStyleBackColor = true;
-            this.controls.Click += new System.EventHandler(this.controls_Click);
+            this.easyMode.AutoSize = true;
+            this.easyMode.Location = new System.Drawing.Point(6, 1);
+            this.easyMode.Name = "easyMode";
+            this.easyMode.Size = new System.Drawing.Size(79, 17);
+            this.easyMode.TabIndex = 19;
+            this.easyMode.Text = "Easy Mode";
+            this.easyMode.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -330,7 +344,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "Super Metroid Randomizer v14";
+            this.Text = "Super Metroid Randomizer";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -368,6 +382,7 @@
         private System.Windows.Forms.TextBox filenameV11;
         private System.Windows.Forms.Button controlsV11;
         private System.Windows.Forms.Button controls;
+        private System.Windows.Forms.CheckBox easyMode;
     }
 }
 
