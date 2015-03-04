@@ -191,7 +191,14 @@ namespace SuperMetroidRandomizer
                 var randomizerV11 = new RandomizerV11(parsedSeed, easySeed);
                 randomizerV11.CreateRom(filenameV11.Text);
 
-                WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000}{1}{1}", parsedSeed, Environment.NewLine));
+                if (randomizerV11.EasyMode)
+                {
+                    WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: ♥{0:0000000}♥{1}{1}", parsedSeed, Environment.NewLine));
+                }
+                else
+                {
+                    WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000}{1}{1}", parsedSeed, Environment.NewLine));
+                }
             }
         }
 

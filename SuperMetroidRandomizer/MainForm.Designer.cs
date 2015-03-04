@@ -209,7 +209,6 @@
             this.easyMode.TabIndex = 19;
             this.easyMode.Text = "Easy Mode";
             this.easyMode.UseVisualStyleBackColor = true;
-            this.easyMode.Visible = false;
             // 
             // controlsV11
             // 

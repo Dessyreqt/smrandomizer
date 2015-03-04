@@ -13,7 +13,8 @@ namespace SuperMetroidRandomizer
         private List<ItemType> haveItems;
         private List<ItemType> itemPool;
         private readonly int seed;
-        private bool easyMode;
+
+        public bool EasyMode { get; set; }
 
         public Suitless IsSuitless { get; set; }
 
@@ -21,7 +22,7 @@ namespace SuperMetroidRandomizer
         {
             random = new SeedRandom(seed);
             this.seed = seed;
-            easyMode = easySeed;
+            EasyMode = easySeed;
         }
 
         public void CreateRom(string filename)
@@ -37,9 +38,9 @@ namespace SuperMetroidRandomizer
         private void WriteRom(string filename)
         {
             string usedFilename;
-            if (easyMode)
+            if (EasyMode)
             {
-                usedFilename = filename.Replace("<seed>", string.Format("♥{0:0000000}♥", seed));
+                usedFilename = filename.Replace("<seed>", string.Format("easy - {0:0000000}", seed));
             }
             else
             {
@@ -153,8 +154,16 @@ namespace SuperMetroidRandomizer
 
         private void WriteSeedInRom(FileStream rom)
         {
-            var seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
-            
+            string seedStr;
+            if (EasyMode)
+            {
+                seedStr = string.Format("SMRv{0} easy - {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+            }
+            else
+            {
+                seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+            }
+
             rom.Seek(0x7fc0, SeekOrigin.Begin);
 
             rom.Write(StringToByteArray(seedStr), 0, 21);
@@ -296,7 +305,7 @@ namespace SuperMetroidRandomizer
                                ItemType.EnergyTank,
                            };
 
-            if (easyMode)
+            if (EasyMode)
             {
                 itemPool.Add(ItemType.Missile);
                 itemPool.Add(ItemType.Missile);
