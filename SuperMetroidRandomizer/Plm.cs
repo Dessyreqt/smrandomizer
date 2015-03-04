@@ -30,6 +30,8 @@ namespace SuperMetroidRandomizer
         public long Address { get; set; }
         public ItemStorageType ItemStorageType { get; set; }
         public Access CanAccess { get; set; }
+        public Access CanAccessEasy { get; set; }
+        public Access CanAccessHard { get; set; }
         public Item Item { get; set; }
         public Region Region { get; set; }
         public bool GravityOkay { get; set; }

@@ -41,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.easyMode = new System.Windows.Forms.CheckBox();
             this.controlsV11 = new System.Windows.Forms.Button();
             this.browseV11 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
-            this.easyMode = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -200,6 +200,17 @@
             this.tabPage1.Text = "Current Randomizer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // easyMode
+            // 
+            this.easyMode.AutoSize = true;
+            this.easyMode.Location = new System.Drawing.Point(6, 1);
+            this.easyMode.Name = "easyMode";
+            this.easyMode.Size = new System.Drawing.Size(79, 17);
+            this.easyMode.TabIndex = 19;
+            this.easyMode.Text = "Easy Mode";
+            this.easyMode.UseVisualStyleBackColor = true;
+            this.easyMode.Visible = false;
+            // 
             // controlsV11
             // 
             this.controlsV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -325,16 +336,6 @@
             this.save.TabIndex = 7;
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
-            // 
-            // easyMode
-            // 
-            this.easyMode.AutoSize = true;
-            this.easyMode.Location = new System.Drawing.Point(6, 1);
-            this.easyMode.Name = "easyMode";
-            this.easyMode.Size = new System.Drawing.Size(79, 17);
-            this.easyMode.TabIndex = 19;
-            this.easyMode.Text = "Easy Mode";
-            this.easyMode.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
