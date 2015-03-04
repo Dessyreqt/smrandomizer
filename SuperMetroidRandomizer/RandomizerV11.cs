@@ -187,14 +187,14 @@ namespace SuperMetroidRandomizer
         {
             do
             {
-                var currentPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems);
+                var currentPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, EasyMode);
                 var candidateItemList = new List<ItemType>();
 
                 foreach (var candidateItem in itemPool)
                 {
                     haveItems.Add(candidateItem);
 
-                    var newPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems);
+                    var newPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, EasyMode);
 
                     if (newPlms.Count > currentPlms.Count)
                     {

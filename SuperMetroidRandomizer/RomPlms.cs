@@ -27,6 +27,18 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.SpeedBooster) ||
                                         (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.SpeedBooster) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.SpeedBooster) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                { 
@@ -35,6 +47,14 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (outside wrecked ship bottom)",
                                    Address = 0x781E8,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
@@ -48,6 +68,20 @@ namespace SuperMetroidRandomizer
                                    Address = 0x781EE,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -69,6 +103,20 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {        
@@ -81,6 +129,14 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {       
@@ -90,6 +146,20 @@ namespace SuperMetroidRandomizer
                                    Name = "energy tank (crateria gauntlet)",
                                    Address = 0x78264,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       have.Contains(ItemType.ScrewAttack) ||
+                                       (have.Contains(ItemType.SpeedBooster) &&
+                                        have.Count(x => x == ItemType.EnergyTank) >= 2),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       have.Contains(ItemType.ScrewAttack) ||
+                                       (have.Contains(ItemType.SpeedBooster) &&
+                                        have.Count(x => x == ItemType.EnergyTank) >= 2),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -109,6 +179,16 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                        have.Contains(ItemType.ScrewAttack),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       have.Contains(ItemType.ScrewAttack),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       have.Contains(ItemType.ScrewAttack),
                                },
                            new Plm
                                {        
@@ -119,6 +199,14 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78404,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.MorphingBall) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.MorphingBall) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.MorphingBall) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
@@ -135,6 +223,16 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster),
+                                   CanAccessEasy = 
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       have.Contains(ItemType.ScrewAttack),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster),
                                },
                            new Plm
                                {       
@@ -147,6 +245,14 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                        (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {     
@@ -156,6 +262,14 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (crateria gauntlet left)",
                                    Address = 0x7846A,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                        (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
@@ -173,6 +287,18 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.EnergyTank) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.EnergyTank) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.EnergyTank) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {       
@@ -182,6 +308,14 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (crateria middle)",
                                    Address = 0x78486,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
@@ -195,6 +329,10 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {        
@@ -205,6 +343,16 @@ namespace SuperMetroidRandomizer
                                    Address = 0x784E4,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall))) &&
+                                        have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall))) &&
+                                        have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall))) &&
@@ -223,6 +371,20 @@ namespace SuperMetroidRandomizer
                                         have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
                                        have.Contains(ItemType.MorphingBall),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {            
@@ -232,6 +394,20 @@ namespace SuperMetroidRandomizer
                                    Name = "super missile (green brinstar top)",
                                    Address = 0x7851E,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -254,6 +430,20 @@ namespace SuperMetroidRandomizer
                                         have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
                                        have.Contains(ItemType.MorphingBall),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {            
@@ -264,6 +454,20 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78532,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -285,6 +489,20 @@ namespace SuperMetroidRandomizer
                                         have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
                                        have.Contains(ItemType.MorphingBall),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {             
@@ -294,6 +512,18 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (pink brinstar top)",
                                    Address = 0x78608,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -313,6 +543,18 @@ namespace SuperMetroidRandomizer
                                         (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
                                },
                            new Plm
                                {             
@@ -327,6 +569,16 @@ namespace SuperMetroidRandomizer
                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall))) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall))) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall))) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
                                },
                            new Plm
                                {            
@@ -336,6 +588,14 @@ namespace SuperMetroidRandomizer
                                    Name = "power bomb (pink brinstar)",
                                    Address = 0x7865C,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
@@ -353,6 +613,18 @@ namespace SuperMetroidRandomizer
                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                         have.Contains(ItemType.SuperMissile) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                         have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                        have.Contains(ItemType.SuperMissile) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                         have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                        have.Contains(ItemType.SuperMissile) && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {           
@@ -362,6 +634,8 @@ namespace SuperMetroidRandomizer
                                    Name = "morphing ball",         
                                    Address = 0x786DE,
                                    CanAccess = have => true,
+                                   CanAccessEasy = have => true,
+                                   CanAccessHard = have => true,
                                },
                            new Plm
                                {              
@@ -372,6 +646,10 @@ namespace SuperMetroidRandomizer
                                    Address = 0x7874C,
                                    CanAccess =
                                        have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {              
@@ -381,6 +659,14 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (blue brinstar middle)",
                                    Address = 0x78798,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       have.Contains(ItemType.MorphingBall),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
                                        have.Contains(ItemType.MorphingBall),
@@ -398,6 +684,16 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
                                        (have.Contains(ItemType.MorphingBall) || have.Contains(ItemType.HiJumpBoots) ||
                                         have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.MorphingBall) || have.Contains(ItemType.HiJumpBoots) ||
+                                        have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.MorphingBall) || have.Contains(ItemType.HiJumpBoots) ||
+                                        have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {            
@@ -408,6 +704,10 @@ namespace SuperMetroidRandomizer
                                    Address = 0x787C2,
                                    CanAccess =
                                        have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {            
@@ -417,6 +717,14 @@ namespace SuperMetroidRandomizer
                                    Name = "super missile (green brinstar bottom)",
                                    Address = 0x787D0,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
@@ -433,6 +741,16 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SpeedBooster) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SpeedBooster) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SpeedBooster) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
                                },
                            new Plm
                                {            
@@ -443,6 +761,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78802,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess = have => have.Contains(ItemType.MorphingBall),
+                                   CanAccessEasy = have => have.Contains(ItemType.MorphingBall),
+                                   CanAccessHard = have => have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {             
@@ -452,6 +772,16 @@ namespace SuperMetroidRandomizer
                                    Name = "energy tank (pink brinstar top)",
                                    Address = 0x78824,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.SuperMissile) || have.Contains(ItemType.WaveBeam)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.SuperMissile) || have.Contains(ItemType.WaveBeam)),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
@@ -468,6 +798,14 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {           
@@ -478,6 +816,14 @@ namespace SuperMetroidRandomizer
                                    Address = 0x7883C,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
@@ -501,6 +847,28 @@ namespace SuperMetroidRandomizer
                                         (have.Contains(ItemType.EnergyTank) &&
                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) ||
                                         have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump) ||
+                                        have.Contains(ItemType.IceBeam)) &&
+                                       (have.Count(x => x == ItemType.EnergyTank) >= 2 ||
+                                        (have.Contains(ItemType.EnergyTank) &&
+                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump) ||
+                                        have.Contains(ItemType.IceBeam)) &&
+                                       (have.Count(x => x == ItemType.EnergyTank) >= 2 ||
+                                        (have.Contains(ItemType.EnergyTank) &&
+                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) ||
+                                        have.Contains(ItemType.GravitySuit)),
                                },
                            new Plm
                                {           
@@ -510,6 +878,14 @@ namespace SuperMetroidRandomizer
                                    Name = "power bomb (red brinstar sidehopper room)",
                                    Address = 0x788CA,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
@@ -528,6 +904,18 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
                                },
                            new Plm
                                {              
@@ -537,6 +925,14 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (red brinstar spike room)",
                                    Address = 0x78914,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
@@ -552,6 +948,14 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
                                },
                            new Plm
                                {           
@@ -561,6 +965,14 @@ namespace SuperMetroidRandomizer
                                    Address = 0x7899C,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
@@ -577,6 +989,14 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
                                },
                            new Plm
                                {            
@@ -590,6 +1010,14 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile),
                                },
                            new Plm
                                {              
@@ -600,6 +1028,16 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78AE4,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile) &&
@@ -619,6 +1057,18 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {                  
@@ -629,6 +1079,28 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78B46,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)))) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)))) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -658,6 +1130,28 @@ namespace SuperMetroidRandomizer
                                          ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                            (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                           (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
                                },
                            new Plm
                                {                    
@@ -668,6 +1162,18 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78BAC,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -695,6 +1201,34 @@ namespace SuperMetroidRandomizer
                                        ((have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.HiJumpBoots)) ||
                                         have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) ||
                                         (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       ((have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.HiJumpBoots)) ||
+                                        have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       ((have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.HiJumpBoots)) ||
+                                        have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))),
                                },
                            new Plm
                                {                   
@@ -704,6 +1238,18 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (hi-jump boots)",
                                    Address = 0x78BE6,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -723,6 +1269,18 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
                                },
                            new Plm
                                {                    
@@ -732,6 +1290,28 @@ namespace SuperMetroidRandomizer
                                    Name = "power bomb (crocomire)",
                                    Address = 0x78C04,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -761,6 +1341,28 @@ namespace SuperMetroidRandomizer
                                          ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                            (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                           (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
                                },
                            new Plm
                                {                   
@@ -770,6 +1372,34 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (grapple beam)",
                                    Address = 0x78C2A,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpeedBooster) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpeedBooster) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -803,6 +1433,28 @@ namespace SuperMetroidRandomizer
                                          ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                            (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                           (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         have.Contains(ItemType.SpeedBooster)) ||
+                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
+                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
                                },
                            new Plm
                                {                  
@@ -813,6 +1465,24 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78C3E,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -839,6 +1509,24 @@ namespace SuperMetroidRandomizer
                                        ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                          (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {                 
@@ -856,6 +1544,24 @@ namespace SuperMetroidRandomizer
                                        ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                          (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {                       
@@ -865,6 +1571,24 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (bubble norfair)",
                                    Address = 0x78C66,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -891,6 +1615,24 @@ namespace SuperMetroidRandomizer
                                        ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                          (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {                     
@@ -909,6 +1651,24 @@ namespace SuperMetroidRandomizer
                                        ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                          (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {                      
@@ -918,6 +1678,24 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (wave beam)",
                                    Address = 0x78CBC,
                                    CanAccess =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -944,6 +1722,24 @@ namespace SuperMetroidRandomizer
                                        ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
                                          (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessEasy =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                   CanAccessHard =
+                                       have =>
+                                       ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
+                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
                                },
                            new Plm
                                {                     
@@ -953,6 +1749,24 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (gold torizo)",
                                    Address = 0x78E6E,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) ||
+                                        (have.Contains(ItemType.GravitySuit) &&
+                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.HiJumpBoots)))) && have.Contains(ItemType.SpaceJump),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) ||
+                                        (have.Contains(ItemType.GravitySuit) &&
+                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.HiJumpBoots)))) && have.Contains(ItemType.SpaceJump),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -979,6 +1793,24 @@ namespace SuperMetroidRandomizer
                                         (have.Contains(ItemType.GravitySuit) &&
                                          ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) ||
+                                        (have.Contains(ItemType.GravitySuit) &&
+                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) ||
+                                        (have.Contains(ItemType.GravitySuit) &&
+                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)))),
                                },
                            new Plm
                                {                         
@@ -988,6 +1820,22 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (mickey mouse room)",
                                    Address = 0x78F30,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1011,6 +1859,22 @@ namespace SuperMetroidRandomizer
                                          have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {                             
@@ -1020,6 +1884,22 @@ namespace SuperMetroidRandomizer
                                    Name = "power bomb (lower norfair above fire flea room)",
                                    Address = 0x78FD2,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1043,6 +1923,22 @@ namespace SuperMetroidRandomizer
                                          have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
                                        ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {                            
@@ -1052,6 +1948,22 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (lower norfair near wave beam)",
                                    Address = 0x79100,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1069,6 +1981,24 @@ namespace SuperMetroidRandomizer
                                    Address = 0x79108,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)) &&
+                                       have.Contains(ItemType.ChargeBeam),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)) &&
+                                       have.Contains(ItemType.ChargeBeam),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1095,6 +2025,24 @@ namespace SuperMetroidRandomizer
                                         (have.Contains(ItemType.GravitySuit) &&
                                          ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) ||
+                                        (have.Contains(ItemType.GravitySuit) &&
+                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) ||
+                                        (have.Contains(ItemType.GravitySuit) &&
+                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                          have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)))),
                                },
                            new Plm
                                {                        
@@ -1104,6 +2052,22 @@ namespace SuperMetroidRandomizer
                                    Name = "energy tank (lower norfair fire flea room)",
                                    Address = 0x79184,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                         have.Contains(ItemType.HiJumpBoots)) || have.Contains(ItemType.GravitySuit)) &&
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1123,6 +2087,14 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
                                },
                            new Plm
                                {                           
@@ -1133,6 +2105,22 @@ namespace SuperMetroidRandomizer
                                    Address = 0x7C2E9,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) && have.Contains(ItemType.SpeedBooster) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) && have.Contains(ItemType.SpeedBooster) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1156,6 +2144,22 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
                                         have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
                                },
                            new Plm
                                {                          
@@ -1165,6 +2169,22 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (wrecked ship top)",
                                    Address = 0x7C319,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1190,6 +2210,26 @@ namespace SuperMetroidRandomizer
                                         have.Contains(ItemType.GravitySuit)) &&
                                        (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.HiJumpBoots) ||
                                         have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.HiJumpBoots) ||
+                                        have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.HiJumpBoots) ||
+                                        have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GravitySuit)),
                                },
                            new Plm
                                {                            
@@ -1206,6 +2246,22 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
                                         have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
                                },
                            new Plm
                                {                           
@@ -1215,6 +2271,22 @@ namespace SuperMetroidRandomizer
                                    Name = "super missile (wrecked ship right)",
                                    Address = 0x7C365,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1239,6 +2311,22 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
                                         have.Contains(ItemType.GravitySuit)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.ChargeBeam) &&
+                                       (have.Contains(ItemType.EnergyTank) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
+                                        have.Contains(ItemType.GravitySuit)),
                                },
                            new Plm
                                {                           
@@ -1248,6 +2336,16 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (green maridia shinespark)",
                                    Address = 0x7C437,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) && have.Contains(ItemType.SpeedBooster),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) && have.Contains(ItemType.SpeedBooster),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1266,6 +2364,18 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        (have.Contains(ItemType.GravitySuit) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))),
                                },
                            new Plm
                                {                             
@@ -1275,6 +2385,24 @@ namespace SuperMetroidRandomizer
                                    Name = "energy tank (green maridia)",
                                    Address = 0x7C47D,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.SpaceJump)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) ||
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                        have.Contains(ItemType.SpaceJump)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1298,6 +2426,18 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        (have.Contains(ItemType.GravitySuit) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam))),
                                },
                            new Plm
                                {                             
@@ -1307,6 +2447,20 @@ namespace SuperMetroidRandomizer
                                    Name = "super missile (yellow maridia)",
                                    Address = 0x7C4AF,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1328,6 +2482,20 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.GravitySuit) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
                                          have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
                                },
                            new Plm
                                {                             
@@ -1337,6 +2505,20 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (yellow maridia false wall)",
                                    Address = 0x7C533,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1360,6 +2542,22 @@ namespace SuperMetroidRandomizer
                                          (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
                                          have.Contains(ItemType.GrappleBeam) && have.Contains(ItemType.XRayScope))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam) && have.Contains(ItemType.XRayScope))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam) && have.Contains(ItemType.XRayScope))),
                                },
                            new Plm
                                {                             
@@ -1369,6 +2567,20 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (left maridia sand pit room)",
                                    Address = 0x7C5DD,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1391,6 +2603,20 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.GravitySuit) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
                                          have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
                                },
                            new Plm
                                {                           
@@ -1400,6 +2626,20 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (right maridia sand pit room)",
                                    Address = 0x7C5EB,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.GravitySuit) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1419,6 +2659,16 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.GravitySuit),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit),
                                },
                            new Plm
                                {                            
@@ -1428,6 +2678,16 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (pink maridia)",
                                    Address = 0x7C603,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) && have.Contains(ItemType.SpeedBooster),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) && have.Contains(ItemType.SpeedBooster),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1445,6 +2705,16 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.GravitySuit) && have.Contains(ItemType.SpeedBooster),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) && have.Contains(ItemType.SpeedBooster),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) && have.Contains(ItemType.SpeedBooster),
                                },
                            new Plm
                                {                             
@@ -1455,6 +2725,18 @@ namespace SuperMetroidRandomizer
                                    Address = 0x7C6E5,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.GrappleBeam)),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       have.Contains(ItemType.GravitySuit) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.GrappleBeam)),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1477,6 +2759,22 @@ namespace SuperMetroidRandomizer
                                          (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
                                          have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
                                },
                            new Plm
                                {                             
@@ -1486,6 +2784,22 @@ namespace SuperMetroidRandomizer
                                    Name = "energy tank (botwoon)",
                                    Address = 0x7C755,
                                    CanAccess =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam))),
+                                   CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1510,6 +2824,22 @@ namespace SuperMetroidRandomizer
                                          (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
                                          have.Contains(ItemType.GrappleBeam) && have.Contains(ItemType.XRayScope))),
+                                   CanAccessEasy =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam) && have.Contains(ItemType.XRayScope))),
+                                   CanAccessHard =
+                                       have =>
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       ((have.Contains(ItemType.GravitySuit) &&
+                                         (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
+                                        (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
+                                         have.Contains(ItemType.GrappleBeam) && have.Contains(ItemType.XRayScope))),
                                },
                        };
         }
@@ -1524,8 +2854,13 @@ namespace SuperMetroidRandomizer
             return instance;
         }
 
-        public List<Plm> GetAvailablePlms(List<ItemType> haveItems)
+        public List<Plm> GetAvailablePlms(List<ItemType> haveItems, bool easyMode)
         {
+            if (easyMode)
+            {
+                return (from Plm plm in Plms where plm.Item == null && plm.CanAccessEasy(haveItems) select plm).ToList();
+            }
+
             return (from Plm plm in Plms where plm.Item == null && plm.CanAccess(haveItems) select plm).ToList();
         }
     }
