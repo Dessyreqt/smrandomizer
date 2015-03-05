@@ -30,7 +30,7 @@
       <Value Profile="(Default)">L</Value>
     </Setting>
     <Setting Name="RandomizerDifficulty" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Normal</Value>
+      <Value Profile="(Default)">Easy</Value>
     </Setting>
   </Settings>
 </SettingsFile>

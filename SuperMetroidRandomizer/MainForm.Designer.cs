@@ -41,6 +41,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.randomizerDifficulty = new System.Windows.Forms.ComboBox();
             this.controlsV11 = new System.Windows.Forms.Button();
             this.browseV11 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
-            this.randomizerDifficulty = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -202,6 +202,29 @@
             this.tabPage1.Text = "Current Randomizer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Difficulty:";
+            // 
+            // randomizerDifficulty
+            // 
+            this.randomizerDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.randomizerDifficulty.FormattingEnabled = true;
+            this.randomizerDifficulty.Items.AddRange(new object[] {
+            "Easy",
+            "Normal",
+            "Hard"});
+            this.randomizerDifficulty.Location = new System.Drawing.Point(64, 6);
+            this.randomizerDifficulty.Name = "randomizerDifficulty";
+            this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);
+            this.randomizerDifficulty.TabIndex = 19;
+            this.randomizerDifficulty.SelectedIndexChanged += new System.EventHandler(this.randomizerDifficulty_SelectedIndexChanged);
+            // 
             // controlsV11
             // 
             this.controlsV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -327,28 +350,6 @@
             this.save.TabIndex = 7;
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
-            // 
-            // easyMode
-            // 
-            this.randomizerDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.randomizerDifficulty.FormattingEnabled = true;
-            this.randomizerDifficulty.Items.AddRange(new object[] {
-            "Easy",
-            "Normal",
-            "Hard"});
-            this.randomizerDifficulty.Location = new System.Drawing.Point(64, 6);
-            this.randomizerDifficulty.Name = "randomizerDifficulty";
-            this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);
-            this.randomizerDifficulty.TabIndex = 19;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Difficulty:";
             // 
             // MainForm
             // 

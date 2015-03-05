@@ -268,5 +268,10 @@ namespace SuperMetroidRandomizer
                 senderText.Text += ".sfc";
             }
         }
+
+        private void randomizerDifficulty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            seedV11.Text = "";
+        }
     }
 }

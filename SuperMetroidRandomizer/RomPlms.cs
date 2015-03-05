@@ -53,7 +53,9 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -80,7 +82,9 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -109,7 +113,9 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -845,12 +851,7 @@ namespace SuperMetroidRandomizer
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile) &&
-                                       (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump) ||
-                                        have.Contains(ItemType.IceBeam)) &&
-                                       (have.Count(x => x == ItemType.EnergyTank) >= 2 ||
-                                        (have.Contains(ItemType.EnergyTank) &&
-                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                       (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -944,7 +945,9 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -964,7 +967,9 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -985,7 +990,9 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1006,7 +1013,9 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1029,7 +1038,9 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile) &&
-                                       (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)),
+                                       (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1054,8 +1065,9 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
                                        have.Contains(ItemType.SuperMissile) &&
-                                       (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -1089,10 +1101,11 @@ namespace SuperMetroidRandomizer
                                          (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
                                           (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)))) ||
                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                         (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                           (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
-                                         have.Contains(ItemType.SpeedBooster))),
+                                         have.Contains(ItemType.SpeedBooster))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -1127,13 +1140,13 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         ((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
                                          have.Contains(ItemType.SpeedBooster)) ||
                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                         (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -1165,7 +1178,9 @@ namespace SuperMetroidRandomizer
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
-                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1198,16 +1213,16 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         ((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
                                          have.Contains(ItemType.SpeedBooster)) ||
                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                         (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
                                           (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
                                        ((have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.HiJumpBoots)) ||
                                         have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) ||
-                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))),
+                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -1241,7 +1256,9 @@ namespace SuperMetroidRandomizer
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
-                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1267,7 +1284,9 @@ namespace SuperMetroidRandomizer
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
-                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1297,13 +1316,13 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         ((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
                                          have.Contains(ItemType.SpeedBooster)) ||
                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                         (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -1338,13 +1357,13 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         ((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
                                          have.Contains(ItemType.SpeedBooster)) ||
                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                         (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -1382,16 +1401,16 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         ((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
                                          have.Contains(ItemType.SpeedBooster)) ||
                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                         ((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)))) &&
                                        (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpeedBooster) ||
                                         (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
-                                        have.Contains(ItemType.SpaceJump)),
+                                        have.Contains(ItemType.SpaceJump)) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -1430,13 +1449,12 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
                                        (((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                         ((have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
                                          have.Contains(ItemType.SpeedBooster)) ||
                                         ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                         ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                           (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))),
+                                         (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                          (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))))) &&
+                                       (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -1472,9 +1490,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1508,9 +1527,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1543,9 +1563,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1578,9 +1599,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1614,9 +1636,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1650,9 +1673,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1685,9 +1709,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -1721,9 +1746,10 @@ namespace SuperMetroidRandomizer
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
                                          have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) &&
-                                       ((have.Count(x => x == ItemType.EnergyTank) >= 3 &&
-                                         (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       (((have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump))) ||
+                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) &&
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpaceJump) ||
+                                       have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.Bomb)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -2083,7 +2109,9 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -2112,7 +2140,9 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.ChargeBeam) && have.Contains(ItemType.SpeedBooster) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -2144,7 +2174,9 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -2176,7 +2208,9 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -2212,7 +2246,9 @@ namespace SuperMetroidRandomizer
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
                                         have.Contains(ItemType.GravitySuit)) &&
                                        (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.HiJumpBoots) ||
-                                        have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GravitySuit)),
+                                        have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -2246,7 +2282,9 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -2278,7 +2316,9 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
@@ -2311,7 +2351,9 @@ namespace SuperMetroidRandomizer
                                        have.Contains(ItemType.ChargeBeam) &&
                                        (have.Contains(ItemType.EnergyTank) ||
                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                        have.Contains(ItemType.GravitySuit)) &&
+                                       (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || 
+                                       have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) &&
