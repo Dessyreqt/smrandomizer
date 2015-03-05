@@ -130,5 +130,17 @@ namespace SuperMetroidRandomizer.Properties {
                 this["ControlsAngleDown"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public string RandomizerDifficulty {
+            get {
+                return ((string)(this["RandomizerDifficulty"]));
+            }
+            set {
+                this["RandomizerDifficulty"] = value;
+            }
+        }
     }
 }

@@ -41,7 +41,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.easyMode = new System.Windows.Forms.CheckBox();
             this.controlsV11 = new System.Windows.Forms.Button();
             this.browseV11 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,6 +52,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
+            this.randomizerDifficulty = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -183,7 +184,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.easyMode);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.randomizerDifficulty);
             this.tabPage1.Controls.Add(this.controlsV11);
             this.tabPage1.Controls.Add(this.browseV11);
             this.tabPage1.Controls.Add(this.label3);
@@ -200,20 +202,10 @@
             this.tabPage1.Text = "Current Randomizer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // easyMode
-            // 
-            this.easyMode.AutoSize = true;
-            this.easyMode.Location = new System.Drawing.Point(6, 1);
-            this.easyMode.Name = "easyMode";
-            this.easyMode.Size = new System.Drawing.Size(79, 17);
-            this.easyMode.TabIndex = 19;
-            this.easyMode.Text = "Easy Mode";
-            this.easyMode.UseVisualStyleBackColor = true;
-            // 
             // controlsV11
             // 
             this.controlsV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.controlsV11.Location = new System.Drawing.Point(364, 8);
+            this.controlsV11.Location = new System.Drawing.Point(364, 17);
             this.controlsV11.Name = "controlsV11";
             this.controlsV11.Size = new System.Drawing.Size(75, 23);
             this.controlsV11.TabIndex = 18;
@@ -225,7 +217,7 @@
             // 
             this.browseV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.browseV11.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
-            this.browseV11.Location = new System.Drawing.Point(495, 73);
+            this.browseV11.Location = new System.Drawing.Point(495, 82);
             this.browseV11.Name = "browseV11";
             this.browseV11.Size = new System.Drawing.Size(25, 25);
             this.browseV11.TabIndex = 15;
@@ -235,7 +227,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 21);
+            this.label3.Location = new System.Drawing.Point(3, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(242, 13);
             this.label3.TabIndex = 17;
@@ -247,18 +239,18 @@
             this.outputV11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputV11.Location = new System.Drawing.Point(6, 102);
+            this.outputV11.Location = new System.Drawing.Point(6, 111);
             this.outputV11.Multiline = true;
             this.outputV11.Name = "outputV11";
             this.outputV11.ReadOnly = true;
-            this.outputV11.Size = new System.Drawing.Size(514, 236);
+            this.outputV11.Size = new System.Drawing.Size(514, 227);
             this.outputV11.TabIndex = 10;
             // 
             // seedV11
             // 
             this.seedV11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.seedV11.Location = new System.Drawing.Point(6, 37);
+            this.seedV11.Location = new System.Drawing.Point(6, 46);
             this.seedV11.Name = "seedV11";
             this.seedV11.Size = new System.Drawing.Size(514, 20);
             this.seedV11.TabIndex = 16;
@@ -266,7 +258,7 @@
             // createV11
             // 
             this.createV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createV11.Location = new System.Drawing.Point(445, 8);
+            this.createV11.Location = new System.Drawing.Point(445, 17);
             this.createV11.Name = "createV11";
             this.createV11.Size = new System.Drawing.Size(75, 23);
             this.createV11.TabIndex = 11;
@@ -277,7 +269,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 60);
+            this.label4.Location = new System.Drawing.Point(3, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(246, 13);
             this.label4.TabIndex = 13;
@@ -287,7 +279,7 @@
             // 
             this.filenameV11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.filenameV11.Location = new System.Drawing.Point(6, 76);
+            this.filenameV11.Location = new System.Drawing.Point(6, 85);
             this.filenameV11.Name = "filenameV11";
             this.filenameV11.Size = new System.Drawing.Size(483, 20);
             this.filenameV11.TabIndex = 14;
@@ -336,6 +328,28 @@
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
+            // easyMode
+            // 
+            this.randomizerDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.randomizerDifficulty.FormattingEnabled = true;
+            this.randomizerDifficulty.Items.AddRange(new object[] {
+            "Easy",
+            "Normal",
+            "Hard"});
+            this.randomizerDifficulty.Location = new System.Drawing.Point(64, 6);
+            this.randomizerDifficulty.Name = "randomizerDifficulty";
+            this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);
+            this.randomizerDifficulty.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Difficulty:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -382,7 +396,8 @@
         private System.Windows.Forms.TextBox filenameV11;
         private System.Windows.Forms.Button controlsV11;
         private System.Windows.Forms.Button controls;
-        private System.Windows.Forms.CheckBox easyMode;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox randomizerDifficulty;
     }
 }
 

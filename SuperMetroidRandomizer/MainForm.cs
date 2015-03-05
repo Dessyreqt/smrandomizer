@@ -18,7 +18,7 @@ namespace SuperMetroidRandomizer
     public partial class MainForm : Form
     {
         private Thread checkUpdateThread;
-        public static string Version = "18";
+        public static string Version = "19";
 
         public MainForm()
         {
@@ -152,6 +152,7 @@ namespace SuperMetroidRandomizer
             outputFilename.Text = Settings.Default.OutputFile;
             filenameV11.Text = Settings.Default.OutputFileV11;
             Text = string.Format("Super Metroid Randomizer v{0}", Version);
+            randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
             RunCheckUpdate();
         }
 
@@ -159,26 +160,35 @@ namespace SuperMetroidRandomizer
         {
             if (string.IsNullOrWhiteSpace(seedV11.Text))
             {
-                if (easyMode.Checked)
+                switch (randomizerDifficulty.SelectedItem.ToString())
                 {
-                    seedV11.Text = string.Format("♥{0:0000000}♥", (new SeedRandom()).Next(10000000));
-                }
-                else
-                {
-                    seedV11.Text = string.Format("{0:0000000}", (new SeedRandom()).Next(10000000));
+                    case "Easy":
+                        seedV11.Text = string.Format("♥{0:0000000}♥", (new SeedRandom()).Next(10000000));
+                        break;
+                    case "Hard":
+                        seedV11.Text = string.Format("♦{0:0000000}♦", (new SeedRandom()).Next(10000000));
+                        break;
+                    default:
+                        seedV11.Text = string.Format("{0:0000000}", (new SeedRandom()).Next(10000000));
+                        break;
                 }
             }
 
             ClearOutputV11();
             
             int parsedSeed;
-            bool easySeed = false;
+            var difficulty = RandomizerDifficulty.Normal;
             var seedText = seedV11.Text;
 
             if (seedText.Contains("♥"))
             {
                 seedText = seedText.Replace("♥", "");
-                easySeed = true;
+                difficulty = RandomizerDifficulty.Easy;
+            }
+            else if (seedText.Contains("♦"))
+            {
+                seedText = seedText.Replace("♦", "");
+                difficulty = RandomizerDifficulty.Hard;
             }
 
             if (!int.TryParse(seedText, out parsedSeed))
@@ -188,18 +198,25 @@ namespace SuperMetroidRandomizer
             }
             else
             {
-                var randomizerV11 = new RandomizerV11(parsedSeed, easySeed);
+                var randomizerV11 = new RandomizerV11(parsedSeed, difficulty);
                 randomizerV11.CreateRom(filenameV11.Text);
 
-                if (randomizerV11.EasyMode)
+                switch (randomizerV11.Difficulty)
                 {
-                    WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: ♥{0:0000000}♥{1}{1}", parsedSeed, Environment.NewLine));
-                }
-                else
-                {
-                    WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000}{1}{1}", parsedSeed, Environment.NewLine));
+                    case RandomizerDifficulty.Easy:
+                        WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: ♥{0:0000000}♥{1}{1}", parsedSeed, Environment.NewLine));
+                        break;
+                    case RandomizerDifficulty.Hard:
+                        WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: ♦{0:0000000}♦{1}{1}", parsedSeed, Environment.NewLine));
+                        break;
+                    default:
+                        WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000}{1}{1}", parsedSeed, Environment.NewLine));
+                        break;
                 }
             }
+
+            Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
+            Settings.Default.Save();
         }
 
         private void ClearOutputV11()

@@ -29,5 +29,8 @@
     <Setting Name="ControlsAngleDown" Type="System.String" Scope="User">
       <Value Profile="(Default)">L</Value>
     </Setting>
+    <Setting Name="RandomizerDifficulty" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

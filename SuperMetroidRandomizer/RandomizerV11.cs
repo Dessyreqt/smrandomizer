@@ -7,6 +7,13 @@ using SuperMetroidRandomizer.Properties;
 
 namespace SuperMetroidRandomizer
 {
+    public enum RandomizerDifficulty
+    {
+        Easy = 0,
+        Normal = 1,
+        Hard = 2,
+    }
+
     public class RandomizerV11
     {
         private static SeedRandom random;
@@ -14,15 +21,15 @@ namespace SuperMetroidRandomizer
         private List<ItemType> itemPool;
         private readonly int seed;
 
-        public bool EasyMode { get; set; }
+        public RandomizerDifficulty Difficulty { get; set; }
 
         public Suitless IsSuitless { get; set; }
 
-        public RandomizerV11(int seed, bool easySeed = false)
+        public RandomizerV11(int seed, RandomizerDifficulty difficulty = RandomizerDifficulty.Normal)
         {
             random = new SeedRandom(seed);
             this.seed = seed;
-            EasyMode = easySeed;
+            Difficulty = difficulty;
         }
 
         public void CreateRom(string filename)
@@ -38,13 +45,17 @@ namespace SuperMetroidRandomizer
         private void WriteRom(string filename)
         {
             string usedFilename;
-            if (EasyMode)
+            switch (Difficulty)
             {
-                usedFilename = filename.Replace("<seed>", string.Format("easy - {0:0000000}", seed));
-            }
-            else
-            {
-                usedFilename = filename.Replace("<seed>", string.Format("{0:0000000}", seed));
+                case RandomizerDifficulty.Easy:
+                    usedFilename = filename.Replace("<seed>", string.Format("easy - {0:0000000}", seed));
+                    break;
+                case RandomizerDifficulty.Hard:
+                    usedFilename = filename.Replace("<seed>", string.Format("hard - {0:0000000}", seed));
+                    break;
+                default:
+                    usedFilename = filename.Replace("<seed>", string.Format("{0:0000000}", seed));
+                    break;
             }
 
             var rom = new FileStream(usedFilename, FileMode.OpenOrCreate);
@@ -155,13 +166,17 @@ namespace SuperMetroidRandomizer
         private void WriteSeedInRom(FileStream rom)
         {
             string seedStr;
-            if (EasyMode)
+            switch (Difficulty)
             {
-                seedStr = string.Format("SMRv{0} easy - {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
-            }
-            else
-            {
-                seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+                case RandomizerDifficulty.Easy:
+                    seedStr = string.Format("SMRv{0} easy - {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+                    break;
+                case RandomizerDifficulty.Hard:
+                    seedStr = string.Format("SMRv{0} hard - {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+                    break;
+                default:
+                    seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+                    break;
             }
 
             rom.Seek(0x7fc0, SeekOrigin.Begin);
@@ -187,20 +202,34 @@ namespace SuperMetroidRandomizer
         {
             do
             {
-                var currentPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, EasyMode);
+                var currentPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, Difficulty);
                 var candidateItemList = new List<ItemType>();
 
                 foreach (var candidateItem in itemPool)
                 {
                     haveItems.Add(candidateItem);
 
-                    var newPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, EasyMode);
+                    var newPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, Difficulty);
 
                     if (newPlms.Count > currentPlms.Count)
                     {
-                        if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)))
+                        switch (Difficulty)
                         {
-                            candidateItemList.Add(candidateItem);
+                            case RandomizerDifficulty.Easy:
+                                candidateItemList.Add(candidateItem);
+                                break;
+                            case RandomizerDifficulty.Hard:
+                                if (!(candidateItem == ItemType.VariaSuit && !currentPlms.Any(x => x.GravityOkay)) && !(candidateItem == ItemType.GravitySuit && currentPlms.All(x => x.Region != Region.Maridia)))
+                                {
+                                    candidateItemList.Add(candidateItem);
+                                }
+                                break;
+                            default:
+                                if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)))
+                                {
+                                    candidateItemList.Add(candidateItem);
+                                }
+                                break;
                         }
                     }
 
@@ -213,20 +242,52 @@ namespace SuperMetroidRandomizer
 
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
-  
+
                     int insertedPlm;
 
-                    do
+                    switch (Difficulty)
                     {
-                        insertedPlm = random.Next(currentPlms.Count);
-                    } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
-                    
+                        case RandomizerDifficulty.Easy:
+                            insertedPlm = random.Next(currentPlms.Count);
+                            break;
+                        case RandomizerDifficulty.Hard:
+                            do
+                            {
+                                insertedPlm = random.Next(currentPlms.Count);
+                            } while ((insertedItem == ItemType.VariaSuit && !currentPlms[insertedPlm].GravityOkay) || (insertedItem == ItemType.GravitySuit && currentPlms[insertedPlm].Region != Region.Maridia));
+                            break;
+                        default:
+                            do
+                            {
+                                insertedPlm = random.Next(currentPlms.Count);
+                            } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
+                            break;
+                    }
+
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
                 else
                 {
                     ItemType insertedItem;
 
+                    switch (Difficulty)
+                    {
+                        case RandomizerDifficulty.Easy:
+                            insertedItem = itemPool[random.Next(itemPool.Count)];
+                            break;
+                        case RandomizerDifficulty.Hard:
+                            do
+                            {
+                                insertedItem = itemPool[random.Next(itemPool.Count)];
+                            } while ((insertedItem == ItemType.VariaSuit && !currentPlms.Any(x => x.GravityOkay)) || (insertedItem == ItemType.GravitySuit && currentPlms.All(x => x.Region != Region.Maridia)));
+                            break;
+                        default:
+                            do
+                            {
+                                insertedItem = itemPool[random.Next(itemPool.Count)];
+                            } while (insertedItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay));
+                            break;
+                    }
                     do
                     {
                         insertedItem = itemPool[random.Next(itemPool.Count)];
@@ -237,10 +298,24 @@ namespace SuperMetroidRandomizer
 
                     int insertedPlm;
 
-                    do
+                    switch (Difficulty)
                     {
-                        insertedPlm = random.Next(currentPlms.Count);
-                    } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
+                        case RandomizerDifficulty.Easy:
+                            insertedPlm = random.Next(currentPlms.Count);
+                            break;
+                        case RandomizerDifficulty.Hard:
+                            do
+                            {
+                                insertedPlm = random.Next(currentPlms.Count);
+                            } while ((insertedItem == ItemType.VariaSuit && !currentPlms[insertedPlm].GravityOkay) || (insertedItem == ItemType.GravitySuit && currentPlms[insertedPlm].Region != Region.Maridia));
+                            break;
+                        default:
+                            do
+                            {
+                                insertedPlm = random.Next(currentPlms.Count);
+                            } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
+                            break;
+                    }
 
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
@@ -251,88 +326,178 @@ namespace SuperMetroidRandomizer
         {
             RomPlms.GetRomPlms().ResetPlms();
             haveItems = new List<ItemType>();
-            itemPool = new List<ItemType>
-                           {
-                               ItemType.MorphingBall,
-                               ItemType.Bomb,
-                               ItemType.ChargeBeam,
-                               ItemType.ChargeBeam,
-                               ItemType.ChargeBeam,
-                               ItemType.ChargeBeam,
-                               ItemType.Spazer,
-                               ItemType.VariaSuit,
-                               ItemType.HiJumpBoots,
-                               ItemType.SpeedBooster,
-                               ItemType.WaveBeam,
-                               ItemType.GrappleBeam,
-                               ItemType.GravitySuit,
-                               ItemType.SpaceJump,
-                               ItemType.SpringBall,
-                               ItemType.PlasmaBeam,
-                               ItemType.IceBeam,
-                               ItemType.ScrewAttack,
-                               ItemType.XRayScope,
-                               ItemType.ReserveTank,
-                               ItemType.ReserveTank,
-                               ItemType.ReserveTank,
-                               ItemType.ReserveTank,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.Missile,
-                               ItemType.SuperMissile,
-                               ItemType.SuperMissile,
-                               ItemType.SuperMissile,
-                               ItemType.SuperMissile,
-                               ItemType.SuperMissile,
-                               ItemType.SuperMissile,
-                               ItemType.PowerBomb,
-                               ItemType.PowerBomb,
-                               ItemType.PowerBomb,
-                               ItemType.PowerBomb,
-                               ItemType.EnergyTank,
-                               ItemType.EnergyTank,
-                               ItemType.EnergyTank,
-                               ItemType.EnergyTank,
-                               ItemType.EnergyTank,
-                               ItemType.EnergyTank,
-                               ItemType.EnergyTank,
-                           };
 
-            if (EasyMode)
+            switch (Difficulty)
             {
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.Missile);
-                itemPool.Add(ItemType.SuperMissile);
-                itemPool.Add(ItemType.SuperMissile);
-                itemPool.Add(ItemType.SuperMissile);
-                itemPool.Add(ItemType.SuperMissile);
-                itemPool.Add(ItemType.PowerBomb);
-                itemPool.Add(ItemType.PowerBomb);
-                itemPool.Add(ItemType.PowerBomb);
-                itemPool.Add(ItemType.PowerBomb);
-                itemPool.Add(ItemType.EnergyTank);
-                itemPool.Add(ItemType.EnergyTank);
-                itemPool.Add(ItemType.EnergyTank);
-                itemPool.Add(ItemType.EnergyTank);
-                itemPool.Add(ItemType.EnergyTank);
-                itemPool.Add(ItemType.EnergyTank);
-                itemPool.Add(ItemType.EnergyTank);
+                case RandomizerDifficulty.Easy:
+                    itemPool = new List<ItemType>
+                                   {
+                                       ItemType.MorphingBall,
+                                       ItemType.Bomb,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.Spazer,
+                                       ItemType.VariaSuit,
+                                       ItemType.HiJumpBoots,
+                                       ItemType.SpeedBooster,
+                                       ItemType.WaveBeam,
+                                       ItemType.GrappleBeam,
+                                       ItemType.GravitySuit,
+                                       ItemType.SpaceJump,
+                                       ItemType.SpringBall,
+                                       ItemType.PlasmaBeam,
+                                       ItemType.IceBeam,
+                                       ItemType.ScrewAttack,
+                                       ItemType.XRayScope,
+                                       ItemType.ReserveTank,
+                                       ItemType.ReserveTank,
+                                       ItemType.ReserveTank,
+                                       ItemType.ReserveTank,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                   };
+                    break;
+                case RandomizerDifficulty.Hard:
+                    itemPool = new List<ItemType>
+                                   {
+                                       ItemType.MorphingBall,
+                                       ItemType.Bomb,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.VariaSuit,
+                                       ItemType.HiJumpBoots,
+                                       ItemType.SpeedBooster,
+                                       ItemType.WaveBeam,
+                                       ItemType.GrappleBeam,
+                                       ItemType.GravitySuit,
+                                       ItemType.SpaceJump,
+                                       ItemType.IceBeam,
+                                       ItemType.ScrewAttack,
+                                       ItemType.XRayScope,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                   };
+                    break;
+                default:
+                    itemPool = new List<ItemType>
+                                   {
+                                       ItemType.MorphingBall,
+                                       ItemType.Bomb,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.ChargeBeam,
+                                       ItemType.Spazer,
+                                       ItemType.VariaSuit,
+                                       ItemType.HiJumpBoots,
+                                       ItemType.SpeedBooster,
+                                       ItemType.WaveBeam,
+                                       ItemType.GrappleBeam,
+                                       ItemType.GravitySuit,
+                                       ItemType.SpaceJump,
+                                       ItemType.SpringBall,
+                                       ItemType.PlasmaBeam,
+                                       ItemType.IceBeam,
+                                       ItemType.ScrewAttack,
+                                       ItemType.XRayScope,
+                                       ItemType.ReserveTank,
+                                       ItemType.ReserveTank,
+                                       ItemType.ReserveTank,
+                                       ItemType.ReserveTank,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.Missile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.SuperMissile,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.PowerBomb,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                       ItemType.EnergyTank,
+                                   };
+                    break;
             }
+
 
             for (int i = itemPool.Count; i < 100; i++)
             {
