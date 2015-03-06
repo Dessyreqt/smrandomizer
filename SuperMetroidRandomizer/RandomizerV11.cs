@@ -317,7 +317,19 @@ namespace SuperMetroidRandomizer
                             break;
                     }
 
-                    currentPlms[insertedPlm].Item = new Item(insertedItem);
+                    if (currentPlms.Count > 0)
+                    {
+                        currentPlms[insertedPlm].Item = new Item(insertedItem);
+                    }
+                    else
+                    {
+                        var unavailablePlms = RomPlms.GetRomPlms().GetUnavailablePlms(haveItems, Difficulty);
+
+                        foreach (var unavailablePlm in unavailablePlms)
+                        {
+                            unavailablePlm.Item = new Item(ItemType.Nothing);
+                        }
+                    }
                 }
             } while (itemPool.Count > 0);
         }
@@ -425,7 +437,6 @@ namespace SuperMetroidRandomizer
                                        ItemType.WaveBeam,
                                        ItemType.GrappleBeam,
                                        ItemType.GravitySuit,
-                                       ItemType.SpaceJump,
                                        ItemType.IceBeam,
                                        ItemType.ScrewAttack,
                                        ItemType.XRayScope,
@@ -436,6 +447,7 @@ namespace SuperMetroidRandomizer
                                        ItemType.SuperMissile,
                                        ItemType.SuperMissile,
                                        ItemType.SuperMissile,
+                                       ItemType.PowerBomb,
                                        ItemType.PowerBomb,
                                        ItemType.PowerBomb,
                                        ItemType.EnergyTank,

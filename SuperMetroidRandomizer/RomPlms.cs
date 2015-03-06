@@ -746,7 +746,7 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SpeedBooster) &&
+                                       have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.GravitySuit) &&
                                        (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
                                    CanAccessHard =
                                        have =>
@@ -878,7 +878,8 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       have.Contains(ItemType.SuperMissile) && 
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.WaveBeam)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -903,7 +904,8 @@ namespace SuperMetroidRandomizer
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                         (((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                           have.Contains(ItemType.ScrewAttack) || have.Contains(ItemType.SpeedBooster)) &&
-                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile),
+                                         have.Contains(ItemType.MorphingBall))) && have.Contains(ItemType.SuperMissile) && 
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.WaveBeam)),
                                    CanAccessHard =
                                        have =>
                                        ((have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -925,7 +927,8 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       have.Contains(ItemType.SuperMissile) && 
+                                       (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.WaveBeam)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
@@ -2899,6 +2902,19 @@ namespace SuperMetroidRandomizer
                     return (from Plm plm in Plms where plm.Item == null && plm.CanAccessHard(haveItems) select plm).ToList();
                 default:
                     return (from Plm plm in Plms where plm.Item == null && plm.CanAccess(haveItems) select plm).ToList();
+            }
+        }
+
+        public List<Plm> GetUnavailablePlms(List<ItemType> haveItems, RandomizerDifficulty difficulty)
+        {
+            switch (difficulty)
+            {
+                case RandomizerDifficulty.Easy:
+                    return (from Plm plm in Plms where plm.Item == null && !plm.CanAccessEasy(haveItems) select plm).ToList();
+                case RandomizerDifficulty.Hard:
+                    return (from Plm plm in Plms where plm.Item == null && !plm.CanAccessHard(haveItems) select plm).ToList();
+                default:
+                    return (from Plm plm in Plms where plm.Item == null && !plm.CanAccess(haveItems) select plm).ToList();
             }
         }
     }
