@@ -512,7 +512,6 @@ namespace SuperMetroidRandomizer
                     break;
             }
 
-
             for (int i = itemPool.Count; i < 100; i++)
             {
                 itemPool.Add(ItemType.Nothing);

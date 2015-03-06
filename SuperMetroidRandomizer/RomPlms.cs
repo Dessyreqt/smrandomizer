@@ -31,7 +31,6 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
                                        (have.Contains(ItemType.SpeedBooster) ||
-                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                         have.Contains(ItemType.SpaceJump)),
                                    CanAccessHard =
                                        have =>
