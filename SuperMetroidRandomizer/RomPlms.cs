@@ -159,11 +159,12 @@ namespace SuperMetroidRandomizer
                                         have.Count(x => x == ItemType.EnergyTank) >= 2),
                                    CanAccessEasy =
                                        have =>
-                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
+                                       ((have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
                                        (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) ||
                                        have.Contains(ItemType.ScrewAttack) ||
                                        (have.Contains(ItemType.SpeedBooster) &&
-                                        have.Count(x => x == ItemType.EnergyTank) >= 2),
+                                        have.Count(x => x == ItemType.EnergyTank) >= 2)) &&
+                                        (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -253,7 +254,8 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
-                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
+                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)) &&
+                                        (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
@@ -273,7 +275,8 @@ namespace SuperMetroidRandomizer
                                    CanAccessEasy =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
-                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)),
+                                       (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall)) &&
+                                        (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster)),
                                    CanAccessHard =
                                        have =>
                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
