@@ -317,21 +317,17 @@ namespace SuperMetroidRandomizer
                             break;
                     }
 
-                    if (currentPlms.Count > 0)
-                    {
-                        currentPlms[insertedPlm].Item = new Item(insertedItem);
-                    }
-                    else
-                    {
-                        var unavailablePlms = RomPlms.GetRomPlms().GetUnavailablePlms(haveItems, Difficulty);
-
-                        foreach (var unavailablePlm in unavailablePlms)
-                        {
-                            unavailablePlm.Item = new Item(ItemType.Nothing);
-                        }
-                    }
+                    currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
             } while (itemPool.Count > 0);
+
+            var unavailablePlms = RomPlms.GetRomPlms().GetUnavailablePlms(haveItems, Difficulty);
+
+            foreach (var unavailablePlm in unavailablePlms)
+            {
+                unavailablePlm.Item = new Item(ItemType.Nothing);
+            }
+
         }
 
         private void GenerateItemList()
@@ -512,7 +508,9 @@ namespace SuperMetroidRandomizer
                     break;
             }
 
-            for (int i = itemPool.Count; i < 100; i++)
+            var unavailablePlms = RomPlms.GetRomPlms().GetUnavailablePlms(itemPool, Difficulty);
+
+            for (int i = itemPool.Count; i < 100 - unavailablePlms.Count; i++)
             {
                 itemPool.Add(ItemType.Nothing);
             }
