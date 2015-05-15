@@ -37,12 +37,16 @@ namespace SuperMetroidRandomizer
             if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
                 Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
 
-            GenerateItemList();
-            GenerateItemPositions();
-            WriteRom(filename);
+            IRomPlms romPlms;
+
+            romPlms = new RomPlmsNormal();
+            
+            GenerateItemList(romPlms);
+            GenerateItemPositions(romPlms);
+            WriteRom(filename, romPlms);
         }
 
-        private void WriteRom(string filename)
+        private void WriteRom(string filename, IRomPlms romPlms)
         {
             string usedFilename;
             switch (Difficulty)
@@ -61,7 +65,7 @@ namespace SuperMetroidRandomizer
             var rom = new FileStream(usedFilename, FileMode.OpenOrCreate);
             rom.Write(Resources.RomImageV11, 0, 3145728);
 
-            foreach (var plm in RomPlms.GetRomPlms().Plms)
+            foreach (var plm in romPlms.Plms)
             {
                 rom.Seek(plm.Address, SeekOrigin.Begin);
                 var newItem = new byte[2];
@@ -198,18 +202,18 @@ namespace SuperMetroidRandomizer
             return retVal;
         }
 
-        private void GenerateItemPositions()
+        private void GenerateItemPositions(IRomPlms romPlms)
         {
             do
             {
-                var currentPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, Difficulty);
+                var currentPlms = romPlms.GetAvailablePlms(haveItems, Difficulty);
                 var candidateItemList = new List<ItemType>();
 
                 foreach (var candidateItem in itemPool)
                 {
                     haveItems.Add(candidateItem);
 
-                    var newPlms = RomPlms.GetRomPlms().GetAvailablePlms(haveItems, Difficulty);
+                    var newPlms = romPlms.GetAvailablePlms(haveItems, Difficulty);
 
                     if (newPlms.Count > currentPlms.Count)
                     {
@@ -321,7 +325,7 @@ namespace SuperMetroidRandomizer
                 }
             } while (itemPool.Count > 0);
 
-            var unavailablePlms = RomPlms.GetRomPlms().GetUnavailablePlms(haveItems, Difficulty);
+            var unavailablePlms = romPlms.GetUnavailablePlms(haveItems, Difficulty);
 
             foreach (var unavailablePlm in unavailablePlms)
             {
@@ -330,9 +334,9 @@ namespace SuperMetroidRandomizer
 
         }
 
-        private void GenerateItemList()
+        private void GenerateItemList(IRomPlms romPlms)
         {
-            RomPlms.GetRomPlms().ResetPlms();
+            romPlms.ResetPlms();
             haveItems = new List<ItemType>();
 
             switch (Difficulty)
@@ -508,7 +512,7 @@ namespace SuperMetroidRandomizer
                     break;
             }
 
-            var unavailablePlms = RomPlms.GetRomPlms().GetUnavailablePlms(itemPool, Difficulty);
+            var unavailablePlms = romPlms.GetUnavailablePlms(itemPool, Difficulty);
 
             for (int i = itemPool.Count; i < 100 - unavailablePlms.Count; i++)
             {
