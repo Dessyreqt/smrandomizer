@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>SMRandomizer.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -56,6 +57,7 @@
     <Compile Include="Controls.Designer.cs">
       <DependentUpon>Controls.cs</DependentUpon>
     </Compile>
+    <Compile Include="IRomPlms.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -68,7 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomizerV10.cs" />
     <Compile Include="RandomizerV11.cs" />
-    <Compile Include="RomPlms.cs" />
+    <Compile Include="RomPlmsNormal.cs" />
+    <Compile Include="RomPlmsEasy.cs" />
+    <Compile Include="RomPlmsHard.cs" />
     <Compile Include="SeedRandom.cs" />
     <EmbeddedResource Include="Controls.resx">
       <DependentUpon>Controls.cs</DependentUpon>
