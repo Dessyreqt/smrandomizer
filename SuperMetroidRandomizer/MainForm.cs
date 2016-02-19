@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ namespace SuperMetroidRandomizer
     public partial class MainForm : Form
     {
         private Thread checkUpdateThread;
-        public static string Version = "20";
+        public static string Version = "20P2";
 
         public MainForm()
         {
@@ -158,18 +159,18 @@ namespace SuperMetroidRandomizer
 
         private void createV11_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(seedV11.Text.Replace("♥", "").Replace("♦", "")))
+            if (string.IsNullOrWhiteSpace(seedV11.Text))
             {
                 switch (randomizerDifficulty.SelectedItem.ToString())
                 {
-                    case "Easy":
-                        seedV11.Text = string.Format("♥{0:0000000}♥", (new SeedRandom()).Next(10000000));
+                    case "Casual":
+                        seedV11.Text = string.Format("C{0:0000000}", (new SeedRandom()).Next(10000000));
                         break;
-                    case "Hard":
-                        seedV11.Text = string.Format("♦{0:0000000}♦", (new SeedRandom()).Next(10000000));
+                    case "Masochist":
+                        seedV11.Text = string.Format("M{0:0000000}", (new SeedRandom()).Next(10000000));
                         break;
                     default:
-                        seedV11.Text = string.Format("{0:0000000}", (new SeedRandom()).Next(10000000));
+                        seedV11.Text = string.Format("S{0:0000000}", (new SeedRandom()).Next(10000000));
                         break;
                 }
             }
@@ -180,21 +181,22 @@ namespace SuperMetroidRandomizer
             RandomizerDifficulty difficulty;
             var seedText = seedV11.Text;
 
-            if (seedText.Contains("♥"))
+            if (seedText.ToUpper().Contains("C"))
             {
-                randomizerDifficulty.SelectedItem = "Easy";
-                seedText = seedText.Replace("♥", "");
+                randomizerDifficulty.SelectedItem = "Casual";
+                seedText = seedText.ToUpper().Replace("C", "");
                 difficulty = RandomizerDifficulty.Easy;
             }
-            else if (seedText.Contains("♦"))
+            else if (seedText.ToUpper().Contains("M"))
             {
-                randomizerDifficulty.SelectedItem = "Hard";
-                seedText = seedText.Replace("♦", "");
+                randomizerDifficulty.SelectedItem = "Masochist";
+                seedText = seedText.ToUpper().Replace("M", "");
                 difficulty = RandomizerDifficulty.Hard;
             }
             else
             {
-                randomizerDifficulty.SelectedItem = "Normal";
+                randomizerDifficulty.SelectedItem = "Speedrunner";
+                seedText = seedText.ToUpper().Replace("S", "");
                 difficulty = RandomizerDifficulty.Normal;
             }
 
@@ -205,21 +207,17 @@ namespace SuperMetroidRandomizer
             }
             else
             {
-                var randomizerV11 = new RandomizerV11(parsedSeed, difficulty);
+                var romPlms = RomPlmsFactory.GetRomPlms(difficulty);
+                var randomizerV11 = new RandomizerV11(parsedSeed, romPlms);
                 randomizerV11.CreateRom(filenameV11.Text);
 
-                switch (randomizerV11.Difficulty)
-                {
-                    case RandomizerDifficulty.Easy:
-                        WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: ♥{0:0000000}♥ (Easy Difficulty){1}{1}", parsedSeed, Environment.NewLine));
-                        break;
-                    case RandomizerDifficulty.Hard:
-                        WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: ♦{0:0000000}♦ (Hard Difficulty){1}{1}", parsedSeed, Environment.NewLine));
-                        break;
-                    default:
-                        WriteOutputV11(string.Format("Done!{1}{1}{1}Seed: {0:0000000} (Normal Difficulty){1}{1}", parsedSeed, Environment.NewLine));
-                        break;
-                }
+                var outputString = new StringBuilder();
+
+                outputString.AppendFormat("Done!{0}{0}{0}Seed: ", Environment.NewLine);
+                outputString.AppendFormat(romPlms.SeedFileString, parsedSeed);
+                outputString.AppendFormat(" ({0} Difficulty){1}{1}", romPlms.DifficultyName, Environment.NewLine);
+
+                WriteOutputV11(outputString.ToString());
             }
 
             Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();

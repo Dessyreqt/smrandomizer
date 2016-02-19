@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using SuperMetroidRandomizer.Properties;
 
 namespace SuperMetroidRandomizer
@@ -20,16 +17,15 @@ namespace SuperMetroidRandomizer
         private List<ItemType> haveItems;
         private List<ItemType> itemPool;
         private readonly int seed;
-
-        public RandomizerDifficulty Difficulty { get; set; }
+        private readonly IRomPlms romPlms;
 
         public Suitless IsSuitless { get; set; }
 
-        public RandomizerV11(int seed, RandomizerDifficulty difficulty = RandomizerDifficulty.Normal)
+        public RandomizerV11(int seed, IRomPlms romPlms)
         {
             random = new SeedRandom(seed);
+            this.romPlms = romPlms;
             this.seed = seed;
-            Difficulty = difficulty;
         }
 
         public void CreateRom(string filename)
@@ -37,82 +33,68 @@ namespace SuperMetroidRandomizer
             if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
                 Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
 
-            IRomPlms romPlms;
-
-            romPlms = new RomPlmsNormal();
-            
-            GenerateItemList(romPlms);
-            GenerateItemPositions(romPlms);
-            WriteRom(filename, romPlms);
+            GenerateItemList();
+            GenerateItemPositions();
+            WriteRom(filename);
         }
 
-        private void WriteRom(string filename, IRomPlms romPlms)
+        private void WriteRom(string filename)
         {
-            string usedFilename;
-            switch (Difficulty)
+            string usedFilename = filename.Replace("<seed>", string.Format(romPlms.SeedFileString, seed));
+
+            using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
             {
-                case RandomizerDifficulty.Easy:
-                    usedFilename = filename.Replace("<seed>", string.Format("easy - {0:0000000}", seed));
-                    break;
-                case RandomizerDifficulty.Hard:
-                    usedFilename = filename.Replace("<seed>", string.Format("hard - {0:0000000}", seed));
-                    break;
-                default:
-                    usedFilename = filename.Replace("<seed>", string.Format("{0:0000000}", seed));
-                    break;
-            }
+                rom.Write(Resources.RomImageV11, 0, 3145728);
 
-            var rom = new FileStream(usedFilename, FileMode.OpenOrCreate);
-            rom.Write(Resources.RomImageV11, 0, 3145728);
-
-            foreach (var plm in romPlms.Plms)
-            {
-                rom.Seek(plm.Address, SeekOrigin.Begin);
-                var newItem = new byte[2];
-
-                if (!plm.NoHidden && plm.Item.Type != ItemType.Nothing && plm.Item.Type != ItemType.ChargeBeam && plm.ItemStorageType == ItemStorageType.Normal)
+                foreach (var plm in romPlms.Plms)
                 {
-                    // hide the item half of the time (to be a jerk)
-                    if (random.Next(2) == 0)
+                    rom.Seek(plm.Address, SeekOrigin.Begin);
+                    var newItem = new byte[2];
+
+                    if (!plm.NoHidden && plm.Item.Type != ItemType.Nothing && plm.Item.Type != ItemType.ChargeBeam && plm.ItemStorageType == ItemStorageType.Normal)
                     {
-                        plm.ItemStorageType = ItemStorageType.Hidden;
+                        // hide the item half of the time (to be a jerk)
+                        if (random.Next(2) == 0)
+                        {
+                            plm.ItemStorageType = ItemStorageType.Hidden;
+                        }
+                    }
+
+                    switch (plm.ItemStorageType)
+                    {
+                        case ItemStorageType.Normal:
+                            newItem = StringToByteArray(plm.Item.Normal);
+                            break;
+                        case ItemStorageType.Hidden:
+                            newItem = StringToByteArray(plm.Item.Hidden);
+                            break;
+                        case ItemStorageType.Chozo:
+                            newItem = StringToByteArray(plm.Item.Chozo);
+                            break;
+                    }
+
+                    rom.Write(newItem, 0, 2);
+
+                    if (plm.Item.Type == ItemType.Nothing)
+                    {
+                        // give same index as morph ball
+                        rom.Seek(plm.Address + 4, SeekOrigin.Begin);
+                        rom.Write(StringToByteArray("\x1a"), 0, 1);
+                    }
+
+                    if (plm.Item.Type == ItemType.ChargeBeam)
+                    {
+                        // we have 4 copies of charge to reduce tedium, give them all the same index
+                        rom.Seek(plm.Address + 4, SeekOrigin.Begin);
+                        rom.Write(StringToByteArray("\xff"), 0, 1);
                     }
                 }
 
-                switch (plm.ItemStorageType)
-                {
-                    case ItemStorageType.Normal:
-                        newItem = StringToByteArray(plm.Item.Normal);
-                        break;
-                    case ItemStorageType.Hidden:
-                        newItem = StringToByteArray(plm.Item.Hidden);
-                        break;
-                    case ItemStorageType.Chozo:
-                        newItem = StringToByteArray(plm.Item.Chozo);
-                        break;
-                }
+                WriteSeedInRom(rom);
+                WriteControls(rom);
 
-                rom.Write(newItem, 0, 2);
-
-                if (plm.Item.Type == ItemType.Nothing)
-                {
-                    // give same index as morph ball
-                    rom.Seek(plm.Address + 4, SeekOrigin.Begin);
-                    rom.Write(StringToByteArray("\x1a"), 0, 1);
-                }
-
-                if (plm.Item.Type == ItemType.ChargeBeam)
-                {
-                    // we have 4 copies of charge to reduce tedium, give them all the same index
-                    rom.Seek(plm.Address + 4, SeekOrigin.Begin);
-                    rom.Write(StringToByteArray("\xff"), 0, 1);
-                }
+                rom.Close();
             }
-
-            WriteSeedInRom(rom);
-            WriteControls(rom);
-
-            rom.Close();
         }
 
         private void WriteControls(FileStream rom)
@@ -169,22 +151,8 @@ namespace SuperMetroidRandomizer
 
         private void WriteSeedInRom(FileStream rom)
         {
-            string seedStr;
-            switch (Difficulty)
-            {
-                case RandomizerDifficulty.Easy:
-                    seedStr = string.Format("SMRv{0} easy - {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
-                    break;
-                case RandomizerDifficulty.Hard:
-                    seedStr = string.Format("SMRv{0} hard - {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
-                    break;
-                default:
-                    seedStr = string.Format("SMRv{0} {1}", MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
-                    break;
-            }
-
+            string seedStr = string.Format(romPlms.SeedRomString, MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
             rom.Seek(0x7fc0, SeekOrigin.Begin);
-
             rom.Write(StringToByteArray(seedStr), 0, 21);
         }
 
@@ -202,44 +170,29 @@ namespace SuperMetroidRandomizer
             return retVal;
         }
 
-        private void GenerateItemPositions(IRomPlms romPlms)
+        private void GenerateItemPositions()
         {
             do
             {
-                var currentPlms = romPlms.GetAvailablePlms(haveItems, Difficulty);
+                var currentPlms = romPlms.GetAvailablePlms(haveItems);
                 var candidateItemList = new List<ItemType>();
 
+                // Generate candidate item list
                 foreach (var candidateItem in itemPool)
                 {
                     haveItems.Add(candidateItem);
 
-                    var newPlms = romPlms.GetAvailablePlms(haveItems, Difficulty);
+                    var newPlms = romPlms.GetAvailablePlms(haveItems);
 
                     if (newPlms.Count > currentPlms.Count)
                     {
-                        switch (Difficulty)
-                        {
-                            case RandomizerDifficulty.Easy:
-                                candidateItemList.Add(candidateItem);
-                                break;
-                            case RandomizerDifficulty.Hard:
-                                if (!(candidateItem == ItemType.VariaSuit && !currentPlms.Any(x => x.GravityOkay)) && !(candidateItem == ItemType.GravitySuit && currentPlms.All(x => x.Region != Region.Maridia)))
-                                {
-                                    candidateItemList.Add(candidateItem);
-                                }
-                                break;
-                            default:
-                                if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)))
-                                {
-                                    candidateItemList.Add(candidateItem);
-                                }
-                                break;
-                        }
+                        romPlms.TryInsertCandidateItem(currentPlms, candidateItemList, candidateItem);
                     }
 
                     haveItems.Remove(candidateItem);
                 }
 
+                // Grab an item from the candidate list if there are any, otherwise, grab a random item
                 if (candidateItemList.Count > 0)
                 {
                     var insertedItem = candidateItemList[random.Next(candidateItemList.Count)];
@@ -247,272 +200,35 @@ namespace SuperMetroidRandomizer
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
 
-                    int insertedPlm;
-
-                    switch (Difficulty)
-                    {
-                        case RandomizerDifficulty.Easy:
-                            insertedPlm = random.Next(currentPlms.Count);
-                            break;
-                        case RandomizerDifficulty.Hard:
-                            do
-                            {
-                                insertedPlm = random.Next(currentPlms.Count);
-                            } while ((insertedItem == ItemType.VariaSuit && !currentPlms[insertedPlm].GravityOkay) || (insertedItem == ItemType.GravitySuit && currentPlms[insertedPlm].Region != Region.Maridia));
-                            break;
-                        default:
-                            do
-                            {
-                                insertedPlm = random.Next(currentPlms.Count);
-                            } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
-                            break;
-                    }
-
+                    int insertedPlm = romPlms.GetInsertedPlm(currentPlms, insertedItem, random);
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
                 else
                 {
-                    ItemType insertedItem;
-
-                    switch (Difficulty)
-                    {
-                        case RandomizerDifficulty.Easy:
-                            insertedItem = itemPool[random.Next(itemPool.Count)];
-                            break;
-                        case RandomizerDifficulty.Hard:
-                            do
-                            {
-                                insertedItem = itemPool[random.Next(itemPool.Count)];
-                            } while ((insertedItem == ItemType.VariaSuit && !currentPlms.Any(x => x.GravityOkay)) || (insertedItem == ItemType.GravitySuit && currentPlms.All(x => x.Region != Region.Maridia)));
-                            break;
-                        default:
-                            do
-                            {
-                                insertedItem = itemPool[random.Next(itemPool.Count)];
-                            } while (insertedItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay));
-                            break;
-                    }
-                    do
-                    {
-                        insertedItem = itemPool[random.Next(itemPool.Count)];
-                    } while (insertedItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay));
+                    ItemType insertedItem = romPlms.GetInsertedItem(currentPlms, itemPool, random);
 
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
 
-                    int insertedPlm;
-
-                    switch (Difficulty)
-                    {
-                        case RandomizerDifficulty.Easy:
-                            insertedPlm = random.Next(currentPlms.Count);
-                            break;
-                        case RandomizerDifficulty.Hard:
-                            do
-                            {
-                                insertedPlm = random.Next(currentPlms.Count);
-                            } while ((insertedItem == ItemType.VariaSuit && !currentPlms[insertedPlm].GravityOkay) || (insertedItem == ItemType.GravitySuit && currentPlms[insertedPlm].Region != Region.Maridia));
-                            break;
-                        default:
-                            do
-                            {
-                                insertedPlm = random.Next(currentPlms.Count);
-                            } while (insertedItem == ItemType.GravitySuit && !currentPlms[insertedPlm].GravityOkay);
-                            break;
-                    }
-
+                    int insertedPlm = romPlms.GetInsertedPlm(currentPlms, insertedItem, random);
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
                 }
             } while (itemPool.Count > 0);
 
-            var unavailablePlms = romPlms.GetUnavailablePlms(haveItems, Difficulty);
+            var unavailablePlms = romPlms.GetUnavailablePlms(haveItems);
 
             foreach (var unavailablePlm in unavailablePlms)
             {
                 unavailablePlm.Item = new Item(ItemType.Nothing);
             }
-
         }
 
-        private void GenerateItemList(IRomPlms romPlms)
+        private void GenerateItemList()
         {
             romPlms.ResetPlms();
             haveItems = new List<ItemType>();
-
-            switch (Difficulty)
-            {
-                case RandomizerDifficulty.Easy:
-                    itemPool = new List<ItemType>
-                                   {
-                                       ItemType.MorphingBall,
-                                       ItemType.Bomb,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.Spazer,
-                                       ItemType.VariaSuit,
-                                       ItemType.HiJumpBoots,
-                                       ItemType.SpeedBooster,
-                                       ItemType.WaveBeam,
-                                       ItemType.GrappleBeam,
-                                       ItemType.GravitySuit,
-                                       ItemType.SpaceJump,
-                                       ItemType.SpringBall,
-                                       ItemType.PlasmaBeam,
-                                       ItemType.IceBeam,
-                                       ItemType.ScrewAttack,
-                                       ItemType.XRayScope,
-                                       ItemType.ReserveTank,
-                                       ItemType.ReserveTank,
-                                       ItemType.ReserveTank,
-                                       ItemType.ReserveTank,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                   };
-                    break;
-                case RandomizerDifficulty.Hard:
-                    itemPool = new List<ItemType>
-                                   {
-                                       ItemType.MorphingBall,
-                                       ItemType.Bomb,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.Spazer,
-                                       ItemType.VariaSuit,
-                                       ItemType.HiJumpBoots,
-                                       ItemType.SpeedBooster,
-                                       ItemType.WaveBeam,
-                                       ItemType.GrappleBeam,
-                                       ItemType.GravitySuit,
-                                       ItemType.IceBeam,
-                                       ItemType.ScrewAttack,
-                                       ItemType.XRayScope,
-                                       ItemType.ReserveTank,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                   };
-                    break;
-                default:
-                    itemPool = new List<ItemType>
-                                   {
-                                       ItemType.MorphingBall,
-                                       ItemType.Bomb,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.ChargeBeam,
-                                       ItemType.Spazer,
-                                       ItemType.VariaSuit,
-                                       ItemType.HiJumpBoots,
-                                       ItemType.SpeedBooster,
-                                       ItemType.WaveBeam,
-                                       ItemType.GrappleBeam,
-                                       ItemType.GravitySuit,
-                                       ItemType.SpaceJump,
-                                       ItemType.SpringBall,
-                                       ItemType.PlasmaBeam,
-                                       ItemType.IceBeam,
-                                       ItemType.ScrewAttack,
-                                       ItemType.XRayScope,
-                                       ItemType.ReserveTank,
-                                       ItemType.ReserveTank,
-                                       ItemType.ReserveTank,
-                                       ItemType.ReserveTank,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.PowerBomb,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                       ItemType.EnergyTank,
-                                   };
-                    break;
-            }
-
-            var unavailablePlms = romPlms.GetUnavailablePlms(itemPool, Difficulty);
+            itemPool = romPlms.GetItemPool();
+            var unavailablePlms = romPlms.GetUnavailablePlms(itemPool);
 
             for (int i = itemPool.Count; i < 100 - unavailablePlms.Count; i++)
             {

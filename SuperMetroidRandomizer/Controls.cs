@@ -42,10 +42,10 @@ namespace SuperMetroidRandomizer
         private void control_SelectedIndexChanged(object sender, EventArgs e)
         {
             var senderBox = (ComboBox) sender;
-            
-            if (senderBox.Items.Contains("Off") && senderBox.SelectedItem.ToString() != "Off")
+
+            if (senderBox.Items.Contains("None") && senderBox.SelectedItem.ToString() != "None")
             {
-                senderBox.Items.Remove("Off");
+                senderBox.Items.Remove("None");
             }
 
             var otherControl = (from control in Controls.OfType<ComboBox>()
@@ -60,12 +60,12 @@ namespace SuperMetroidRandomizer
                 }
                 else
                 {
-                    if (!otherControl.Items.Contains("Off"))
+                    if (!otherControl.Items.Contains("None"))
                     {
-                        otherControl.Items.Add("Off");
+                        otherControl.Items.Add("None");
                     }
 
-                    otherControl.SelectedItem = "Off";
+                    otherControl.SelectedItem = "None";
                 }
                 controlsDict[otherControl.Name] = controlsDict[senderBox.Name];
             }

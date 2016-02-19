@@ -216,9 +216,9 @@
             this.randomizerDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.randomizerDifficulty.FormattingEnabled = true;
             this.randomizerDifficulty.Items.AddRange(new object[] {
-            "Easy",
-            "Normal",
-            "Hard"});
+            "Casual",
+            "Speedrunner",
+            "Masochist"});
             this.randomizerDifficulty.Location = new System.Drawing.Point(64, 6);
             this.randomizerDifficulty.Name = "randomizerDifficulty";
             this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);

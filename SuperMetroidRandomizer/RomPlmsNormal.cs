@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SuperMetroidRandomizer
 {
     public class RomPlmsNormal : IRomPlms
     {
         public List<Plm> Plms { get; set; }
+        public string DifficultyName { get { return "Speedrunner"; } }
+        public string SeedFileString { get { return "S{0:0000000}"; } }
+        public string SeedRomString { get { return "SMRv{0} S{1}"; } }
 
         public void ResetPlms()
         {
@@ -22,10 +23,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x781CC,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       (have.Contains(ItemType.SpeedBooster) ||
-                                        (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) ||
-                                        have.Contains(ItemType.SpaceJump)),
+                                       CanUsePowerBombs(have) 
+                                       && (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump) || CanIbj(have)),
                                },
                            new Plm
                                { 
@@ -1510,19 +1509,210 @@ namespace SuperMetroidRandomizer
                        };
         }
 
+        private bool CanIbj(List<ItemType> have)
+        {
+            return (have.Contains(ItemType.Bomb)
+                && have.Contains(ItemType.MorphingBall));
+        }
+
+        private bool CanDefeatDraygon(List<ItemType> have)
+        {
+            return CanDefeatBotwoon(have)
+                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam))
+                && have.Count(x => x == ItemType.EnergyTank) >= 3;
+        }
+
+        private bool CanDefeatBotwoon(List<ItemType> have)
+        {
+            return CanAccessInnerMaridia(have)
+                && (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpeedBooster));
+        }
+
+        private bool CanAccessInnerMaridia(List<ItemType> have)
+        {
+            return CanAccessOuterMaridia(have)
+                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpeedBooster));
+        }
+
+        private bool CanAccessOuterMaridia(List<ItemType> have)
+        {
+            return CanAccessRedBrinstar(have)
+                && have.Contains(ItemType.PowerBomb)
+                && have.Contains(ItemType.GravitySuit)
+                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots));
+        }
+
+        private bool CanAccessLowerNorfair(List<ItemType> have)
+        {
+            return CanAccessHeatedNorfair(have)
+                && have.Contains(ItemType.PowerBomb)
+                && have.Contains(ItemType.GravitySuit)
+                && have.Contains(ItemType.SpaceJump);
+        }
+
+        private bool CanAccessCrocomire(List<ItemType> have)
+        {
+            return CanAccessHeatedNorfair(have)
+                && ((have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.PowerBomb)) || have.Contains(ItemType.WaveBeam));
+        }
+
+        private bool CanAccessHeatedNorfair(List<ItemType> have)
+        {
+            return CanAccessRedBrinstar(have)
+                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots))
+                && (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit));
+        }
+
+        private bool CanAccessKraid(List<ItemType> have)
+        {
+            return CanAccessRedBrinstar(have);
+        }
+
+        private bool CanAccessRedBrinstar(List<ItemType> have)
+        {
+            return have.Contains(ItemType.SuperMissile)
+                && ((CanDestroyBombWalls(have) && have.Contains(ItemType.MorphingBall))
+                    || (CanUsePowerBombs(have))) ;
+        }
+
+        private bool CanPassBombPassages(List<ItemType> have)
+        {
+            return (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))
+                || (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall));
+        }
+
+        private static bool CanUsePowerBombs(List<ItemType> have)
+        {
+            return have.Contains(ItemType.PowerBomb) 
+                && have.Contains(ItemType.MorphingBall);
+        }
+
+        private static bool CanOpenMissileDoors(List<ItemType> have)
+        {
+            return have.Contains(ItemType.Missile) 
+                || have.Contains(ItemType.SuperMissile);
+        }
+
+        private static bool CanDestroyBombWalls(List<ItemType> have)
+        {
+            return (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))
+                || (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall))
+                || have.Contains(ItemType.ScrewAttack);
+        }
+
+        private static bool CanDefeatPhantoon(List<ItemType> have)
+        {
+            return CanAccessWs(have);
+        }
+
+        private static bool CanAccessWs(List<ItemType> have)
+        {
+            return have.Contains(ItemType.SuperMissile)
+                && CanUsePowerBombs(have);
+        }
+
         public RomPlmsNormal()
         {
             ResetPlms();
         }
 
-        public List<Plm> GetAvailablePlms(List<ItemType> haveItems, RandomizerDifficulty difficulty)
+        public List<Plm> GetAvailablePlms(List<ItemType> haveItems)
         {
             return (from Plm plm in Plms where plm.Item == null && plm.CanAccess(haveItems) select plm).ToList();
         }
 
-        public List<Plm> GetUnavailablePlms(List<ItemType> haveItems, RandomizerDifficulty difficulty)
+        public List<Plm> GetUnavailablePlms(List<ItemType> haveItems)
         {
             return (from Plm plm in Plms where plm.Item == null && !plm.CanAccess(haveItems) select plm).ToList();
+        }
+
+        public void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem)
+        {
+            if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)))
+            {
+                candidateItemList.Add(candidateItem);
+            }
+        }
+
+        public int GetInsertedPlm(List<Plm> currentPlms, ItemType insertedItem, SeedRandom random)
+        {
+            int retVal;
+
+            do
+            {
+                retVal = random.Next(currentPlms.Count);
+            } while (insertedItem == ItemType.GravitySuit && !currentPlms[retVal].GravityOkay);
+
+            return retVal;
+        }
+
+        public ItemType GetInsertedItem(List<Plm> currentPlms, List<ItemType> itemPool, SeedRandom random)
+        {
+            ItemType retVal;
+
+            do
+            {
+                retVal = itemPool[random.Next(itemPool.Count)];
+            } while (retVal == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay));
+
+            return retVal;
+        }
+
+        public List<ItemType> GetItemPool()
+        {
+            return new List<ItemType>
+                       {
+                           ItemType.MorphingBall,
+                           ItemType.Bomb,
+                           ItemType.ChargeBeam,
+                           ItemType.ChargeBeam,
+                           ItemType.ChargeBeam,
+                           ItemType.ChargeBeam,
+                           ItemType.Spazer,
+                           ItemType.VariaSuit,
+                           ItemType.HiJumpBoots,
+                           ItemType.SpeedBooster,
+                           ItemType.WaveBeam,
+                           ItemType.GrappleBeam,
+                           ItemType.GravitySuit,
+                           ItemType.SpaceJump,
+                           ItemType.SpringBall,
+                           ItemType.PlasmaBeam,
+                           ItemType.IceBeam,
+                           ItemType.ScrewAttack,
+                           ItemType.XRayScope,
+                           ItemType.ReserveTank,
+                           ItemType.ReserveTank,
+                           ItemType.ReserveTank,
+                           ItemType.ReserveTank,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.SuperMissile,
+                           ItemType.SuperMissile,
+                           ItemType.SuperMissile,
+                           ItemType.SuperMissile,
+                           ItemType.SuperMissile,
+                           ItemType.SuperMissile,
+                           ItemType.PowerBomb,
+                           ItemType.PowerBomb,
+                           ItemType.PowerBomb,
+                           ItemType.PowerBomb,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                       };
         }
     }
 }

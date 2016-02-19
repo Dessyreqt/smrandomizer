@@ -8,6 +8,9 @@ namespace SuperMetroidRandomizer
     public class RomPlmsHard : IRomPlms
     {
         public List<Plm> Plms { get; set; }
+        public string DifficultyName { get { return "Masochist"; } }
+        public string SeedFileString { get { return "M{0:0000000}"; } }
+        public string SeedRomString { get { return "SMRv{0} M{1}"; } }
 
         public void ResetPlms()
         {
@@ -1500,9 +1503,9 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       have.Contains(ItemType.SuperMissile) &&
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       ((have.Contains(ItemType.GravitySuit) &&
+                                       have.Contains(ItemType.SuperMissile) 
+                                       && (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) 
+                                       && ((have.Contains(ItemType.GravitySuit) &&
                                          (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.IceBeam))) ||
                                         (have.Contains(ItemType.HiJumpBoots) && have.Contains(ItemType.IceBeam) &&
                                          have.Contains(ItemType.GrappleBeam) && have.Contains(ItemType.XRayScope))),
@@ -1515,14 +1518,81 @@ namespace SuperMetroidRandomizer
             ResetPlms();
         }
 
-        public List<Plm> GetAvailablePlms(List<ItemType> haveItems, RandomizerDifficulty difficulty)
+        public List<Plm> GetAvailablePlms(List<ItemType> haveItems)
         {
             return (from Plm plm in Plms where plm.Item == null && plm.CanAccess(haveItems) select plm).ToList();
         }
 
-        public List<Plm> GetUnavailablePlms(List<ItemType> haveItems, RandomizerDifficulty difficulty)
+        public List<Plm> GetUnavailablePlms(List<ItemType> haveItems)
         {
             return (from Plm plm in Plms where plm.Item == null && !plm.CanAccess(haveItems) select plm).ToList();
+        }
+
+        public void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem)
+        {
+            if (!(candidateItem == ItemType.VariaSuit && !currentPlms.Any(x => x.GravityOkay)) && !(candidateItem == ItemType.GravitySuit && currentPlms.All(x => x.Region != Region.Maridia)))
+            {
+                candidateItemList.Add(candidateItem);
+            }
+        }
+
+        public int GetInsertedPlm(List<Plm> currentPlms, ItemType insertedItem, SeedRandom random)
+        {
+            int retVal;
+
+            do
+            {
+                retVal = random.Next(currentPlms.Count);
+            } while ((insertedItem == ItemType.VariaSuit && !currentPlms[retVal].GravityOkay) || (insertedItem == ItemType.GravitySuit && currentPlms[retVal].Region != Region.Maridia));
+
+            return retVal;
+        }
+
+        public ItemType GetInsertedItem(List<Plm> currentPlms, List<ItemType> itemPool, SeedRandom random)
+        {
+            ItemType retVal;
+
+            do
+            {
+                retVal = itemPool[random.Next(itemPool.Count)];
+            } while ((retVal == ItemType.VariaSuit && !currentPlms.Any(x => x.GravityOkay)) || (retVal == ItemType.GravitySuit && currentPlms.All(x => x.Region != Region.Maridia)));
+
+            return retVal;
+        }
+
+        public List<ItemType> GetItemPool()
+        {
+            return new List<ItemType>
+                       {
+                           ItemType.MorphingBall,
+                           ItemType.Bomb,
+                           ItemType.ChargeBeam,
+                           ItemType.ChargeBeam,
+                           ItemType.ChargeBeam,
+                           ItemType.ChargeBeam,
+                           ItemType.Spazer,
+                           ItemType.VariaSuit,
+                           ItemType.HiJumpBoots,
+                           ItemType.SpeedBooster,
+                           ItemType.WaveBeam,
+                           ItemType.GrappleBeam,
+                           ItemType.SpringBall,
+                           ItemType.IceBeam,
+                           ItemType.XRayScope,
+                           ItemType.ReserveTank,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.Missile,
+                           ItemType.SuperMissile,
+                           ItemType.SuperMissile,
+                           ItemType.SuperMissile,
+                           ItemType.PowerBomb,
+                           ItemType.PowerBomb,
+                           ItemType.PowerBomb,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                           ItemType.EnergyTank,
+                       };
         }
     }
 }

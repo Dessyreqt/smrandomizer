@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomizerV10.cs" />
     <Compile Include="RandomizerV11.cs" />
+    <Compile Include="RomPlmsFactory.cs" />
     <Compile Include="RomPlmsNormal.cs" />
     <Compile Include="RomPlmsEasy.cs" />
     <Compile Include="RomPlmsHard.cs" />
