@@ -390,8 +390,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x787D0,
                                    CanAccess =
                                        have =>
-                                       CanUsePowerBombs(have) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanUsePowerBombs(have) 
+                                       && have.Contains(ItemType.SuperMissile),
                                },
                            new Plm
                                {          
@@ -519,6 +519,7 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessRedBrinstar(have) 
+                                       && CanPassBombPassages(have)
                                        && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots)),
                                },
                            new Plm

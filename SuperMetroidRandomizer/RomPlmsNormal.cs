@@ -369,7 +369,8 @@ namespace SuperMetroidRandomizer
                                    Name = "energy tank (green brinstar bottom)",
                                    Address = 0x787C2,
                                    CanAccess =
-                                       have => (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                       have => 
+                                       CanUsePowerBombs(have),
                                },
                            new Plm
                                {            
@@ -380,8 +381,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x787D0,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanUsePowerBombs(have) 
+                                       && have.Contains(ItemType.SuperMissile),
                                },
                            new Plm
                                {          
@@ -392,9 +393,9 @@ namespace SuperMetroidRandomizer
                                    Address = 0x787FA,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SpeedBooster) &&
-                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)),
+                                       CanUsePowerBombs(have) 
+                                       && CanOpenMissileDoors(have)
+                                       && have.Contains(ItemType.SpeedBooster) 
                                },
                            new Plm
                                {            
@@ -404,7 +405,9 @@ namespace SuperMetroidRandomizer
                                    Name = "missile (blue brinstar bottom)",
                                    Address = 0x78802,
                                    ItemStorageType = ItemStorageType.Chozo,
-                                   CanAccess = have => have.Contains(ItemType.MorphingBall),
+                                   CanAccess = 
+                                       have => 
+                                       have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {             
@@ -415,8 +418,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78824,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       (have.Contains(ItemType.SuperMissile) || have.Contains(ItemType.WaveBeam)),
+                                       CanUsePowerBombs(have) 
+                                       && (have.Contains(ItemType.WaveBeam) || have.Contains(ItemType.SuperMissile)),
                                },
                            new Plm
                                {           
@@ -427,8 +430,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78836,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                       CanOpenMissileDoors(have) 
+                                       && CanUsePowerBombs(have) 
                                },
                            new Plm
                                {           
@@ -440,8 +443,8 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.Missile) || have.Contains(ItemType.SuperMissile)) &&
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)),
+                                       CanOpenMissileDoors(have) 
+                                       && CanUsePowerBombs(have) 
                                },
                            new Plm
                                {           
@@ -453,15 +456,9 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile) &&
-                                       (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump) ||
-                                        have.Contains(ItemType.IceBeam)) &&
-                                       (have.Count(x => x == ItemType.EnergyTank) >= 2 ||
-                                        (have.Contains(ItemType.EnergyTank) &&
-                                         (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))) ||
-                                        have.Contains(ItemType.GravitySuit)),
+                                       CanAccessRedBrinstar(have) 
+                                       && CanUsePowerBombs(have) 
+                                       && (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.IceBeam)),
                                },
                            new Plm
                                {           
@@ -472,8 +469,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x788CA,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanAccessRedBrinstar(have) 
+                                       && CanUsePowerBombs(have), 
                                },
                            new Plm
                                {            
@@ -485,8 +482,8 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanAccessRedBrinstar(have) 
+                                       && CanUsePowerBombs(have), 
                                },
                            new Plm
                                {              
@@ -497,8 +494,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78914,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanAccessRedBrinstar(have) 
+                                       && CanUsePowerBombs(have), 
                                },
                            new Plm
                                {            
@@ -509,8 +506,8 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanAccessRedBrinstar(have) 
+                                       && CanPassBombPassages(have)
                                },
                            new Plm
                                {           
@@ -1535,8 +1532,7 @@ namespace SuperMetroidRandomizer
         private bool CanAccessRedBrinstar(List<ItemType> have)
         {
             return have.Contains(ItemType.SuperMissile)
-                && ((CanDestroyBombWalls(have) && have.Contains(ItemType.MorphingBall))
-                    || (CanUsePowerBombs(have))) ;
+                && ((CanDestroyBombWalls(have) && have.Contains(ItemType.MorphingBall)) || (CanUsePowerBombs(have)));
         }
 
         private bool CanPassBombPassages(List<ItemType> have)
