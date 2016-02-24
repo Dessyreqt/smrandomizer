@@ -580,7 +580,8 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have)
+                                       CanAccessKraid(have)
+                                       && (have.Contains(ItemType.GravitySuit) || have.Contains(ItemType.VariaSuit))
                                        && have.Contains(ItemType.SpeedBooster)
                                        && (CanUsePowerBombs(have) || have.Contains(ItemType.IceBeam)),
                                },
@@ -1270,6 +1271,12 @@ namespace SuperMetroidRandomizer
                 && (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit));
         }
 
+        private static int EnergyReserveCount(List<ItemType> have)
+        {
+            var energyTankCount = have.Count(x => x == ItemType.EnergyTank);
+            var reserveTankCount = Math.Min(have.Count(x => x == ItemType.ReserveTank), energyTankCount + 1);
+            return energyTankCount + reserveTankCount;
+        }
         private bool CanAccessKraid(List<ItemType> have)
         {
             return CanAccessRedBrinstar(have)

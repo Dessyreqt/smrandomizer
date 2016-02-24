@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SuperMetroidRandomizer
@@ -518,8 +519,7 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanAccessKraid(have),
                                },
                            new Plm
                                {           
@@ -531,8 +531,8 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanAccessKraid(have)
+                                       && CanUsePowerBombs(have),
                                },
                            new Plm
                                {            
@@ -544,8 +544,7 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile),
+                                       CanAccessKraid(have),
                                },
                            new Plm
                                {              
@@ -557,9 +556,7 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile) &&
-                                       (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit)),
+                                       CanAccessHeatedNorfair(have),
                                },
                            new Plm
                                {                    
@@ -571,10 +568,8 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) &&
-                                       have.Contains(ItemType.SuperMissile) &&
-                                       (have.Count(x => x == ItemType.EnergyTank) >= 3 ||
-                                        (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       CanAccessKraid(have)
+                                       && (have.Contains(ItemType.GravitySuit) || have.Contains(ItemType.VariaSuit) || have.Count(x => x == ItemType.EnergyTank) >= 2)
                                },
                            new Plm
                                {                  
@@ -1520,8 +1515,15 @@ namespace SuperMetroidRandomizer
         private bool CanAccessHeatedNorfair(List<ItemType> have)
         {
             return CanAccessRedBrinstar(have)
-                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots))
-                && (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit));
+                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots) || CanIbj(have))
+                && (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit) || EnergyReserveCount(have) >= 3);
+        }
+
+        private static int EnergyReserveCount(List<ItemType> have)
+        {
+            var energyTankCount = have.Count(x => x == ItemType.EnergyTank);
+            var reserveTankCount = Math.Min(have.Count(x => x == ItemType.ReserveTank), energyTankCount + 1);
+            return energyTankCount + reserveTankCount;
         }
 
         private bool CanAccessKraid(List<ItemType> have)
