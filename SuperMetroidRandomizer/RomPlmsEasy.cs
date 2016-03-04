@@ -26,7 +26,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanUsePowerBombs(have) 
-                                       && (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump)),
+                                       && (have.Contains(ItemType.SpeedBooster) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                { 
@@ -83,7 +84,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have)
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.SpeedBooster)),
                                },
                            new Plm
                                {        
@@ -130,7 +132,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.SpeedBooster)),
                                },
                            new Plm
                                {     
@@ -142,7 +145,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.SpeedBooster)),
                                },
                            new Plm
                                {     
@@ -155,7 +159,9 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanUsePowerBombs(have)
                                        && have.Contains(ItemType.SpeedBooster) 
-                                       && (have.Contains(ItemType.EnergyTank) || (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit))),
+                                       && (EnergyReserveCount(have) >= 1 
+                                           || have.Contains(ItemType.VariaSuit) 
+                                           || have.Contains(ItemType.GravitySuit)),
                                },
                            new Plm
                                {       
@@ -270,7 +276,9 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanDestroyBombWalls(have) 
                                        && CanOpenMissileDoors(have)
-                                       && (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster))
+                                       && (have.Contains(ItemType.GrappleBeam) 
+                                           || have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.SpeedBooster))
                                },
                            new Plm
                                {            
@@ -281,7 +289,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x7860E,
                                    CanAccess =
                                        have =>
-                                       (CanDestroyBombWalls(have) && CanOpenMissileDoors(have))
+                                       (CanDestroyBombWalls(have) 
+                                           && CanOpenMissileDoors(have))
                                        || CanUsePowerBombs(have),
                                },
                            new Plm
@@ -294,7 +303,8 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       (CanPassBombPassages(have) && CanOpenMissileDoors(have))
+                                       (CanPassBombPassages(have) 
+                                           && CanOpenMissileDoors(have))
                                        || CanUsePowerBombs(have),
                                },
                            new Plm
@@ -308,7 +318,9 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanUsePowerBombs(have) 
                                        && have.Contains(ItemType.SuperMissile)
-                                       && (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster))
+                                       && (have.Contains(ItemType.GrappleBeam) 
+                                           || have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.SpeedBooster))
                               },
                            new Plm
                                {           
@@ -319,9 +331,11 @@ namespace SuperMetroidRandomizer
                                    Address = 0x78676,
                                    CanAccess =
                                        have =>
-                                       (CanPassBombPassages(have) && have.Contains(ItemType.SuperMissile)
-                                       || CanUsePowerBombs(have))
-                                       && (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpaceJump)),
+                                       ((CanPassBombPassages(have) 
+                                               && have.Contains(ItemType.SuperMissile))
+                                           || CanUsePowerBombs(have))
+                                       && (have.Contains(ItemType.HiJumpBoots) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {           
@@ -368,7 +382,9 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanOpenMissileDoors(have) 
-                                       && (have.Contains(ItemType.HiJumpBoots) || have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump)),
+                                       && (have.Contains(ItemType.HiJumpBoots) 
+                                           || have.Contains(ItemType.SpeedBooster) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {            
@@ -442,7 +458,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanOpenMissileDoors(have) 
                                        && CanUsePowerBombs(have) 
-                                       && (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump)),
+                                       && (have.Contains(ItemType.SpeedBooster) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {           
@@ -456,7 +473,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanOpenMissileDoors(have) 
                                        && CanUsePowerBombs(have) 
-                                       && (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.SpaceJump)),
+                                       && (have.Contains(ItemType.SpeedBooster) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {           
@@ -470,7 +488,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanAccessRedBrinstar(have) 
                                        && CanUsePowerBombs(have) 
-                                       && (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump)),
+                                       && (have.Contains(ItemType.GrappleBeam) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {           
@@ -520,7 +539,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanAccessRedBrinstar(have) 
                                        && CanPassBombPassages(have)
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.HiJumpBoots)),
                                },
                            new Plm
                                {           
@@ -581,9 +601,11 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessKraid(have)
-                                       && (have.Contains(ItemType.GravitySuit) || have.Contains(ItemType.VariaSuit))
+                                       && (have.Contains(ItemType.GravitySuit) 
+                                           || have.Contains(ItemType.VariaSuit))
                                        && have.Contains(ItemType.SpeedBooster)
-                                       && (CanUsePowerBombs(have) || have.Contains(ItemType.IceBeam)),
+                                       && (CanUsePowerBombs(have) 
+                                           || have.Contains(ItemType.IceBeam)),
                                },
                            new Plm
                                {                  
@@ -632,7 +654,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessCrocomire(have)
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.GrappleBeam)),
                                },
                            new Plm
                                {                   
@@ -666,7 +689,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessCrocomire(have)
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.GrappleBeam)),
                                },
                            new Plm
                                {                    
@@ -689,7 +713,9 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessCrocomire(have)
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpeedBooster)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.GrappleBeam) 
+                                           || have.Contains(ItemType.SpeedBooster)),
                                },
                            new Plm
                                {                     
@@ -702,7 +728,9 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessCrocomire(have)
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.SpeedBooster)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || (have.Contains(ItemType.SpeedBooster)
+                                               && have.Contains(ItemType.HiJumpBoots))),
                                },
                            new Plm
                                {                  
@@ -715,7 +743,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessHeatedNorfair(have) 
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.GrappleBeam)),
                                },
                            new Plm
                                {                  
@@ -728,7 +757,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessHeatedNorfair(have) 
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.GrappleBeam)),
                                },
                            new Plm
                                {                 
@@ -740,7 +770,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessHeatedNorfair(have) 
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.GrappleBeam)),
                                },
                            new Plm
                                {                       
@@ -799,7 +830,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessHeatedNorfair(have)
-                                       && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam)),
+                                       && (have.Contains(ItemType.SpaceJump) 
+                                           || have.Contains(ItemType.GrappleBeam)),
                                },
                            new Plm
                                {                     
@@ -891,7 +923,7 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanAccessLowerNorfair(have)
                                        && have.Contains(ItemType.ChargeBeam)
-                                       && have.Count(x => x == ItemType.EnergyTank) >= 4,
+                                       && EnergyReserveCount(have) >= 4,
                                },
                            new Plm
                                {                        
@@ -973,7 +1005,8 @@ namespace SuperMetroidRandomizer
                                        have => 
                                        CanDefeatPhantoon(have) 
                                        && have.Contains(ItemType.GravitySuit) 
-                                       && (have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump)),
+                                       && (have.Contains(ItemType.GrappleBeam) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {                            
@@ -1041,7 +1074,8 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanAccessOuterMaridia(have)
-                                       && (have.Contains(ItemType.SpeedBooster) || have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump)),
+                                       && (have.Contains(ItemType.SpeedBooster) 
+                                           || have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {                            
@@ -1226,20 +1260,24 @@ namespace SuperMetroidRandomizer
         private bool CanDefeatDraygon(List<ItemType> have)
         {
             return CanDefeatBotwoon(have)
-                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam))
-                && have.Count(x => x == ItemType.EnergyTank) >= 3;
+                && (have.Contains(ItemType.SpaceJump) 
+                    || have.Contains(ItemType.GrappleBeam))
+                && EnergyReserveCount(have) >= 3;
         }
 
         private bool CanDefeatBotwoon(List<ItemType> have)
         {
             return CanAccessInnerMaridia(have)
-                && (have.Contains(ItemType.IceBeam) || have.Contains(ItemType.SpeedBooster));
+                && (have.Contains(ItemType.IceBeam) 
+                    || have.Contains(ItemType.SpeedBooster));
         }
 
         private bool CanAccessInnerMaridia(List<ItemType> have)
         {
             return CanAccessOuterMaridia(have)
-                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpeedBooster));
+                && (have.Contains(ItemType.SpaceJump) 
+                    || have.Contains(ItemType.GrappleBeam) 
+                    || have.Contains(ItemType.SpeedBooster));
         }
 
         private bool CanAccessOuterMaridia(List<ItemType> have)
@@ -1247,7 +1285,8 @@ namespace SuperMetroidRandomizer
             return CanAccessRedBrinstar(have)
                 && have.Contains(ItemType.PowerBomb)
                 && have.Contains(ItemType.GravitySuit)
-                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots));
+                && (have.Contains(ItemType.SpaceJump) 
+                    || have.Contains(ItemType.HiJumpBoots));
         }
 
         private bool CanAccessLowerNorfair(List<ItemType> have)
@@ -1261,14 +1300,17 @@ namespace SuperMetroidRandomizer
         private bool CanAccessCrocomire(List<ItemType> have)
         {
             return CanAccessHeatedNorfair(have)
-                && ((have.Contains(ItemType.SpeedBooster) && have.Contains(ItemType.PowerBomb)) || have.Contains(ItemType.WaveBeam));
+                && ((have.Contains(ItemType.SpeedBooster) && CanUsePowerBombs(have)) 
+                    || have.Contains(ItemType.WaveBeam));
         }
 
         private bool CanAccessHeatedNorfair(List<ItemType> have)
         {
             return CanAccessRedBrinstar(have)
-                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots))
-                && (have.Contains(ItemType.VariaSuit) || have.Contains(ItemType.GravitySuit));
+                && (have.Contains(ItemType.SpaceJump) 
+                    || have.Contains(ItemType.HiJumpBoots))
+                && (have.Contains(ItemType.VariaSuit) 
+                    || have.Contains(ItemType.GravitySuit));
         }
 
         private static int EnergyReserveCount(List<ItemType> have)
@@ -1280,20 +1322,24 @@ namespace SuperMetroidRandomizer
         private bool CanAccessKraid(List<ItemType> have)
         {
             return CanAccessRedBrinstar(have)
-                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.HiJumpBoots));
+                && (have.Contains(ItemType.SpaceJump) 
+                    || have.Contains(ItemType.HiJumpBoots));
         }
 
         private bool CanAccessRedBrinstar(List<ItemType> have)
         {
             return have.Contains(ItemType.SuperMissile)
-                && ((CanDestroyBombWalls(have) && have.Contains(ItemType.MorphingBall))
+                && ((CanDestroyBombWalls(have) 
+                        && have.Contains(ItemType.MorphingBall)) 
                     || (CanUsePowerBombs(have)));
         }
 
         private bool CanPassBombPassages(List<ItemType> have)
         {
-            return (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) 
-                || (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall));
+            return (have.Contains(ItemType.Bomb) 
+                    && have.Contains(ItemType.MorphingBall)) 
+                || (have.Contains(ItemType.PowerBomb) 
+                    && have.Contains(ItemType.MorphingBall));
         }
 
         private static bool CanUsePowerBombs(List<ItemType> have)
@@ -1310,15 +1356,18 @@ namespace SuperMetroidRandomizer
 
         private static bool CanDestroyBombWalls(List<ItemType> have)
         {
-            return (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall)) 
-                || (have.Contains(ItemType.PowerBomb) && have.Contains(ItemType.MorphingBall)) 
+            return (have.Contains(ItemType.Bomb) 
+                    && have.Contains(ItemType.MorphingBall)) 
+                || CanUsePowerBombs(have) 
                 || have.Contains(ItemType.ScrewAttack);
         }
 
         private static bool CanEnterAndLeaveGauntlet(List<ItemType> have)
         {
-            return (have.Contains(ItemType.Bomb) && have.Contains(ItemType.MorphingBall))
-                || (have.Count(x => x == ItemType.PowerBomb) >= 2 && have.Contains(ItemType.MorphingBall))
+            return (have.Contains(ItemType.Bomb) 
+                    && have.Contains(ItemType.MorphingBall))
+                || (have.Count(x => x == ItemType.PowerBomb) >= 2 
+                    && have.Contains(ItemType.MorphingBall))
                 || have.Contains(ItemType.ScrewAttack);
         }
 
@@ -1326,14 +1375,18 @@ namespace SuperMetroidRandomizer
         {
             return CanAccessWs(have) 
                 && have.Contains(ItemType.ChargeBeam)
-                && (have.Contains(ItemType.GravitySuit) || have.Contains(ItemType.VariaSuit) || have.Count(x => x == ItemType.EnergyTank) >= 2);
+                && (have.Contains(ItemType.GravitySuit) 
+                    || have.Contains(ItemType.VariaSuit) 
+                    || EnergyReserveCount(have) >= 2);
         }
 
         private static bool CanAccessWs(List<ItemType> have)
         {
             return have.Contains(ItemType.SuperMissile) 
                 && CanUsePowerBombs(have)
-                && (have.Contains(ItemType.SpaceJump) || have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpeedBooster));
+                && (have.Contains(ItemType.SpaceJump) 
+                    || have.Contains(ItemType.GrappleBeam) 
+                    || have.Contains(ItemType.SpeedBooster));
         }
 
         public RomPlmsEasy()
