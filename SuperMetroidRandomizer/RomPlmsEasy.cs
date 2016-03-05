@@ -1051,7 +1051,8 @@ namespace SuperMetroidRandomizer
                                    Address = 0x7C437,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have),
+                                       CanAccessOuterMaridia(have)
+                                       && have.Contains(ItemType.SpeedBooster),
                                },
                            new Plm
                                {                             
@@ -1075,7 +1076,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanAccessOuterMaridia(have)
                                        && (have.Contains(ItemType.SpeedBooster) 
-                                           || have.Contains(ItemType.GrappleBeam) || have.Contains(ItemType.SpaceJump)),
+                                           || have.Contains(ItemType.GrappleBeam) 
+                                           || have.Contains(ItemType.SpaceJump)),
                                },
                            new Plm
                                {                            
@@ -1132,7 +1134,10 @@ namespace SuperMetroidRandomizer
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanDefeatDraygon(have),
+                                       CanDefeatDraygon(have)
+                                       && have.Contains(ItemType.SpaceJump)
+                                       && (have.Contains(ItemType.ScrewAttack)
+                                           || have.Contains(ItemType.PlasmaBeam)),
                                },
                            new Plm
                                {                             
@@ -1260,8 +1265,7 @@ namespace SuperMetroidRandomizer
         private bool CanDefeatDraygon(List<ItemType> have)
         {
             return CanDefeatBotwoon(have)
-                && (have.Contains(ItemType.SpaceJump) 
-                    || have.Contains(ItemType.GrappleBeam))
+                && have.Contains(ItemType.SpaceJump)
                 && EnergyReserveCount(have) >= 3;
         }
 
