@@ -454,7 +454,7 @@ namespace SuperMetroidRandomizer
             if (AtWsReserve(CHOZO_SPEED))
                 return false;
 
-            //keep gravity from spawning at spring ball spot
+            //keep gravity from spawning at Spring Ball spot
             if (AtSpringball(CHOZO_GRAVITY))
                 return false;
 
@@ -462,7 +462,7 @@ namespace SuperMetroidRandomizer
             if ((AtScrewAttack(CHOZO_HIJUMP) || InMaridia(CHOZO_HIJUMP)) && (AtScrewAttack(CHOZO_GRAVITY) || InMaridia(CHOZO_GRAVITY)))
                 return false;
 
-            //both ice and speed can't appear behind draygon
+            //both ice and speed can't appear behind Draygon
             if ((BehindDraygon(CHOZO_SPEED) && BehindDraygon(CHOZO_ICE)) || BehindDraygon(CHOZO_SPEED) && AtWsReserve(CHOZO_ICE))
                 return false;
 
@@ -490,7 +490,7 @@ namespace SuperMetroidRandomizer
                 if (InMaridia(CHOZO_GRAVITY))
                     return false;
 
-                //Can't trap gravity or Hi-Jump behind speed blocks if speed is also in maridia
+                //Can't trap gravity or Hi-Jump behind speed blocks if speed is also in Maridia
                 if (InMaridia(CHOZO_SPEED) && (AtWsReserve(CHOZO_GRAVITY) || AtWsReserve(CHOZO_HIJUMP)))
                     return false;
             }

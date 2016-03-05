@@ -21,7 +21,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Crateria,
-                                   Name = "power bomb (crateria surface)",
+                                   Name = "Power Bomb (Crateria surface)",
                                    Address = 0x781CC,
                                    CanAccess =
                                        have =>
@@ -34,7 +34,7 @@ namespace SuperMetroidRandomizer
                                { 
                                    GravityOkay = false,
                                    Region = Region.Crateria,
-                                   Name = "missile (outside wrecked ship bottom)",
+                                   Name = "Missile (outside Wrecked Ship bottom)",
                                    Address = 0x781E8,
                                    CanAccess =
                                        have =>
@@ -45,7 +45,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,                                   
                                    Region = Region.Crateria,
-                                   Name = "missile (outside wrecked ship top)",
+                                   Name = "Missile (outside Wrecked Ship top)",
                                    Address = 0x781EE,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -57,7 +57,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Crateria,
-                                   Name = "missile (outside wrecked ship middle)",
+                                   Name = "Missile (outside Wrecked Ship middle)",
                                    Address = 0x781F4,
                                    CanAccess =
                                        have =>
@@ -68,7 +68,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
-                                   Name = "missile (crateria moat)",
+                                   Name = "Missile (Crateria moat)",
                                    Address = 0x78248,
                                    CanAccess =
                                        have =>
@@ -80,7 +80,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
-                                   Name = "energy tank (crateria gauntlet)",
+                                   Name = "Energy Tank (Crateria gauntlet)",
                                    Address = 0x78264,
                                    CanAccess =
                                        have =>
@@ -91,7 +91,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
-                                   Name = "missile (crateria bottom)",
+                                   Name = "Missile (Crateria bottom)",
                                    Address = 0x783EE,
                                    CanAccess =
                                        have =>
@@ -115,7 +115,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
-                                   Name = "energy tank (crateria tunnel to brinstar)",
+                                   Name = "Energy Tank (Crateria tunnel to Brinstar)",
                                    Address = 0x78432,
                                    CanAccess =
                                        have =>
@@ -127,7 +127,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
-                                   Name = "missile (crateria gauntlet right)",
+                                   Name = "Missile (Crateria gauntlet right)",
                                    Address = 0x78464,
                                    CanAccess =
                                        have =>
@@ -138,7 +138,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
-                                   Name = "missile (crateria gauntlet left)",
+                                   Name = "Missile (Crateria gauntlet left)",
                                    Address = 0x7846A,
                                    CanAccess =
                                        have =>
@@ -149,7 +149,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
-                                   Name = "super missile (crateria)",
+                                   Name = "Super Missile (Crateria)",
                                    Address = 0x78478,
                                    CanAccess =
                                        have =>
@@ -164,7 +164,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,     
                                    Region = Region.Crateria,
-                                   Name = "missile (crateria middle)",
+                                   Name = "Missile (Crateria middle)",
                                    Address = 0x78486,
                                    CanAccess =
                                        have =>
@@ -175,7 +175,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,
                                    Region = Region.Brinstar,
-                                   Name = "power bomb (green brinstar bottom)",
+                                   Name = "Power Bomb (green Brinstar bottom)",
                                    Address = 0x784AC,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -187,7 +187,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "super missile (pink brinstar)",
+                                   Name = "Super Missile (pink Brinstar)",
                                    Address = 0x784E4,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -200,7 +200,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = true,
                                    GravityOkay = false, 
                                    Region = Region.Brinstar,
-                                   Name = "missile (green brinstar below super missile)",
+                                   Name = "Missile (green Brinstar below super missile)",
                                    Address = 0x78518,
                                    CanAccess =
                                        have =>
@@ -212,7 +212,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "super missile (green brinstar top)",
+                                   Name = "Super Missile (green Brinstar top)",
                                    Address = 0x7851E,
                                    CanAccess =
                                        have =>
@@ -226,7 +226,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "reserve tank (brinstar)",
+                                   Name = "Reserve Tank (Brinstar)",
                                    Address = 0x7852C,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -241,7 +241,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "missile (green brinstar behind missile)",
+                                   Name = "Missile (green Brinstar behind missile)",
                                    Address = 0x78532,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -255,7 +255,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "missile (green brinstar behind reserve tank)",
+                                   Name = "Missile (green Brinstar behind Reserve Tank)",
                                    Address = 0x78538,
                                    CanAccess =
                                        have =>
@@ -268,7 +268,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "missile (pink brinstar top)",
+                                   Name = "Missile (pink Brinstar top)",
                                    Address = 0x78608,
                                    CanAccess =
                                        have =>
@@ -281,7 +281,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "missile (pink brinstar bottom)",
+                                   Name = "Missile (pink Brinstar bottom)",
                                    Address = 0x7860E,
                                    CanAccess =
                                        have =>
@@ -294,7 +294,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,      
                                    Region = Region.Brinstar,
-                                   Name = "charge beam",
+                                   Name = "Charge Beam",
                                    Address = 0x78614,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -308,7 +308,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,     
                                    Region = Region.Brinstar,
-                                   Name = "power bomb (pink brinstar)",
+                                   Name = "Power Bomb (pink Brinstar)",
                                    Address = 0x7865C,
                                    CanAccess =
                                        have =>
@@ -320,7 +320,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "missile (green brinstar pipe)",
+                                   Name = "Missile (green Brinstar pipe)",
                                    Address = 0x78676,
                                    CanAccess =
                                        have =>
@@ -333,7 +333,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = true,
                                    GravityOkay = false,              
                                    Region = Region.Brinstar,
-                                   Name = "morphing ball",         
+                                   Name = "Morphing Ball",         
                                    Address = 0x786DE,
                                    CanAccess = 
                                        have => 
@@ -344,7 +344,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,      
                                    Region = Region.Brinstar,
-                                   Name = "power bomb (blue brinstar)",
+                                   Name = "Power Bomb (blue Brinstar)",
                                    Address = 0x7874C,
                                    CanAccess =
                                        have => 
@@ -355,7 +355,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "missile (blue brinstar middle)",
+                                   Name = "Missile (blue Brinstar middle)",
                                    Address = 0x78798,
                                    CanAccess =
                                        have =>
@@ -367,7 +367,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "energy tank (blue brinstar)",
+                                   Name = "Energy Tank (blue Brinstar)",
                                    Address = 0x7879E,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -379,7 +379,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "energy tank (green brinstar bottom)",
+                                   Name = "Energy Tank (green Brinstar bottom)",
                                    Address = 0x787C2,
                                    CanAccess =
                                        have => 
@@ -390,7 +390,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "super missile (green brinstar bottom)",
+                                   Name = "Super Missile (green Brinstar bottom)",
                                    Address = 0x787D0,
                                    CanAccess =
                                        have =>
@@ -402,7 +402,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "energy tank (pink brinstar bottom)",
+                                   Name = "Energy Tank (pink Brinstar bottom)",
                                    Address = 0x787FA,
                                    CanAccess =
                                        have =>
@@ -415,7 +415,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "missile (blue brinstar bottom)",
+                                   Name = "Missile (blue Brinstar bottom)",
                                    Address = 0x78802,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess = 
@@ -427,7 +427,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,     
                                    Region = Region.Brinstar,
-                                   Name = "energy tank (pink brinstar top)",
+                                   Name = "Energy Tank (pink Brinstar top)",
                                    Address = 0x78824,
                                    CanAccess =
                                        have =>
@@ -440,7 +440,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "missile (blue brinstar top)",
+                                   Name = "Missile (blue Brinstar top)",
                                    Address = 0x78836,
                                    CanAccess =
                                        have =>
@@ -452,7 +452,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "missile (blue brinstar behind missile)",
+                                   Name = "Missile (blue Brinstar behind missile)",
                                    Address = 0x7883C,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -465,7 +465,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,      
                                    Region = Region.Brinstar,
-                                   Name = "x-ray visor",
+                                   Name = "X-Ray Visor",
                                    Address = 0x78876,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -481,7 +481,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,            
                                    Region = Region.Brinstar,
-                                   Name = "power bomb (red brinstar sidehopper room)",
+                                   Name = "Power Bomb (red Brinstar sidehopper room)",
                                    Address = 0x788CA,
                                    CanAccess =
                                        have =>
@@ -493,7 +493,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,        
                                    Region = Region.Brinstar,
-                                   Name = "power bomb (red brinstar spike room)",
+                                   Name = "Power Bomb (red Brinstar spike room)",
                                    Address = 0x7890E,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -506,7 +506,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,     
                                    Region = Region.Brinstar,
-                                   Name = "missile (red brinstar spike room)",
+                                   Name = "Missile (red Brinstar spike room)",
                                    Address = 0x78914,
                                    CanAccess =
                                        have =>
@@ -517,7 +517,7 @@ namespace SuperMetroidRandomizer
                                {            
                                    GravityOkay = false, 
                                    Region = Region.Brinstar,
-                                   Name = "spazer",
+                                   Name = "Spazer",
                                    Address = 0x7896E,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -529,7 +529,7 @@ namespace SuperMetroidRandomizer
                                {           
                                    GravityOkay = false,
                                    Region = Region.Brinstar,
-                                   Name = "energy tank (kraid)",
+                                   Name = "Energy Tank (Kraid)",
                                    Address = 0x7899C,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -541,7 +541,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "missile (kraid)",
+                                   Name = "Missile (Kraid)",
                                    Address = 0x789EC,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -554,7 +554,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "varia suit",
+                                   Name = "Varia Suit",
                                    Address = 0x78ACA,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -566,7 +566,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (lava room)",
+                                   Name = "Missile (lava room)",
                                    Address = 0x78AE4,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -578,7 +578,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "ice beam",
+                                   Name = "Ice Beam",
                                    Address = 0x78B24,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -593,7 +593,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (below ice beam)",
+                                   Name = "Missile (below Ice Beam)",
                                    Address = 0x78B46,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -609,7 +609,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "energy tank (crocomire)",
+                                   Name = "Energy Tank (Crocomire)",
                                    Address = 0x78BA4,
                                    CanAccess =
                                        have =>
@@ -620,7 +620,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Norfair,
-                                   Name = "hi-jump boots",
+                                   Name = "Hi-Jump Boots",
                                    Address = 0x78BAC,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -632,7 +632,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (above crocomire)",
+                                   Name = "Missile (above Crocomire)",
                                    Address = 0x78BC0,
                                    CanAccess =
                                        have =>
@@ -648,7 +648,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Norfair,
-                                   Name = "missile (hi-jump boots)",
+                                   Name = "Missile (Hi-Jump Boots)",
                                    Address = 0x78BE6,
                                    CanAccess =
                                        have =>
@@ -659,7 +659,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.Norfair,
-                                   Name = "energy tank (hi-jump boots)",
+                                   Name = "Energy Tank (Hi-Jump Boots)",
                                    Address = 0x78BEC,
                                    CanAccess =
                                        have =>
@@ -670,7 +670,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "power bomb (crocomire)",
+                                   Name = "Power Bomb (Crocomire)",
                                    Address = 0x78C04,
                                    CanAccess =
                                        have =>
@@ -681,7 +681,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (below crocomire)",
+                                   Name = "Missile (below Crocomire)",
                                    Address = 0x78C14,
                                    CanAccess =
                                        have =>
@@ -692,7 +692,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (grapple beam)",
+                                   Name = "Missile (Grapple Beam)",
                                    Address = 0x78C2A,
                                    CanAccess =
                                        have =>
@@ -707,7 +707,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "grapple beam",
+                                   Name = "Grapple Beam",
                                    Address = 0x78C36,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -723,7 +723,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "reserve tank (norfair)",
+                                   Name = "Reserve Tank (Norfair)",
                                    Address = 0x78C3E,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -739,7 +739,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (norfair reserve tank)",
+                                   Name = "Missile (Norfair Reserve Tank)",
                                    Address = 0x78C44,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -755,7 +755,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (bubble norfair green door)",
+                                   Name = "Missile (bubble Norfair green door)",
                                    Address = 0x78C52,
                                    CanAccess =
                                        have =>
@@ -770,7 +770,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (bubble norfair)",
+                                   Name = "Missile (bubble Norfair)",
                                    Address = 0x78C66,
                                    CanAccess =
                                        have =>
@@ -781,7 +781,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (speed booster)",
+                                   Name = "Missile (Speed Booster)",
                                    Address = 0x78C74,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -793,7 +793,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "speed booster",
+                                   Name = "Speed Booster",
                                    Address = 0x78C82,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -805,7 +805,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "missile (wave beam)",
+                                   Name = "Missile (Wave Beam)",
                                    Address = 0x78CBC,
                                    CanAccess =
                                        have =>
@@ -816,7 +816,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "wave beam",
+                                   Name = "Wave Beam",
                                    Address = 0x78CCA,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -828,7 +828,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "missile (gold torizo)",
+                                   Name = "Missile (Gold Torizo)",
                                    Address = 0x78E6E,
                                    CanAccess =
                                        have =>
@@ -840,7 +840,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "super missile (gold torizo)",
+                                   Name = "Super Missile (Gold Torizo)",
                                    Address = 0x78E74,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -852,7 +852,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "missile (mickey mouse room)",
+                                   Name = "Missile (Mickey Mouse room)",
                                    Address = 0x78F30,
                                    CanAccess =
                                        have =>
@@ -863,7 +863,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "missile (lower norfair above fire flea room)",
+                                   Name = "Missile (lower Norfair above fire flea room)",
                                    Address = 0x78FCA,
                                    CanAccess =
                                        have =>
@@ -874,7 +874,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "power bomb (lower norfair above fire flea room)",
+                                   Name = "Power Bomb (lower Norfair above fire flea room)",
                                    Address = 0x78FD2,
                                    CanAccess =
                                        have =>
@@ -885,7 +885,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "power bomb (above ridley)",
+                                   Name = "Power Bomb (above Ridley)",
                                    Address = 0x790C0,
                                    CanAccess =
                                        have =>
@@ -896,7 +896,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "missile (lower norfair near wave beam)",
+                                   Name = "Missile (lower Norfair near Wave Beam)",
                                    Address = 0x79100,
                                    CanAccess =
                                        have =>
@@ -907,7 +907,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "energy tank (ridley)",
+                                   Name = "Energy Tank (Ridley)",
                                    Address = 0x79108,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -921,7 +921,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "screw attack",
+                                   Name = "Screw Attack",
                                    Address = 0x79110,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -933,7 +933,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "energy tank (lower norfair fire flea room)",
+                                   Name = "Energy Tank (lower Norfair fire flea room)",
                                    Address = 0x79184,
                                    CanAccess =
                                        have =>
@@ -944,7 +944,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,  
                                    Region = Region.WreckedShip,
-                                   Name = "missile (wrecked ship middle)",
+                                   Name = "Missile (Wrecked Ship middle)",
                                    Address = 0x7C265,
                                    CanAccess =
                                        have =>
@@ -955,7 +955,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "reserve tank (wrecked ship)",
+                                   Name = "Reserve Tank (Wrecked Ship)",
                                    Address = 0x7C2E9,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -969,7 +969,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "missile (gravity suit)",
+                                   Name = "Missile (Gravity Suit)",
                                    Address = 0x7C2EF,
                                    CanAccess =
                                        have =>
@@ -982,7 +982,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "missile (wrecked ship top)",
+                                   Name = "Missile (Wrecked Ship top)",
                                    Address = 0x7C319,
                                    CanAccess =
                                        have =>
@@ -993,7 +993,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "energy tank (wrecked ship)",
+                                   Name = "Energy Tank (Wrecked Ship)",
                                    Address = 0x7C337,
                                    CanAccess =
                                        have =>
@@ -1011,7 +1011,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "super missile (wrecked ship left)",
+                                   Name = "Super Missile (Wrecked Ship left)",
                                    Address = 0x7C357,
                                    CanAccess =
                                        have =>
@@ -1022,7 +1022,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "super missile (wrecked ship right)",
+                                   Name = "Super Missile (Wrecked Ship right)",
                                    Address = 0x7C365,
                                    CanAccess =
                                        have =>
@@ -1033,7 +1033,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "gravity suit",
+                                   Name = "Gravity Suit",
                                    Address = 0x7C36D,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -1047,7 +1047,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (green maridia shinespark)",
+                                   Name = "Missile (green Maridia shinespark)",
                                    Address = 0x7C437,
                                    CanAccess =
                                        have =>
@@ -1061,7 +1061,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "super missile (green maridia)",
+                                   Name = "Super Missile (green Maridia)",
                                    Address = 0x7C43D,
                                    CanAccess =
                                        have =>
@@ -1072,7 +1072,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "energy tank (green maridia)",
+                                   Name = "Energy Tank (green Maridia)",
                                    Address = 0x7C47D,
                                    CanAccess =
                                        have =>
@@ -1089,7 +1089,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (green maridia tatori)",
+                                   Name = "Missile (green Maridia tatori)",
                                    Address = 0x7C483,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -1101,7 +1101,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "super missile (yellow maridia)",
+                                   Name = "Super Missile (yellow Maridia)",
                                    Address = 0x7C4AF,
                                    CanAccess =
                                        have =>
@@ -1112,7 +1112,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (yellow maridia super missile)",
+                                   Name = "Missile (yellow Maridia super missile)",
                                    Address = 0x7C4B5,
                                    CanAccess =
                                        have =>
@@ -1123,7 +1123,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (yellow maridia false wall)",
+                                   Name = "Missile (yellow Maridia false wall)",
                                    Address = 0x7C533,
                                    CanAccess =
                                        have =>
@@ -1134,7 +1134,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "plasma beam",
+                                   Name = "Plasma Beam",
                                    Address = 0x7C559,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -1152,7 +1152,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (left maridia sand pit room)",
+                                   Name = "Missile (left Maridia sand pit room)",
                                    Address = 0x7C5DD,
                                    CanAccess =
                                        have =>
@@ -1163,7 +1163,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "reserve tank (maridia)",
+                                   Name = "Reserve Tank (Maridia)",
                                    Address = 0x7C5E3,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -1175,7 +1175,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (right maridia sand pit room)",
+                                   Name = "Missile (right Maridia sand pit room)",
                                    Address = 0x7C5EB,
                                    CanAccess =
                                        have =>
@@ -1186,7 +1186,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "power bomb (right maridia sand pit room)",
+                                   Name = "Power Bomb (right Maridia sand pit room)",
                                    Address = 0x7C5F1,
                                    CanAccess =
                                        have =>
@@ -1198,7 +1198,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (pink maridia)",
+                                   Name = "Missile (pink Maridia)",
                                    Address = 0x7C603,
                                    CanAccess =
                                        have =>
@@ -1211,7 +1211,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "super missile (pink maridia)",
+                                   Name = "Super Missile (pink Maridia)",
                                    Address = 0x7C609,
                                    CanAccess =
                                        have =>
@@ -1224,7 +1224,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "spring ball",
+                                   Name = "Spring Ball",
                                    Address = 0x7C6E5,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
@@ -1239,7 +1239,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "missile (draygon)",
+                                   Name = "Missile (Draygon)",
                                    Address = 0x7C74D,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
@@ -1251,7 +1251,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "energy tank (botwoon)",
+                                   Name = "Energy Tank (Botwoon)",
                                    Address = 0x7C755,
                                    CanAccess =
                                        have =>
@@ -1262,7 +1262,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "space jump",
+                                   Name = "Space Jump",
                                    Address = 0x7C7A7,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
