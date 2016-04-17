@@ -133,7 +133,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
                                        && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.SpeedBooster)),
+                                           || have.Contains(ItemType.SpeedBooster))
+                                       && have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {     
@@ -146,7 +147,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
                                        && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.SpeedBooster)),
+                                           || have.Contains(ItemType.SpeedBooster))
+                                       && have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {     
@@ -1410,7 +1412,7 @@ namespace SuperMetroidRandomizer
 
         public void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem)
         {
-            if (!candidateItemList.Contains(candidateItem))
+            if (currentPlms.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem))
             {
                 candidateItemList.Add(candidateItem);
             }

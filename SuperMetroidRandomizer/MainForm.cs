@@ -35,49 +35,57 @@ namespace SuperMetroidRandomizer
 
         private void CheckUpdate()
         {
-            var response = GetResponse("https://smrandomizer.codeplex.com/");
-
-            if (string.IsNullOrWhiteSpace(response))
-                return;
-
-            var pattern = "<TD>Super Metroid Randomizer v(?<version>\\S+) </TD>";
-            var match = Regex.Match(response, pattern);
-
-            if (match.Success)
+            try
             {
-                var currentVersion = match.Groups["version"].Value;
-                             int versionNum;
-                int currentVersionNum;
+                var response = GetResponse("https://smrandomizer.codeplex.com/");
 
-                if (int.TryParse(Version, out versionNum) && int.TryParse(currentVersion, out currentVersionNum))
+                if (string.IsNullOrWhiteSpace(response))
+                    return;
+
+                var pattern = "<TD>Super Metroid Randomizer v(?<version>\\S+) </TD>";
+                var match = Regex.Match(response, pattern);
+
+                if (match.Success)
                 {
-                    if (int.Parse(Version) < int.Parse(currentVersion))
-                    {
-                        var result =
-                            MessageBox.Show(
-                                string.Format(
-                                    "You have v{0} and the current version is v{1}. Would you like to update?", Version,
-                                    currentVersion), "Version Update", MessageBoxButtons.YesNo);
+                    var currentVersion = match.Groups["version"].Value;
+                    int versionNum;
+                    int currentVersionNum;
 
-                        if (result == DialogResult.Yes)
-                            Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                    if (int.TryParse(Version, out versionNum) && int.TryParse(currentVersion, out currentVersionNum))
+                    {
+                        if (int.Parse(Version) < int.Parse(currentVersion))
+                        {
+                            var result =
+                                MessageBox.Show(
+                                    string.Format(
+                                        "You have v{0} and the current version is v{1}. Would you like to update?",
+                                        Version,
+                                        currentVersion), "Version Update", MessageBoxButtons.YesNo);
+
+                            if (result == DialogResult.Yes)
+                                Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                        }
+                    }
+                    else
+                    {
+                        if (Version != currentVersion)
+                        {
+                            var result =
+                                MessageBox.Show(
+                                    string.Format(
+                                        "You have v{0} and the current version is v{1}. Would you like to update?",
+                                        Version, currentVersion), "Version Update", MessageBoxButtons.YesNo);
+
+                            if (result == DialogResult.Yes)
+                                Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                        }
                     }
                 }
-                else
-                {
-                    if (Version != currentVersion)
-                    {
-                        var result =
-                            MessageBox.Show(
-                                string.Format("You have v{0} and the current version is v{1}. Would you like to update?", Version, currentVersion), "Version Update", MessageBoxButtons.YesNo);
-
-                        if (result == DialogResult.Yes)
-                            Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
-                    }
-                }
-
             }
-
+            catch (NullReferenceException)
+            {
+                // check for update failed, do nothing here
+            }
         }
 
         private static string GetResponse(string address)

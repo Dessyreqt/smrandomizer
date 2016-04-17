@@ -1443,7 +1443,7 @@ namespace SuperMetroidRandomizer
 
         public void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem)
         {
-            if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)) && !candidateItemList.Contains(candidateItem))
+            if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)) && (currentPlms.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
             {
                 candidateItemList.Add(candidateItem);
             }
