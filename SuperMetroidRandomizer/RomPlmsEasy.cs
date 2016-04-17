@@ -1410,7 +1410,10 @@ namespace SuperMetroidRandomizer
 
         public void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem)
         {
-            candidateItemList.Add(candidateItem);
+            if (!candidateItemList.Contains(candidateItem))
+            {
+                candidateItemList.Add(candidateItem);
+            }
         }
 
         public int GetInsertedPlm(List<Plm> currentPlms, ItemType insertedItem, SeedRandom random)
