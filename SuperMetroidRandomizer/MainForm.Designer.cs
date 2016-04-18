@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.output = new System.Windows.Forms.TextBox();
             this.process = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -54,6 +53,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
+            this.createSpoilerLog = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -184,6 +184,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.createSpoilerLog);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.randomizerDifficulty);
             this.tabPage1.Controls.Add(this.controlsV11);
@@ -351,6 +352,16 @@
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
+            // createSpoilerLog
+            // 
+            this.createSpoilerLog.AutoSize = true;
+            this.createSpoilerLog.Location = new System.Drawing.Point(192, 7);
+            this.createSpoilerLog.Name = "createSpoilerLog";
+            this.createSpoilerLog.Size = new System.Drawing.Size(113, 17);
+            this.createSpoilerLog.TabIndex = 21;
+            this.createSpoilerLog.Text = "Create Spoiler Log";
+            this.createSpoilerLog.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,6 +409,7 @@
         private System.Windows.Forms.Button controls;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox randomizerDifficulty;
+        private System.Windows.Forms.CheckBox createSpoilerLog;
     }
 }
 

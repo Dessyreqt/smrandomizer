@@ -102,7 +102,7 @@ namespace SuperMetroidRandomizer
                                    NoHidden = false,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
-                                   Name = "bomb",
+                                   Name = "Bomb",
                                    Address = 0x78404,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =

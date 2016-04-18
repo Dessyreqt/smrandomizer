@@ -18,14 +18,16 @@ namespace SuperMetroidRandomizer
         private List<ItemType> itemPool;
         private readonly int seed;
         private readonly IRomPlms romPlms;
+        private RandomizerLog log;
 
         public Suitless IsSuitless { get; set; }
 
-        public RandomizerV11(int seed, IRomPlms romPlms)
+        public RandomizerV11(int seed, IRomPlms romPlms, RandomizerLog log)
         {
             random = new SeedRandom(seed);
             this.romPlms = romPlms;
             this.seed = seed;
+            this.log = log;
         }
 
         public void CreateRom(string filename)
@@ -94,6 +96,11 @@ namespace SuperMetroidRandomizer
                 WriteControls(rom);
 
                 rom.Close();
+            }
+
+            if (log != null)
+            {
+                log.WriteLog(usedFilename);
             }
         }
 
@@ -202,6 +209,11 @@ namespace SuperMetroidRandomizer
 
                     int insertedPlm = romPlms.GetInsertedPlm(currentPlms, insertedItem, random);
                     currentPlms[insertedPlm].Item = new Item(insertedItem);
+
+                    if (log != null)
+                    {
+                        log.AddOrderedItem(currentPlms[insertedPlm]);
+                    }
                 }
                 else
                 {
@@ -220,6 +232,11 @@ namespace SuperMetroidRandomizer
             foreach (var unavailablePlm in unavailablePlms)
             {
                 unavailablePlm.Item = new Item(ItemType.Nothing);
+            }
+
+            if (log != null)
+            {
+                log.AddGeneratedItems(romPlms.Plms);
             }
         }
 

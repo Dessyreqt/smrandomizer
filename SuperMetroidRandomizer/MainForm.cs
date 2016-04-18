@@ -19,7 +19,7 @@ namespace SuperMetroidRandomizer
     public partial class MainForm : Form
     {
         private Thread checkUpdateThread;
-        public static string Version = "20P2";
+        public static string Version = "20P3";
 
         public MainForm()
         {
@@ -160,6 +160,7 @@ namespace SuperMetroidRandomizer
         {
             outputFilename.Text = Settings.Default.OutputFile;
             filenameV11.Text = Settings.Default.OutputFileV11;
+            createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
             Text = string.Format("Super Metroid Randomizer v{0}", Version);
             randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
             RunCheckUpdate();
@@ -216,7 +217,14 @@ namespace SuperMetroidRandomizer
             else
             {
                 var romPlms = RomPlmsFactory.GetRomPlms(difficulty);
-                var randomizerV11 = new RandomizerV11(parsedSeed, romPlms);
+                RandomizerLog log = null;
+
+                if (createSpoilerLog.Checked)
+                {
+                    log = new RandomizerLog(seedV11.Text);
+                }
+
+                var randomizerV11 = new RandomizerV11(parsedSeed, romPlms, log);
                 randomizerV11.CreateRom(filenameV11.Text);
 
                 var outputString = new StringBuilder();
@@ -228,6 +236,7 @@ namespace SuperMetroidRandomizer
                 WriteOutputV11(outputString.ToString());
             }
 
+            Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
             Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
             Settings.Default.Save();
         }

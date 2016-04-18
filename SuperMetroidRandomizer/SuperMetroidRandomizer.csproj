@@ -68,6 +68,7 @@
     <Compile Include="Plm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomizerLog.cs" />
     <Compile Include="RandomizerV10.cs" />
     <Compile Include="RandomizerV11.cs" />
     <Compile Include="RomPlmsFactory.cs" />
