@@ -265,7 +265,8 @@ namespace SuperMetroidRandomizer
                                        have =>
                                        CanDestroyBombWalls(have) 
                                        && CanOpenMissileDoors(have) 
-                                       && have.Contains(ItemType.SpeedBooster),
+                                       && have.Contains(ItemType.SpeedBooster)
+                                       && have.Contains(ItemType.MorphingBall),
                                },
                            new Plm
                                {             
