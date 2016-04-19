@@ -43,6 +43,7 @@ namespace SuperMetroidRandomizer
         private void WriteRom(string filename)
         {
             string usedFilename = filename.Replace("<seed>", string.Format(romPlms.SeedFileString, seed));
+            var hidePlms = !(romPlms is RomPlmsEasy);
 
             using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
             {
@@ -56,7 +57,7 @@ namespace SuperMetroidRandomizer
                     if (!plm.NoHidden && plm.Item.Type != ItemType.Nothing && plm.Item.Type != ItemType.ChargeBeam && plm.ItemStorageType == ItemStorageType.Normal)
                     {
                         // hide the item half of the time (to be a jerk)
-                        if (random.Next(2) == 0)
+                        if (hidePlms && random.Next(2) == 0)
                         {
                             plm.ItemStorageType = ItemStorageType.Hidden;
                         }
