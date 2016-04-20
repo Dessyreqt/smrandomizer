@@ -1,16 +1,15 @@
-# Current Version: 19
-# Project Description
+# Current Version: 20 ([download](https://github.com/Dessyreqt/smrandomizer/releases/tag/v19))
+# About Super Metroid Randomizer
 This is a simple program that moves around items in Super Metroid. It is used for racing the game.
 
 When racing the game, it is suggested that each player play the same seed to ensure a level playing field.
 
-# Using the Program
-When you start the program, you will see there are two tabs, one for "Current Randomizer" and one for "Old Randomizer". "Current Randomizer" is more difficult than "Old Randomizer", so if you aren't as experienced at Super Metroid, you may wish to create a rom under the "Old Randomizer" setting.
+# Using the Randomizer
+When you start the program, you will see there are two tabs, one for "Current Randomizer" and one for "Old Randomizer". "Old Randomizer" is just for the people who have been playing randomizer for a while and really miss the old days.
 
-That said, if you want to play "Current Randomizer", read on...
+If you've beaten Super Metroid once or twice, I suggest you play "Casual". If you are a speedrunner, "Speedrunner" is probably the correct difficulty for you. If you hate yourself, "Masochist" seems most appropriate.
 
-# Tricks You Should Know
-Believe it or not, every rom created with "Current Randomizer" is completable! There are just a few tricks you have to know.
+# Tricks You Should Know _(Speedrunner or higher difficulty)_
 ## Mockball
 This is a very important trick to know! It will allow for so many new areas to be open to you. Here's a short demo: https://www.youtube.com/watch?v=C5FlyJod8qk
 ## Short Charge
