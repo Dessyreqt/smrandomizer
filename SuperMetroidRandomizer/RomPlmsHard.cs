@@ -132,6 +132,7 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
+                                       && have.Contains(ItemType.MorphingBall)
                                },
                            new Plm
                                {     
@@ -143,6 +144,7 @@ namespace SuperMetroidRandomizer
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
+                                       && have.Contains(ItemType.MorphingBall)
                                },
                            new Plm
                                {     
@@ -1334,7 +1336,9 @@ namespace SuperMetroidRandomizer
         private bool CanAccessLowerNorfair(List<ItemType> have)
         {
             return CanAccessHeatedNorfair(have)
-                && have.Contains(ItemType.PowerBomb);
+                && have.Contains(ItemType.PowerBomb)
+                && (have.Contains(ItemType.VariaSuit)
+                    || have.Contains(ItemType.GravitySuit));
         }
 
         private bool CanAccessCrocomire(List<ItemType> have)

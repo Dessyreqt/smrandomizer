@@ -133,7 +133,7 @@ namespace SuperMetroidRandomizer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Easy")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Casual")]
         public string RandomizerDifficulty {
             get {
                 return ((string)(this["RandomizerDifficulty"]));

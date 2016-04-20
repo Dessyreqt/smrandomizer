@@ -30,7 +30,7 @@
       <Value Profile="(Default)">L</Value>
     </Setting>
     <Setting Name="RandomizerDifficulty" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Easy</Value>
+      <Value Profile="(Default)">Casual</Value>
     </Setting>
     <Setting Name="CreateSpoilerLog" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

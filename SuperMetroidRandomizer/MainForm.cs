@@ -19,7 +19,7 @@ namespace SuperMetroidRandomizer
     public partial class MainForm : Form
     {
         private Thread checkUpdateThread;
-        public static string Version = "20P5";
+        public static string Version = "20";
 
         public MainForm()
         {
@@ -37,12 +37,12 @@ namespace SuperMetroidRandomizer
         {
             try
             {
-                var response = GetResponse("https://smrandomizer.codeplex.com/");
+                var response = GetResponse("http://dessyreqt.github.io/smrandomizer/");
 
                 if (string.IsNullOrWhiteSpace(response))
                     return;
 
-                var pattern = "<TD>Super Metroid Randomizer v(?<version>\\S+) </TD>";
+                var pattern = "Current Version: (?<version>\\S+)";
                 var match = Regex.Match(response, pattern);
 
                 if (match.Success)
@@ -63,7 +63,7 @@ namespace SuperMetroidRandomizer
                                         currentVersion), "Version Update", MessageBoxButtons.YesNo);
 
                             if (result == DialogResult.Yes)
-                                Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                                Help.ShowHelp(null, "http://dessyreqt.github.io/smrandomizer/");
                         }
                     }
                     else
@@ -77,7 +77,7 @@ namespace SuperMetroidRandomizer
                                         Version, currentVersion), "Version Update", MessageBoxButtons.YesNo);
 
                             if (result == DialogResult.Yes)
-                                Help.ShowHelp(null, "https://smrandomizer.codeplex.com/");
+                                Help.ShowHelp(null, "http://dessyreqt.github.io/smrandomizer/");
                         }
                     }
                 }
@@ -90,7 +90,7 @@ namespace SuperMetroidRandomizer
 
         private static string GetResponse(string address)
         {
-            if (!address.Contains("smrandomizer.codeplex.com"))
+            if (!address.Contains("dessyreqt.github.io/smrandomizer"))
                 return "";
 
             var webBrowser = new WebBrowser {ScrollBarsEnabled = false, ScriptErrorsSuppressed = true};
@@ -221,7 +221,7 @@ namespace SuperMetroidRandomizer
 
                 if (createSpoilerLog.Checked)
                 {
-                    log = new RandomizerLog(seedV11.Text);
+                    log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
                 }
 
                 var randomizerV11 = new RandomizerV11(parsedSeed, romPlms, log);
