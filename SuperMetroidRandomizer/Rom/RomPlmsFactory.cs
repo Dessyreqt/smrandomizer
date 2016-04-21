@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SuperMetroidRandomizer.Random;
 
-namespace SuperMetroidRandomizer
+namespace SuperMetroidRandomizer.Rom
 {
     public class RomPlmsFactory
     {
@@ -12,11 +9,11 @@ namespace SuperMetroidRandomizer
             switch (difficulty)
             {
                 case RandomizerDifficulty.Easy:
-                    return new RomPlmsEasy();
+                    return new RomPlmsCasual();
                 case RandomizerDifficulty.Hard:
-                    return new RomPlmsHard();
+                    return new RomPlmsMasochist();
                 default:
-                    return new RomPlmsNormal();
+                    return new RomPlmsSpeedrunner();
             }
         }
     }
