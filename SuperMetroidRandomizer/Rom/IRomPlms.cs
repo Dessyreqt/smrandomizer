@@ -16,6 +16,6 @@ namespace SuperMetroidRandomizer.Rom
         void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem);
         int GetInsertedPlm(List<Plm> currentPlms, ItemType insertedItem, SeedRandom random);
         ItemType GetInsertedItem(List<Plm> currentPlms, List<ItemType> itemPool, SeedRandom random);
-        List<ItemType> GetItemPool();
+        List<ItemType> GetItemPool(SeedRandom random);
     }
 }

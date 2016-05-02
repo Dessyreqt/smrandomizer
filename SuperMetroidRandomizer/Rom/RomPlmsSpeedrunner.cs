@@ -1479,7 +1479,7 @@ namespace SuperMetroidRandomizer.Rom
             return retVal;
         }
 
-        public List<ItemType> GetItemPool()
+        public List<ItemType> GetItemPool(SeedRandom random)
         {
             return new List<ItemType>
                        {

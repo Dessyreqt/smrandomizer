@@ -40,6 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.createSpoilerLog = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.randomizerDifficulty = new System.Windows.Forms.ComboBox();
             this.controlsV11 = new System.Windows.Forms.Button();
@@ -53,7 +54,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
-            this.createSpoilerLog = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -134,9 +134,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(105, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(246, 13);
+            this.label1.Size = new System.Drawing.Size(385, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Output Filename (<seed> is replaced with file seed)";
+            this.label1.Text = "Output Filename (<seed> is replaced with file seed, <date> is replaced with date)" +
+    "";
             // 
             // outputFilename
             // 
@@ -203,6 +204,16 @@
             this.tabPage1.Text = "Current Randomizer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // createSpoilerLog
+            // 
+            this.createSpoilerLog.AutoSize = true;
+            this.createSpoilerLog.Location = new System.Drawing.Point(192, 7);
+            this.createSpoilerLog.Name = "createSpoilerLog";
+            this.createSpoilerLog.Size = new System.Drawing.Size(113, 17);
+            this.createSpoilerLog.TabIndex = 21;
+            this.createSpoilerLog.Text = "Create Spoiler Log";
+            this.createSpoilerLog.UseVisualStyleBackColor = true;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -219,12 +230,12 @@
             this.randomizerDifficulty.Items.AddRange(new object[] {
             "Casual",
             "Speedrunner",
-            "Masochist"});
+            "Masochist",
+            "Insane"});
             this.randomizerDifficulty.Location = new System.Drawing.Point(64, 6);
             this.randomizerDifficulty.Name = "randomizerDifficulty";
             this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);
             this.randomizerDifficulty.TabIndex = 19;
-            this.randomizerDifficulty.SelectedIndexChanged += new System.EventHandler(this.randomizerDifficulty_SelectedIndexChanged);
             // 
             // controlsV11
             // 
@@ -295,9 +306,10 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 69);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(246, 13);
+            this.label4.Size = new System.Drawing.Size(385, 13);
             this.label4.TabIndex = 13;
-            this.label4.Text = "Output Filename (<seed> is replaced with file seed)";
+            this.label4.Text = "Output Filename (<seed> is replaced with file seed, <date> is replaced with date)" +
+    "";
             // 
             // filenameV11
             // 
@@ -351,16 +363,6 @@
             this.save.TabIndex = 7;
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
-            // 
-            // createSpoilerLog
-            // 
-            this.createSpoilerLog.AutoSize = true;
-            this.createSpoilerLog.Location = new System.Drawing.Point(192, 7);
-            this.createSpoilerLog.Name = "createSpoilerLog";
-            this.createSpoilerLog.Size = new System.Drawing.Size(113, 17);
-            this.createSpoilerLog.TabIndex = 21;
-            this.createSpoilerLog.Text = "Create Spoiler Log";
-            this.createSpoilerLog.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\FileName.cs" />
+    <Compile Include="Net\RandomizerVersion.cs" />
     <Compile Include="Rom\Controller.cs" />
     <Compile Include="Controls.cs">
       <SubType>Form</SubType>
@@ -72,6 +74,7 @@
     <Compile Include="Random\RandomizerV10.cs" />
     <Compile Include="Random\RandomizerV11.cs" />
     <Compile Include="Rom\RomPlmsFactory.cs" />
+    <Compile Include="Rom\RomPlmsInsane.cs" />
     <Compile Include="Rom\RomPlmsSpeedrunner.cs" />
     <Compile Include="Rom\RomPlmsCasual.cs" />
     <Compile Include="Rom\RomPlmsMasochist.cs" />

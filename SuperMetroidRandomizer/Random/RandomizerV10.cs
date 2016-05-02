@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Linq;
+using SuperMetroidRandomizer.IO;
 using SuperMetroidRandomizer.Properties;
 using SuperMetroidRandomizer.Rom;
 
@@ -132,7 +133,7 @@ namespace SuperMetroidRandomizer.Random
                 ParseSeed(seed);
             }
 
-            var rom = new FileStream(filename.Replace("<seed>", GetSeed()), FileMode.OpenOrCreate);
+            var rom = new FileStream(FileName.Fix(filename, GetSeed()), FileMode.OpenOrCreate);
             rom.Write(Resources.RomImage, 0, 3145728);
 
             WriteMajorItems(ref rom);

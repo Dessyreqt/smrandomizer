@@ -8,10 +8,12 @@ namespace SuperMetroidRandomizer.Rom
         {
             switch (difficulty)
             {
-                case RandomizerDifficulty.Easy:
+                case RandomizerDifficulty.Casual:
                     return new RomPlmsCasual();
-                case RandomizerDifficulty.Hard:
+                case RandomizerDifficulty.Masochist:
                     return new RomPlmsMasochist();
+                case RandomizerDifficulty.Insane:
+                    return new RomPlmsInsane();
                 default:
                     return new RomPlmsSpeedrunner();
             }

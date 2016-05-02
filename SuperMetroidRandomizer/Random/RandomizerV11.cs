@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using SuperMetroidRandomizer.IO;
+using SuperMetroidRandomizer.Net;
 using SuperMetroidRandomizer.Properties;
 using SuperMetroidRandomizer.Rom;
 
@@ -8,9 +9,10 @@ namespace SuperMetroidRandomizer.Random
 {
     public enum RandomizerDifficulty
     {
-        Easy = 0,
-        Normal = 1,
-        Hard = 2,
+        Casual = 0,
+        Speedrunner = 1,
+        Masochist = 2,
+        Insane = 3,
     }
 
     public class RandomizerV11
@@ -44,7 +46,7 @@ namespace SuperMetroidRandomizer.Random
 
         private void WriteRom(string filename)
         {
-            string usedFilename = filename.Replace("<seed>", string.Format(romPlms.SeedFileString, seed));
+            string usedFilename = FileName.Fix(filename, string.Format(romPlms.SeedFileString, seed));
             var hidePlms = !(romPlms is RomPlmsCasual);
 
             using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
@@ -161,7 +163,7 @@ namespace SuperMetroidRandomizer.Random
 
         private void WriteSeedInRom(FileStream rom)
         {
-            string seedStr = string.Format(romPlms.SeedRomString, MainForm.Version, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+            string seedStr = string.Format(romPlms.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
             rom.Seek(0x7fc0, SeekOrigin.Begin);
             rom.Write(StringToByteArray(seedStr), 0, 21);
         }
@@ -247,7 +249,7 @@ namespace SuperMetroidRandomizer.Random
         {
             romPlms.ResetPlms();
             haveItems = new List<ItemType>();
-            itemPool = romPlms.GetItemPool();
+            itemPool = romPlms.GetItemPool(random);
             var unavailablePlms = romPlms.GetUnavailablePlms(itemPool);
 
             for (int i = itemPool.Count; i < 100 - unavailablePlms.Count; i++)

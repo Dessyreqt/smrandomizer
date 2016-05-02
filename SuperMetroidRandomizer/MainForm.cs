@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using SuperMetroidRandomizer.IO;
+using SuperMetroidRandomizer.Net;
 using SuperMetroidRandomizer.Properties;
 using SuperMetroidRandomizer.Random;
 using SuperMetroidRandomizer.Rom;
@@ -22,7 +23,6 @@ namespace SuperMetroidRandomizer
     public partial class MainForm : Form
     {
         private Thread checkUpdateThread;
-        public static string Version = "20";
 
         public MainForm()
         {
@@ -31,76 +31,9 @@ namespace SuperMetroidRandomizer
 
         private void RunCheckUpdate()
         {
-            checkUpdateThread = new Thread(CheckUpdate);
+            checkUpdateThread = new Thread(RandomizerVersion.CheckUpdate);
             checkUpdateThread.SetApartmentState(ApartmentState.STA);
             checkUpdateThread.Start();
-        }
-
-        private void CheckUpdate()
-        {
-            try
-            {
-                var response = GetResponse("http://dessyreqt.github.io/smrandomizer/");
-
-                if (string.IsNullOrWhiteSpace(response))
-                    return;
-
-                var pattern = "Current Version: (?<version>\\S+)";
-                var match = Regex.Match(response, pattern);
-
-                if (match.Success)
-                {
-                    var currentVersion = match.Groups["version"].Value;
-                    int versionNum;
-                    int currentVersionNum;
-
-                    if (int.TryParse(Version, out versionNum) && int.TryParse(currentVersion, out currentVersionNum))
-                    {
-                        if (int.Parse(Version) < int.Parse(currentVersion))
-                        {
-                            var result =
-                                MessageBox.Show(
-                                    string.Format(
-                                        "You have v{0} and the current version is v{1}. Would you like to update?",
-                                        Version,
-                                        currentVersion), "Version Update", MessageBoxButtons.YesNo);
-
-                            if (result == DialogResult.Yes)
-                                Help.ShowHelp(null, "http://dessyreqt.github.io/smrandomizer/");
-                        }
-                    }
-                    else
-                    {
-                        if (Version != currentVersion)
-                        {
-                            var result =
-                                MessageBox.Show(
-                                    string.Format(
-                                        "You have v{0} and the current version is v{1}. Would you like to update?",
-                                        Version, currentVersion), "Version Update", MessageBoxButtons.YesNo);
-
-                            if (result == DialogResult.Yes)
-                                Help.ShowHelp(null, "http://dessyreqt.github.io/smrandomizer/");
-                        }
-                    }
-                }
-            }
-            catch (NullReferenceException)
-            {
-                // check for update failed, do nothing here
-            }
-        }
-
-        private static string GetResponse(string address)
-        {
-            if (!address.Contains("dessyreqt.github.io/smrandomizer"))
-                return "";
-
-            var webBrowser = new WebBrowser {ScrollBarsEnabled = false, ScriptErrorsSuppressed = true};
-            webBrowser.Navigate(address);
-            while (webBrowser.ReadyState != WebBrowserReadyState.Complete) { Application.DoEvents(); }
-
-            return webBrowser.Document.Body.InnerHtml;
         }
 
         private void process_Click(object sender, EventArgs e)
@@ -143,7 +76,7 @@ namespace SuperMetroidRandomizer
 
         private void save_Click(object sender, EventArgs e)
         {
-            var info = new FileInfo(outputFilename.Text.Replace("<seed>", ""));
+            var info = new FileInfo(Regex.Replace(outputFilename.Text, "<.*>", ""));
             var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -164,7 +97,7 @@ namespace SuperMetroidRandomizer
             outputFilename.Text = Settings.Default.OutputFile;
             filenameV11.Text = Settings.Default.OutputFileV11;
             createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
-            Text = string.Format("Super Metroid Randomizer v{0}", Version);
+            Text = string.Format("Super Metroid Randomizer v{0}", RandomizerVersion.Current);
             randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
             RunCheckUpdate();
         }
@@ -180,6 +113,9 @@ namespace SuperMetroidRandomizer
                         break;
                     case "Masochist":
                         seedV11.Text = string.Format("M{0:0000000}", (new SeedRandom()).Next(10000000));
+                        break;
+                    case "Insane":
+                        seedV11.Text = string.Format("I{0:0000000}", (new SeedRandom()).Next(10000000));
                         break;
                     default:
                         seedV11.Text = string.Format("S{0:0000000}", (new SeedRandom()).Next(10000000));
@@ -197,19 +133,47 @@ namespace SuperMetroidRandomizer
             {
                 randomizerDifficulty.SelectedItem = "Casual";
                 seedText = seedText.ToUpper().Replace("C", "");
-                difficulty = RandomizerDifficulty.Easy;
+                difficulty = RandomizerDifficulty.Casual;
+            }
+            else if (seedText.ToUpper().Contains("S"))
+            {
+                randomizerDifficulty.SelectedItem = "Speedrunner";
+                seedText = seedText.ToUpper().Replace("S", "");
+                difficulty = RandomizerDifficulty.Speedrunner;
             }
             else if (seedText.ToUpper().Contains("M"))
             {
                 randomizerDifficulty.SelectedItem = "Masochist";
                 seedText = seedText.ToUpper().Replace("M", "");
-                difficulty = RandomizerDifficulty.Hard;
+                difficulty = RandomizerDifficulty.Masochist;
+            }
+            else if (seedText.ToUpper().Contains("I"))
+            {
+                randomizerDifficulty.SelectedItem = "Insane";
+                seedText = seedText.ToUpper().Replace("I", "");
+                difficulty = RandomizerDifficulty.Insane;
             }
             else
             {
-                randomizerDifficulty.SelectedItem = "Speedrunner";
-                seedText = seedText.ToUpper().Replace("S", "");
-                difficulty = RandomizerDifficulty.Normal;
+                switch (randomizerDifficulty.SelectedItem.ToString())
+                {
+                    case "Casual":
+                        difficulty = RandomizerDifficulty.Casual;
+                        break;
+                    case "Speedrunner":
+                        difficulty = RandomizerDifficulty.Speedrunner;
+                        break;
+                    case "Masochist":
+                        difficulty = RandomizerDifficulty.Masochist;
+                        break;
+                    case "Insane":
+                        difficulty = RandomizerDifficulty.Insane;
+                        break;
+                    default:
+                        MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        WriteOutputV11("Please select a difficulty.");
+                        return;
+                }
             }
 
             if (!int.TryParse(seedText, out parsedSeed))
@@ -227,6 +191,7 @@ namespace SuperMetroidRandomizer
                     log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
                 }
 
+                seedV11.Text = string.Format(romPlms.SeedFileString, parsedSeed);
                 var randomizerV11 = new RandomizerV11(parsedSeed, romPlms, log);
                 randomizerV11.CreateRom(filenameV11.Text);
 
@@ -256,7 +221,7 @@ namespace SuperMetroidRandomizer
 
         private void browseV11_Click(object sender, EventArgs e)
         {
-            var info = new FileInfo(filenameV11.Text.Replace("<seed>", ""));
+            var info = new FileInfo(Regex.Replace(filenameV11.Text, "<.*>", ""));
             var saveFileDialog = new SaveFileDialog { Filter = "All files (*.*)|*.*", FilterIndex = 2, RestoreDirectory = true, InitialDirectory = info.DirectoryName, FileName = info.Name };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -291,19 +256,6 @@ namespace SuperMetroidRandomizer
             if (!senderText.Text.Contains("."))
             {
                 senderText.Text += ".sfc";
-            }
-        }
-
-        private void randomizerDifficulty_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            seedV11.Text = "";
-            if (randomizerDifficulty.SelectedItem.ToString() == "Easy")
-            {
-                seedV11.Text = "♥♥";
-            }
-            if (randomizerDifficulty.SelectedItem.ToString() == "Hard")
-            {
-                seedV11.Text = "♦♦";
             }
         }
     }
