@@ -132,7 +132,7 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
-                                       && have.Contains(ItemType.MorphingBall)
+                                       && CanPassBombPassages(have)
                                },
                            new Plm
                                {     
@@ -144,7 +144,7 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have) 
-                                       && have.Contains(ItemType.MorphingBall)
+                                       && CanPassBombPassages(have)
                                },
                            new Plm
                                {     

@@ -133,7 +133,7 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have)
-                                       && have.Contains(ItemType.MorphingBall)
+                                       && CanPassBombPassages(have)
                                },
                            new Plm
                                {
@@ -145,7 +145,7 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanEnterAndLeaveGauntlet(have)
-                                       && have.Contains(ItemType.MorphingBall)
+                                       && CanPassBombPassages(have)
                                },
                            new Plm
                                {
@@ -1490,6 +1490,9 @@ namespace SuperMetroidRandomizer.Rom
                                 ItemType.PowerBomb,
                                 ItemType.EnergyTank,
                                 ItemType.ChargeBeam,
+                                ItemType.ChargeBeam,
+                                ItemType.ChargeBeam,
+                                ItemType.ChargeBeam,
                             };
             var possibleEnergy = new List<List<ItemType>>
                                  {
@@ -1513,6 +1516,7 @@ namespace SuperMetroidRandomizer.Rom
                                {
                                    new List<ItemType>
                                    {
+                                       ItemType.Missile,
                                        ItemType.Missile,
                                        ItemType.Missile,
                                    },
@@ -1543,6 +1547,7 @@ namespace SuperMetroidRandomizer.Rom
                                            {
                                                ItemType.VariaSuit,
                                                ItemType.IceBeam,
+                                               ItemType.HiJumpBoots,
                                                ItemType.GrappleBeam,
                                                ItemType.SpringBall,
                                            },
