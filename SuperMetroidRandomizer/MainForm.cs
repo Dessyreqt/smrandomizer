@@ -26,7 +26,23 @@ namespace SuperMetroidRandomizer
 
         public MainForm()
         {
+            InitializeSettings();
             InitializeComponent();
+        }
+
+        private void InitializeSettings()
+        {
+            Settings.Default.OutputFile = Settings.Default.OutputFile;
+            Settings.Default.OutputFileV11 = Settings.Default.OutputFileV11;
+            Settings.Default.ControlsShot = Settings.Default.ControlsShot;
+            Settings.Default.ControlsJump = Settings.Default.ControlsJump;
+            Settings.Default.ControlsDash = Settings.Default.ControlsDash;
+            Settings.Default.ControlsItemSelect = Settings.Default.ControlsItemSelect;
+            Settings.Default.ControlsItemCancel = Settings.Default.ControlsItemCancel;
+            Settings.Default.ControlsAngleUp = Settings.Default.ControlsAngleUp;
+            Settings.Default.ControlsAngleDown = Settings.Default.ControlsAngleDown;
+            Settings.Default.RandomizerDifficulty = Settings.Default.RandomizerDifficulty;
+            Settings.Default.CreateSpoilerLog = Settings.Default.CreateSpoilerLog;
         }
 
         private void RunCheckUpdate()
