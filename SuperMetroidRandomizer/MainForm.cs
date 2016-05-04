@@ -274,5 +274,10 @@ namespace SuperMetroidRandomizer
                 senderText.Text += ".sfc";
             }
         }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "https://github.com/Dessyreqt/smrandomizer/issues/new");
+        }
     }
 }

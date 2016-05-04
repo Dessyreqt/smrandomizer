@@ -54,6 +54,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
+            this.btnReport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -185,6 +186,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnReport);
             this.tabPage1.Controls.Add(this.createSpoilerLog);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.randomizerDifficulty);
@@ -278,7 +280,7 @@
             this.outputV11.Multiline = true;
             this.outputV11.Name = "outputV11";
             this.outputV11.ReadOnly = true;
-            this.outputV11.Size = new System.Drawing.Size(514, 227);
+            this.outputV11.Size = new System.Drawing.Size(514, 198);
             this.outputV11.TabIndex = 10;
             // 
             // seedV11
@@ -364,6 +366,17 @@
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
+            // btnReport
+            // 
+            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReport.Location = new System.Drawing.Point(428, 315);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(92, 23);
+            this.btnReport.TabIndex = 22;
+            this.btnReport.Text = "Report an issue";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,6 +425,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox randomizerDifficulty;
         private System.Windows.Forms.CheckBox createSpoilerLog;
+        private System.Windows.Forms.Button btnReport;
     }
 }
 
