@@ -9,9 +9,9 @@ namespace SuperMetroidRandomizer.IO
 {
     public class RandomizerLog
     {
-        private List<Plm> generatedItems;
-        private List<Plm> orderedItems;
-        private string seed;
+        private readonly List<Plm> generatedItems;
+        private readonly List<Plm> orderedItems;
+        private readonly string seed;
 
         public RandomizerLog(string seed)
         {
