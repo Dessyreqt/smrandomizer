@@ -1450,6 +1450,8 @@ namespace SuperMetroidRandomizer.Rom
 
         public void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem)
         {
+			// only try gravity if gravity is okay in this spot
+			// only insert multiples of an item into the candidate list if we aren't looking at the morph ball slot.
             if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)) && (currentPlms.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
             {
                 candidateItemList.Add(candidateItem);
