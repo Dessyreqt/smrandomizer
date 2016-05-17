@@ -24,9 +24,7 @@ namespace SuperMetroidRandomizer.Random
         private readonly IRomPlms romPlms;
         private RandomizerLog log;
 
-        public Suitless IsSuitless { get; set; }
-
-        public RandomizerV11(int seed, IRomPlms romPlms, RandomizerLog log)
+	    public RandomizerV11(int seed, IRomPlms romPlms, RandomizerLog log)
         {
             random = new SeedRandom(seed);
             this.romPlms = romPlms;
