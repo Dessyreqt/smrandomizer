@@ -4,16 +4,17 @@ using System.Windows.Forms;
 
 namespace SuperMetroidRandomizer.Net
 {
-    public class RandomizerVersion
+    public static class RandomizerVersion
     {
         public static string Current = "21P1";
         private const int checkVersion = 20;
+        private static readonly string updateAddress = "http://dessyreqt.github.io/smrandomizer/?" + DateTime.Now.Ticks;
 
         public static void CheckUpdate()
         {
             try
             {
-                var response = GetResponse("http://dessyreqt.github.io/smrandomizer/");
+                var response = GetResponse(updateAddress);
 
                 if (string.IsNullOrWhiteSpace(response))
                     return;
@@ -38,7 +39,7 @@ namespace SuperMetroidRandomizer.Net
                                         currentVersion), "Version Update", MessageBoxButtons.YesNo);
 
                             if (result == DialogResult.Yes)
-                                Help.ShowHelp(null, "http://dessyreqt.github.io/smrandomizer/");
+                                Help.ShowHelp(null, updateAddress);
                         }
                     }
                 }
