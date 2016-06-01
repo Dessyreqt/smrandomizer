@@ -7,6 +7,22 @@ namespace SuperMetroidRandomizer.Net
     public static class RandomizerVersion
     {
         public static string Current = "21P1";
+
+        public static string CurrentDisplay
+        {
+            get
+            {
+                var retVal = Current;
+
+                if (retVal.Contains("P"))
+                {
+                    retVal = string.Format("{0})", retVal.Replace("P", " (preview "));
+                }
+
+                return retVal;
+            }
+        }
+
         private const int checkVersion = 20;
         private static readonly string updateAddress = "http://dessyreqt.github.io/smrandomizer/?" + DateTime.Now.Ticks;
 

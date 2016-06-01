@@ -113,7 +113,7 @@ namespace SuperMetroidRandomizer
             outputFilename.Text = Settings.Default.OutputFile;
             filenameV11.Text = Settings.Default.OutputFileV11;
             createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
-            Text = string.Format("Super Metroid Randomizer v{0}", RandomizerVersion.Current);
+            Text = string.Format("Super Metroid Randomizer v{0}", RandomizerVersion.CurrentDisplay);
             randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
             RunCheckUpdate();
         }
@@ -277,7 +277,7 @@ namespace SuperMetroidRandomizer
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "https://github.com/Dessyreqt/smrandomizer/issues/new");
+            Help.ShowHelp(null, string.Format("https://gitreports.com/issue/Dessyreqt/smrandomizer?issue_title=[v{0}]%20Anonymous%20Issue&details=[v{0}]%0A%0A", RandomizerVersion.CurrentDisplay));
         }
     }
 }

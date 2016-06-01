@@ -1514,25 +1514,6 @@ namespace SuperMetroidRandomizer.Rom
                                          ItemType.ReserveTank,
                                      },
                                  };
-            var possibleAmmo = new List<List<ItemType>>
-                               {
-                                   new List<ItemType>
-                                   {
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                       ItemType.Missile,
-                                   },
-                                   new List<ItemType>
-                                   {
-                                       ItemType.Missile,
-                                       ItemType.SuperMissile,
-                                   },
-                                   new List<ItemType>
-                                   {
-                                       ItemType.SuperMissile,
-                                       ItemType.SuperMissile,
-                                   },
-                               };
             var possibleAdditions = new List<List<ItemType>>
                                        {
                                            new List<ItemType>
@@ -1553,6 +1534,12 @@ namespace SuperMetroidRandomizer.Rom
                                                ItemType.GrappleBeam,
                                                ItemType.SpringBall,
                                            },
+                                           new List<ItemType>
+                                           {
+                                               ItemType.GravitySuit,
+                                               ItemType.PowerBomb,
+                                               ItemType.PowerBomb,
+                                           }
                                        };
             var possibleVaria = new List<List<ItemType>>
                                 {
@@ -1578,14 +1565,141 @@ namespace SuperMetroidRandomizer.Rom
 
             retVal.AddRange(coreItems);
             retVal.AddRange(possibleEnergy[random.Next(possibleEnergy.Count)]);
-            retVal.AddRange(possibleAmmo[random.Next(possibleAmmo.Count)]);
             retVal.AddRange(possibleAdditions[random.Next(possibleAdditions.Count)]);
+
+            // Enable Crystal Flash
+            if (retVal.Count(item => item == ItemType.PowerBomb) == 3)
+            {
+                retVal.Add(ItemType.Missile);
+                retVal.Add(ItemType.SuperMissile);
+            }
+
+            var zebSkip = retVal.Contains(ItemType.SpeedBooster) || retVal.Contains(ItemType.IceBeam);
+
+            while (!AmmoOkay(retVal, zebSkip))
+            {
+                var missileCount = retVal.Count(item => item == ItemType.Missile);
+                var superMissileCount = retVal.Count(item => item == ItemType.SuperMissile);
+
+                var addedItem = ItemType.SuperMissile;
+
+                if (random.Next(2) == 0)
+                {
+                    addedItem = ItemType.Missile;
+                }
+
+                if (zebSkip)
+                {
+                    if (addedItem == ItemType.Missile)
+                    {
+                        if (missileCount == 2 && superMissileCount == 1)
+                        {
+                            retVal.Add(ItemType.Missile);
+                            retVal.Add(ItemType.Missile);
+                        }
+                        else if (missileCount == 4)
+                        {
+                            retVal.Add(ItemType.SuperMissile);
+                        }
+                        else
+                        {
+                            retVal.Add(ItemType.Missile);
+                        }
+                    }
+                    else if (addedItem == ItemType.SuperMissile)
+                    {
+                        if (superMissileCount == 3)
+                        {
+                            retVal.Add(ItemType.Missile);
+                        }
+                        else
+                        {
+                            retVal.Add(ItemType.SuperMissile);
+                        }
+                    }
+                }
+                else
+                {
+                    if (addedItem == ItemType.Missile)
+                    {
+                        if (missileCount == 4)
+                        {
+                            retVal.Add(ItemType.SuperMissile);
+                        }
+                        else
+                        {
+                            retVal.Add(ItemType.Missile);
+                        }
+                    }
+                    else if (addedItem == ItemType.SuperMissile)
+                    {
+                        if (superMissileCount == 3)
+                        {
+                            retVal.Add(ItemType.SuperMissile);
+                            retVal.Add(ItemType.SuperMissile);
+                        }
+                        else if (superMissileCount == 5)
+                        {
+                            retVal.Add(ItemType.Missile);
+                        }
+                        else
+                        {
+                            retVal.Add(ItemType.SuperMissile);
+                        }
+                    }
+                }
+            }
 
             if (!retVal.Contains(ItemType.VariaSuit))
             {
                 retVal.AddRange(possibleVaria[random.Next(possibleVaria.Count)]);
             }
 
+            return retVal;
+        }
+
+        private bool AmmoOkay(List<ItemType> have, bool zebSkip = true)
+        {
+            var retVal = false;
+            var missileCount = have.Count(item => item == ItemType.Missile);
+            var superMissileCount = have.Count(item => item == ItemType.SuperMissile);
+
+            if (zebSkip)
+            {
+                // If we are skipping zebetites values are 4M 1SM; 2M 2SM; 1M 3SM
+                if (missileCount == 4 && superMissileCount == 1)
+                {
+                    retVal = true;
+                }
+                if (missileCount == 2 && superMissileCount == 2)
+                {
+                    retVal = true;
+                }
+                if (missileCount == 1 && superMissileCount == 3)
+                {
+                    retVal = true;
+                }
+            }
+            else
+            {
+                // If we are not skipping zebetites values are 4M 1SM; 3M 2SM; 2M 3SM; 1M 5SM
+                if (missileCount == 4 && superMissileCount == 1)
+                {
+                    retVal = true;
+                }
+                if (missileCount == 3 && superMissileCount == 2)
+                {
+                    retVal = true;
+                }
+                if (missileCount == 2 && superMissileCount == 3)
+                {
+                    retVal = true;
+                }
+                if (missileCount == 1 && superMissileCount == 5)
+                {
+                    retVal = true;
+                }
+            }
             return retVal;
         }
     }

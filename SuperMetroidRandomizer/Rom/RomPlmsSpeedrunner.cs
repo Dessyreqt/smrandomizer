@@ -1337,7 +1337,8 @@ namespace SuperMetroidRandomizer.Rom
         {
             return CanAccessHeatedNorfair(have)
                 && have.Contains(ItemType.PowerBomb)
-                && (have.Contains(ItemType.VariaSuit)
+                && ((have.Contains(ItemType.VariaSuit)
+                        && have.Contains(ItemType.HiJumpBoots))
                     || have.Contains(ItemType.GravitySuit));
         }
 

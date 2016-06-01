@@ -36,7 +36,7 @@ namespace SuperMetroidRandomizer.IO
             {
                 writer.WriteLine("Super Metroid Randomizer Log");
                 writer.WriteLine("----------------------------");
-                writer.WriteLine("Version: {0}", RandomizerVersion.Current);
+                writer.WriteLine("Version: {0}", RandomizerVersion.CurrentDisplay);
                 writer.WriteLine("Creation Date: {0}", DateTime.Now);
                 writer.WriteLine("Seed: {0}", seed);
                 writer.WriteLine();
