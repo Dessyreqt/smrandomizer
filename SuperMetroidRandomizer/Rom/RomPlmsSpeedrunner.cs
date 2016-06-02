@@ -964,6 +964,7 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanDefeatPhantoon(have)
+                                       && have.Contains(ItemType.SpeedBooster)
                                        && (have.Contains(ItemType.VariaSuit)
                                            || EnergyReserveCount(have) >= 1)
                                },

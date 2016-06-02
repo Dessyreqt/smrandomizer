@@ -965,6 +965,7 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanDefeatPhantoon(have)
+                                       && have.Contains(ItemType.SpeedBooster)
                                        && (have.Contains(ItemType.VariaSuit)
                                            || EnergyReserveCount(have) >= 1)
                                },
@@ -1144,12 +1145,7 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanDefeatDraygon(have)
-                                       && (have.Contains(ItemType.SpeedBooster)
-                                           || ((have.Contains(ItemType.ScrewAttack)
-                                                   || have.Contains(ItemType.PlasmaBeam))
-                                               && (have.Contains(ItemType.SpaceJump)
-                                                   || have.Contains(ItemType.HiJumpBoots)
-                                                   || CanIbj(have)))),
+                                       && have.Contains(ItemType.ChargeBeam),
                                },
                            new Plm
                                {
