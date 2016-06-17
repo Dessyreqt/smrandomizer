@@ -21,7 +21,7 @@ namespace SuperMetroidRandomizer.Rom
 
     public delegate bool Access(List<ItemType> have);
 
-    public class Plm
+    public class Location
     {
         public string Name { get; set; }
         public long Address { get; set; }
@@ -31,8 +31,9 @@ namespace SuperMetroidRandomizer.Rom
         public Region Region { get; set; }
         public bool GravityOkay { get; set; }
         public bool NoHidden { get; set; }
+        public int Weight { get; set; }
         
-        public Plm()
+        public Location()
         {
             ItemStorageType = ItemStorageType.Normal;
         }

@@ -58,7 +58,7 @@
     <Compile Include="Controls.Designer.cs">
       <DependentUpon>Controls.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rom\IRomPlms.cs" />
+    <Compile Include="Rom\IRomLocations.cs" />
     <Compile Include="Rom\Item.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -66,17 +66,17 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rom\Plm.cs" />
+    <Compile Include="Rom\Location.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IO\RandomizerLog.cs" />
     <Compile Include="Random\RandomizerV10.cs" />
     <Compile Include="Random\RandomizerV11.cs" />
-    <Compile Include="Rom\RomPlmsFactory.cs" />
-    <Compile Include="Rom\RomPlmsInsane.cs" />
-    <Compile Include="Rom\RomPlmsSpeedrunner.cs" />
-    <Compile Include="Rom\RomPlmsCasual.cs" />
-    <Compile Include="Rom\RomPlmsMasochist.cs" />
+    <Compile Include="Rom\RomLocationsFactory.cs" />
+    <Compile Include="Rom\RomLocationsInsane.cs" />
+    <Compile Include="Rom\RomLocationsSpeedrunner.cs" />
+    <Compile Include="Rom\RomLocationsCasual.cs" />
+    <Compile Include="Rom\RomLocationsMasochist.cs" />
     <Compile Include="Random\SeedRandom.cs" />
     <EmbeddedResource Include="Controls.resx">
       <DependentUpon>Controls.cs</DependentUpon>

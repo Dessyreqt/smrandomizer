@@ -2,20 +2,20 @@
 
 namespace SuperMetroidRandomizer.Rom
 {
-    public class RomPlmsFactory
+    public class RomLocationsFactory
     {
-        public static IRomPlms GetRomPlms(RandomizerDifficulty difficulty)
+        public static IRomLocations GetRomLocations(RandomizerDifficulty difficulty)
         {
             switch (difficulty)
             {
                 case RandomizerDifficulty.Casual:
-                    return new RomPlmsCasual();
+                    return new RomLocationsCasual();
                 case RandomizerDifficulty.Masochist:
-                    return new RomPlmsMasochist();
+                    return new RomLocationsMasochist();
                 case RandomizerDifficulty.Insane:
-                    return new RomPlmsInsane();
+                    return new RomLocationsInsane();
                 default:
-                    return new RomPlmsSpeedrunner();
+                    return new RomLocationsSpeedrunner();
             }
         }
     }

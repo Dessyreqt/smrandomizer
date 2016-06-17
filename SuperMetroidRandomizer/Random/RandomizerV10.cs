@@ -579,17 +579,17 @@ namespace SuperMetroidRandomizer.Random
 
         private void WriteMinorItem(ref FileStream rom)
         {
-            var plm = new byte[2];
-            rom.Read(plm, 0, 2);
+            var location = new byte[2];
+            rom.Read(location, 0, 2);
 
-            if (pickups.Any(c => plm[0] == c[0] && plm[1] == c[1]))
+            if (pickups.Any(c => location[0] == c[0] && location[1] == c[1]))
             {
                 WriteItem(ref rom, pickups[items[itemsPos]]);
                 itemsPos++;
                 return;
             }
 
-            if (hiddenPickups.Any(c => plm[0] == c[0] && plm[1] == c[1]))
+            if (hiddenPickups.Any(c => location[0] == c[0] && location[1] == c[1]))
             {
                 WriteItem(ref rom, hiddenPickups[items[itemsPos]]);
                 itemsPos++;

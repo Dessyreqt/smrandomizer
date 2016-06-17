@@ -9,10 +9,11 @@ namespace SuperMetroidRandomizer.Random
 {
     public enum RandomizerDifficulty
     {
-        Casual = 0,
-        Speedrunner = 1,
-        Masochist = 2,
-        Insane = 3,
+        None,
+        Casual,
+        Speedrunner,
+        Masochist,
+        Insane,
     }
 
     public class RandomizerV11
@@ -21,76 +22,87 @@ namespace SuperMetroidRandomizer.Random
         private List<ItemType> haveItems;
         private List<ItemType> itemPool;
         private readonly int seed;
-        private readonly IRomPlms romPlms;
+        private readonly IRomLocations romLocations;
         private RandomizerLog log;
 
-	    public RandomizerV11(int seed, IRomPlms romPlms, RandomizerLog log)
+	    public RandomizerV11(int seed, IRomLocations romLocations, RandomizerLog log)
         {
             random = new SeedRandom(seed);
-            this.romPlms = romPlms;
+            this.romLocations = romLocations;
             this.seed = seed;
             this.log = log;
         }
 
-        public void CreateRom(string filename)
+        public string CreateRom(string filename, bool spoilerOnly = false)
         {
             if (filename.Contains("\\") && !Directory.Exists(filename.Substring(0, filename.LastIndexOf('\\'))))
+            {
                 Directory.CreateDirectory(filename.Substring(0, filename.LastIndexOf('\\')));
+            }
 
             GenerateItemList();
             GenerateItemPositions();
             WriteRom(filename);
+
+            if (spoilerOnly)
+            {
+                return log?.GetLogOutput();
+            }
+
+            WriteRom(filename);
+
+            return "";
         }
 
         private void WriteRom(string filename)
         {
-            string usedFilename = FileName.Fix(filename, string.Format(romPlms.SeedFileString, seed));
-            var hidePlms = !(romPlms is RomPlmsCasual);
+            string usedFilename = FileName.Fix(filename, string.Format(romLocations.SeedFileString, seed));
+            var hideLocations = !(romLocations is RomLocationsCasual);
 
             using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
             {
                 rom.Write(Resources.RomImage, 0, 3145728);
 
-                foreach (var plm in romPlms.Plms)
+                foreach (var location in romLocations.Locations)
                 {
-                    rom.Seek(plm.Address, SeekOrigin.Begin);
+                    rom.Seek(location.Address, SeekOrigin.Begin);
                     var newItem = new byte[2];
 
-                    if (!plm.NoHidden && plm.Item.Type != ItemType.Nothing && plm.Item.Type != ItemType.ChargeBeam && plm.ItemStorageType == ItemStorageType.Normal)
+                    if (!location.NoHidden && location.Item.Type != ItemType.Nothing && location.Item.Type != ItemType.ChargeBeam && location.ItemStorageType == ItemStorageType.Normal)
                     {
                         // hide the item half of the time (to be a jerk)
-                        if (hidePlms && random.Next(2) == 0)
+                        if (hideLocations && random.Next(2) == 0)
                         {
-                            plm.ItemStorageType = ItemStorageType.Hidden;
+                            location.ItemStorageType = ItemStorageType.Hidden;
                         }
                     }
 
-                    switch (plm.ItemStorageType)
+                    switch (location.ItemStorageType)
                     {
                         case ItemStorageType.Normal:
-                            newItem = StringToByteArray(plm.Item.Normal);
+                            newItem = StringToByteArray(location.Item.Normal);
                             break;
                         case ItemStorageType.Hidden:
-                            newItem = StringToByteArray(plm.Item.Hidden);
+                            newItem = StringToByteArray(location.Item.Hidden);
                             break;
                         case ItemStorageType.Chozo:
-                            newItem = StringToByteArray(plm.Item.Chozo);
+                            newItem = StringToByteArray(location.Item.Chozo);
                             break;
                     }
 
                     rom.Write(newItem, 0, 2);
 
-                    if (plm.Item.Type == ItemType.Nothing)
+                    if (location.Item.Type == ItemType.Nothing)
                     {
                         // give same index as morph ball
-                        rom.Seek(plm.Address + 4, SeekOrigin.Begin);
+                        rom.Seek(location.Address + 4, SeekOrigin.Begin);
                         rom.Write(StringToByteArray("\x1a"), 0, 1);
                     }
 
-                    if (plm.Item.Type == ItemType.ChargeBeam)
+                    if (location.Item.Type == ItemType.ChargeBeam)
                     {
                         // we have 4 copies of charge to reduce tedium, give them all the same index
-                        rom.Seek(plm.Address + 4, SeekOrigin.Begin);
+                        rom.Seek(location.Address + 4, SeekOrigin.Begin);
                         rom.Write(StringToByteArray("\xff"), 0, 1);
                     }
                 }
@@ -161,7 +173,7 @@ namespace SuperMetroidRandomizer.Random
 
         private void WriteSeedInRom(FileStream rom)
         {
-            string seedStr = string.Format(romPlms.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
+            string seedStr = string.Format(romLocations.SeedRomString, RandomizerVersion.Current, seed.ToString().PadLeft(7, '0')).PadRight(21).Substring(0, 21);
             rom.Seek(0x7fc0, SeekOrigin.Begin);
             rom.Write(StringToByteArray(seedStr), 0, 21);
         }
@@ -184,7 +196,7 @@ namespace SuperMetroidRandomizer.Random
         {
             do
             {
-                var currentPlms = romPlms.GetAvailablePlms(haveItems);
+                var currentLocations = romLocations.GetAvailableLocations(haveItems);
                 var candidateItemList = new List<ItemType>();
 
                 // Generate candidate item list
@@ -192,11 +204,11 @@ namespace SuperMetroidRandomizer.Random
                 {
                     haveItems.Add(candidateItem);
 
-                    var newPlms = romPlms.GetAvailablePlms(haveItems);
+                    var newLocations = romLocations.GetAvailableLocations(haveItems);
 
-                    if (newPlms.Count > currentPlms.Count)
+                    if (newLocations.Count > currentLocations.Count)
                     {
-                        romPlms.TryInsertCandidateItem(currentPlms, candidateItemList, candidateItem);
+                        romLocations.TryInsertCandidateItem(currentLocations, candidateItemList, candidateItem);
                     }
 
                     haveItems.Remove(candidateItem);
@@ -210,47 +222,47 @@ namespace SuperMetroidRandomizer.Random
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
 
-                    int insertedPlm = romPlms.GetInsertedPlm(currentPlms, insertedItem, random);
-                    currentPlms[insertedPlm].Item = new Item(insertedItem);
+                    int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
+                    currentLocations[insertedLocation].Item = new Item(insertedItem);
 
                     if (log != null)
                     {
-                        log.AddOrderedItem(currentPlms[insertedPlm]);
+                        log.AddOrderedItem(currentLocations[insertedLocation]);
                     }
                 }
                 else
                 {
-                    ItemType insertedItem = romPlms.GetInsertedItem(currentPlms, itemPool, random);
+                    ItemType insertedItem = romLocations.GetInsertedItem(currentLocations, itemPool, random);
 
                     itemPool.Remove(insertedItem);
                     haveItems.Add(insertedItem);
 
-                    int insertedPlm = romPlms.GetInsertedPlm(currentPlms, insertedItem, random);
-                    currentPlms[insertedPlm].Item = new Item(insertedItem);
+                    int insertedLocation = romLocations.GetInsertedLocation(currentLocations, insertedItem, random);
+                    currentLocations[insertedLocation].Item = new Item(insertedItem);
                 }
             } while (itemPool.Count > 0);
 
-            var unavailablePlms = romPlms.GetUnavailablePlms(haveItems);
+            var unavailableLocations = romLocations.GetUnavailableLocations(haveItems);
 
-            foreach (var unavailablePlm in unavailablePlms)
+            foreach (var unavailableLocation in unavailableLocations)
             {
-                unavailablePlm.Item = new Item(ItemType.Nothing);
+                unavailableLocation.Item = new Item(ItemType.Nothing);
             }
 
             if (log != null)
             {
-                log.AddGeneratedItems(romPlms.Plms);
+                log.AddGeneratedItems(romLocations.Locations);
             }
         }
 
         private void GenerateItemList()
         {
-            romPlms.ResetPlms();
+            romLocations.ResetLocations();
             haveItems = new List<ItemType>();
-            itemPool = romPlms.GetItemPool(random);
-            var unavailablePlms = romPlms.GetUnavailablePlms(itemPool);
+            itemPool = romLocations.GetItemPool(random);
+            var unavailableLocations = romLocations.GetUnavailableLocations(itemPool);
 
-            for (int i = itemPool.Count; i < 100 - unavailablePlms.Count; i++)
+            for (int i = itemPool.Count; i < 100 - unavailableLocations.Count; i++)
             {
                 itemPool.Add(ItemType.Nothing);
             }

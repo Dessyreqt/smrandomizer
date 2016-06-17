@@ -122,51 +122,104 @@ namespace SuperMetroidRandomizer
         {
             if (string.IsNullOrWhiteSpace(seedV11.Text))
             {
-                switch (randomizerDifficulty.SelectedItem.ToString())
-                {
-                    case "Casual":
-                        seedV11.Text = string.Format("C{0:0000000}", (new SeedRandom()).Next(10000000));
-                        break;
-                    case "Masochist":
-                        seedV11.Text = string.Format("M{0:0000000}", (new SeedRandom()).Next(10000000));
-                        break;
-                    case "Insane":
-                        seedV11.Text = string.Format("I{0:0000000}", (new SeedRandom()).Next(10000000));
-                        break;
-                    default:
-                        seedV11.Text = string.Format("S{0:0000000}", (new SeedRandom()).Next(10000000));
-                        break;
-                }
+                SetSeedBasedOnDifficulty();
             }
 
             ClearOutputV11();
             
-            int parsedSeed;
-            RandomizerDifficulty difficulty;
-            var seedText = seedV11.Text;
+            var difficulty = GetRandomizerDifficulty();
 
-            if (seedText.ToUpper().Contains("C"))
+            if (difficulty == RandomizerDifficulty.None)
+            {
+                return;
+            }
+
+            CreateRom(difficulty);
+
+            Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
+            Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
+            Settings.Default.Save();
+        }
+
+        private void CreateRom(RandomizerDifficulty difficulty)
+        {
+            int parsedSeed;
+            if (!int.TryParse(seedV11.Text, out parsedSeed))
+            {
+                MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WriteOutputV11("Seed must be numeric or blank.");
+            }
+            else
+            {
+                var romLocations = RomLocationsFactory.GetRomLocations(difficulty);
+                RandomizerLog log = null;
+
+                if (createSpoilerLog.Checked)
+                {
+                    log = new RandomizerLog(string.Format(romLocations.SeedFileString, parsedSeed));
+                }
+
+                seedV11.Text = string.Format(romLocations.SeedFileString, parsedSeed);
+                var randomizerV11 = new RandomizerV11(parsedSeed, romLocations, log);
+                randomizerV11.CreateRom(filenameV11.Text);
+
+                var outputString = new StringBuilder();
+
+                outputString.AppendFormat("Done!{0}{0}{0}Seed: ", Environment.NewLine);
+                outputString.AppendFormat(romLocations.SeedFileString, parsedSeed);
+                outputString.AppendFormat(" ({0} Difficulty){1}{1}", romLocations.DifficultyName, Environment.NewLine);
+
+                WriteOutputV11(outputString.ToString());
+            }
+        }
+
+        private void CreateSpoilerLog(RandomizerDifficulty difficulty)
+        {
+            int parsedSeed;
+
+            if (!int.TryParse(seedV11.Text, out parsedSeed))
+            {
+                MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WriteOutputV11("Seed must be numeric or blank.");
+            }
+            else
+            {
+                var romPlms = RomLocationsFactory.GetRomLocations(difficulty);
+                RandomizerLog log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
+
+                seedV11.Text = string.Format(romPlms.SeedFileString, parsedSeed);
+
+                var randomizer = new RandomizerV11(parsedSeed, romPlms, log);
+                WriteOutputV11(randomizer.CreateRom(filenameV11.Text, true));
+            }
+        }
+
+        private RandomizerDifficulty GetRandomizerDifficulty()
+        {
+            RandomizerDifficulty difficulty;
+
+            if (seedV11.Text.ToUpper().Contains("C"))
             {
                 randomizerDifficulty.SelectedItem = "Casual";
-                seedText = seedText.ToUpper().Replace("C", "");
+                seedV11.Text = seedV11.Text.ToUpper().Replace("C", "");
                 difficulty = RandomizerDifficulty.Casual;
             }
-            else if (seedText.ToUpper().Contains("S"))
+            else if (seedV11.Text.ToUpper().Contains("S"))
             {
                 randomizerDifficulty.SelectedItem = "Speedrunner";
-                seedText = seedText.ToUpper().Replace("S", "");
+                seedV11.Text = seedV11.Text.ToUpper().Replace("S", "");
                 difficulty = RandomizerDifficulty.Speedrunner;
             }
-            else if (seedText.ToUpper().Contains("M"))
+            else if (seedV11.Text.ToUpper().Contains("M"))
             {
                 randomizerDifficulty.SelectedItem = "Masochist";
-                seedText = seedText.ToUpper().Replace("M", "");
+                seedV11.Text = seedV11.Text.ToUpper().Replace("M", "");
                 difficulty = RandomizerDifficulty.Masochist;
             }
-            else if (seedText.ToUpper().Contains("I"))
+            else if (seedV11.Text.ToUpper().Contains("I"))
             {
                 randomizerDifficulty.SelectedItem = "Insane";
-                seedText = seedText.ToUpper().Replace("I", "");
+                seedV11.Text = seedV11.Text.ToUpper().Replace("I", "");
                 difficulty = RandomizerDifficulty.Insane;
             }
             else
@@ -188,41 +241,29 @@ namespace SuperMetroidRandomizer
                     default:
                         MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         WriteOutputV11("Please select a difficulty.");
-                        return;
+                        return RandomizerDifficulty.None;
                 }
             }
+            return difficulty;
+        }
 
-            if (!int.TryParse(seedText, out parsedSeed))
+        private void SetSeedBasedOnDifficulty()
+        {
+            switch (randomizerDifficulty.SelectedItem.ToString())
             {
-                MessageBox.Show("Seed must be numeric or blank.", "Seed Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                WriteOutputV11("Seed must be numeric or blank.");
+                case "Casual":
+                    seedV11.Text = string.Format("C{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+                case "Masochist":
+                    seedV11.Text = string.Format("M{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+                case "Insane":
+                    seedV11.Text = string.Format("I{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+                default:
+                    seedV11.Text = string.Format("S{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
             }
-            else
-            {
-                var romPlms = RomPlmsFactory.GetRomPlms(difficulty);
-                RandomizerLog log = null;
-
-                if (createSpoilerLog.Checked)
-                {
-                    log = new RandomizerLog(string.Format(romPlms.SeedFileString, parsedSeed));
-                }
-
-                seedV11.Text = string.Format(romPlms.SeedFileString, parsedSeed);
-                var randomizerV11 = new RandomizerV11(parsedSeed, romPlms, log);
-                randomizerV11.CreateRom(filenameV11.Text);
-
-                var outputString = new StringBuilder();
-
-                outputString.AppendFormat("Done!{0}{0}{0}Seed: ", Environment.NewLine);
-                outputString.AppendFormat(romPlms.SeedFileString, parsedSeed);
-                outputString.AppendFormat(" ({0} Difficulty){1}{1}", romPlms.DifficultyName, Environment.NewLine);
-
-                WriteOutputV11(outputString.ToString());
-            }
-
-            Settings.Default.CreateSpoilerLog = createSpoilerLog.Checked;
-            Settings.Default.RandomizerDifficulty = randomizerDifficulty.SelectedItem.ToString();
-            Settings.Default.Save();
         }
 
         private void ClearOutputV11()
@@ -278,6 +319,16 @@ namespace SuperMetroidRandomizer
         private void btnReport_Click(object sender, EventArgs e)
         {
             Help.ShowHelp(null, string.Format("https://gitreports.com/issue/Dessyreqt/smrandomizer?issue_title=[v{0}]%20Anonymous%20Issue&details=[v{0}]%0A%0A", RandomizerVersion.CurrentDisplay));
+        }
+
+        private void randomSpoiler_Click(object sender, EventArgs e)
+        {
+            SetSeedBasedOnDifficulty();
+
+            ClearOutputV11();
+
+            var difficulty = GetRandomizerDifficulty();
+            CreateSpoilerLog(difficulty);
         }
     }
 }

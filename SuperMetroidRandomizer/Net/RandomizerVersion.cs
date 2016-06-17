@@ -6,7 +6,7 @@ namespace SuperMetroidRandomizer.Net
 {
     public static class RandomizerVersion
     {
-        public static string Current = "21P1";
+        public static string Current = "21P3";
 
         public static string CurrentDisplay
         {

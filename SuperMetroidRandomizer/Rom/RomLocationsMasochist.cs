@@ -5,18 +5,18 @@ using SuperMetroidRandomizer.Random;
 
 namespace SuperMetroidRandomizer.Rom
 {
-    public class RomPlmsMasochist : IRomPlms
+    public class RomLocationsMasochist : IRomLocations
     {
-        public List<Plm> Plms { get; set; }
+        public List<Location> Locations { get; set; }
         public string DifficultyName { get { return "Masochist"; } }
         public string SeedFileString { get { return "M{0:0000000}"; } }
         public string SeedRomString { get { return "SMRv{0} M{1}"; } }
 
-        public void ResetPlms()
+        public void ResetLocations()
         {
-            Plms = new List<Plm>
+            Locations = new List<Location>
                        {
-                           new Plm
+                           new Location
                                {
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -30,7 +30,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.SpaceJump) 
                                            || CanIbj(have)),
                                },
-                           new Plm
+                           new Location
                                { 
                                    GravityOkay = false,
                                    Region = Region.Crateria,
@@ -40,7 +40,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessWs(have),
                                },
-                           new Plm
+                           new Location
                                {     
                                    NoHidden = false,
                                    GravityOkay = false,                                   
@@ -52,7 +52,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDefeatPhantoon(have),
                                },
-                           new Plm
+                           new Location
                                {       
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -63,7 +63,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDefeatPhantoon(have),
                                },
-                           new Plm
+                           new Location
                                {        
                                    NoHidden = true,
                                    GravityOkay = false,   
@@ -75,7 +75,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have.Contains(ItemType.SuperMissile) 
                                        && CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {       
                                    NoHidden = true,
                                    GravityOkay = false,    
@@ -86,7 +86,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanEnterAndLeaveGauntlet(have)
                                },
-                           new Plm
+                           new Location
                                {        
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -97,7 +97,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDestroyBombWalls(have),
                                },
-                           new Plm
+                           new Location
                                {        
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -110,7 +110,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have.Contains(ItemType.MorphingBall) &&
                                        CanOpenMissileDoors(have)
                                },
-                           new Plm
+                           new Location
                                {     
                                    NoHidden = true,
                                    GravityOkay = false,   
@@ -122,7 +122,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanDestroyBombWalls(have) 
                                        || have.Contains(ItemType.SpeedBooster),
                                },
-                           new Plm
+                           new Location
                                {       
                                    NoHidden = false,
                                    GravityOkay = false,   
@@ -134,7 +134,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanEnterAndLeaveGauntlet(have) 
                                        && CanPassBombPassages(have)
                                },
-                           new Plm
+                           new Location
                                {     
                                    NoHidden = false,
                                    GravityOkay = false,   
@@ -146,7 +146,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanEnterAndLeaveGauntlet(have) 
                                        && CanPassBombPassages(have)
                                },
-                           new Plm
+                           new Location
                                {     
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -161,7 +161,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.VariaSuit) 
                                            || have.Contains(ItemType.GravitySuit)),
                                },
-                           new Plm
+                           new Location
                                {       
                                    NoHidden = false,
                                    GravityOkay = false,     
@@ -172,7 +172,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanPassBombPassages(have),
                                },
-                           new Plm
+                           new Location
                                {        
                                    NoHidden = false,
                                    GravityOkay = false,
@@ -184,7 +184,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have => 
                                        CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {        
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -197,7 +197,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanPassBombPassages(have) 
                                        && have.Contains(ItemType.SuperMissile),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = true,
                                    GravityOkay = false, 
@@ -209,7 +209,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanPassBombPassages(have) 
                                        && CanOpenMissileDoors(have),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,   
@@ -223,7 +223,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && (have.Contains(ItemType.SpeedBooster) 
                                            || have.Contains(ItemType.SpeedBooster)),
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = false,
                                    GravityOkay = false,   
@@ -238,7 +238,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && (have.Contains(ItemType.SpeedBooster) 
                                            || have.Contains(ItemType.SpeedBooster)),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,   
@@ -252,7 +252,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && CanOpenMissileDoors(have) 
                                        && have.Contains(ItemType.SpeedBooster),
                                },
-                           new Plm
+                           new Location
                                {             
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -266,7 +266,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && have.Contains(ItemType.SpeedBooster)
                                        && have.Contains(ItemType.MorphingBall),
                                },
-                           new Plm
+                           new Location
                                {             
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -279,7 +279,7 @@ namespace SuperMetroidRandomizer.Rom
                                            && CanOpenMissileDoors(have))
                                        || CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -292,7 +292,7 @@ namespace SuperMetroidRandomizer.Rom
                                            && CanOpenMissileDoors(have))
                                        || CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {             
                                    NoHidden = false,
                                    GravityOkay = false,      
@@ -306,7 +306,7 @@ namespace SuperMetroidRandomizer.Rom
                                            && CanOpenMissileDoors(have))
                                        || CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,     
@@ -318,7 +318,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanUsePowerBombs(have) 
                                        && have.Contains(ItemType.SuperMissile),
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -331,7 +331,7 @@ namespace SuperMetroidRandomizer.Rom
                                            && have.Contains(ItemType.SuperMissile))
                                        || CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = true,
                                    GravityOkay = false,              
@@ -342,7 +342,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have => 
                                        true,
                                },
-                           new Plm
+                           new Location
                                {              
                                    NoHidden = false,
                                    GravityOkay = false,      
@@ -353,7 +353,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have => 
                                        CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {              
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -365,7 +365,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanOpenMissileDoors(have) 
                                        && have.Contains(ItemType.MorphingBall),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,   
@@ -377,7 +377,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanOpenMissileDoors(have) 
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -388,7 +388,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have => 
                                        CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -400,7 +400,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanUsePowerBombs(have) 
                                        && have.Contains(ItemType.SuperMissile),
                                },
-                           new Plm
+                           new Location
                                {          
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -413,7 +413,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && CanOpenMissileDoors(have)
                                        && have.Contains(ItemType.SpeedBooster) 
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -425,7 +425,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have => 
                                        have.Contains(ItemType.MorphingBall),
                                },
-                           new Plm
+                           new Location
                                {             
                                    NoHidden = false,
                                    GravityOkay = false,     
@@ -438,7 +438,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && (have.Contains(ItemType.WaveBeam) 
                                            || have.Contains(ItemType.SuperMissile)),
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = false,
                                    GravityOkay = false,    
@@ -450,7 +450,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanOpenMissileDoors(have) 
                                        && CanUsePowerBombs(have) 
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = false,
                                    GravityOkay = false,   
@@ -463,7 +463,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanOpenMissileDoors(have) 
                                        && CanUsePowerBombs(have) 
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = false,
                                    GravityOkay = false,      
@@ -474,12 +474,9 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanAccessRedBrinstar(have) 
-                                       && CanUsePowerBombs(have) 
-                                       && (have.Contains(ItemType.GrappleBeam) 
-                                           || have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.IceBeam)),
+                                       && CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = false,
                                    GravityOkay = false,            
@@ -491,7 +488,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanAccessRedBrinstar(have) 
                                        && CanUsePowerBombs(have), 
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,        
@@ -504,7 +501,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanAccessRedBrinstar(have) 
                                        && CanUsePowerBombs(have), 
                                },
-                           new Plm
+                           new Location
                                {              
                                    NoHidden = false,
                                    GravityOkay = false,     
@@ -516,7 +513,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanAccessRedBrinstar(have) 
                                        && CanUsePowerBombs(have), 
                                },
-                           new Plm
+                           new Location
                                {            
                                    GravityOkay = false, 
                                    Region = Region.Brinstar,
@@ -528,7 +525,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanAccessRedBrinstar(have) 
                                        && CanPassBombPassages(have)
                                },
-                           new Plm
+                           new Location
                                {           
                                    GravityOkay = false,
                                    Region = Region.Brinstar,
@@ -539,7 +536,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessKraid(have),
                                },
-                           new Plm
+                           new Location
                                {           
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -552,7 +549,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanAccessKraid(have)
                                        && CanUsePowerBombs(have),
                                },
-                           new Plm
+                           new Location
                                {            
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -564,7 +561,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessKraid(have),
                                },
-                           new Plm
+                           new Location
                                {              
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -576,7 +573,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessHeatedNorfair(have),
                                },
-                           new Plm
+                           new Location
                                {                    
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -591,7 +588,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.VariaSuit) 
                                            || EnergyReserveCount(have) >= 2)
                                },
-                           new Plm
+                           new Location
                                {                  
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -607,7 +604,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.VariaSuit) 
                                            || EnergyReserveCount(have) >= 3)
                                },
-                           new Plm
+                           new Location
                                {                   
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -618,7 +615,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessCrocomire(have),
                                },
-                           new Plm
+                           new Location
                                {                    
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -630,7 +627,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessRedBrinstar(have), 
                                },
-                           new Plm
+                           new Location
                                {                   
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -646,7 +643,7 @@ namespace SuperMetroidRandomizer.Rom
                                                && have.Contains(ItemType.SpeedBooster))
                                            || CanIbj(have)),
                                },
-                           new Plm
+                           new Location
                                {                   
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -657,7 +654,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessRedBrinstar(have), 
                                },
-                           new Plm
+                           new Location
                                {                    
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -668,7 +665,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessRedBrinstar(have), 
                                },
-                           new Plm
+                           new Location
                                {                    
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -679,7 +676,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessCrocomire(have)
                                },
-                           new Plm
+                           new Location
                                {                    
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -690,7 +687,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessCrocomire(have),
                                },
-                           new Plm
+                           new Location
                                {                   
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -705,7 +702,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.SpeedBooster) 
                                            || CanIbj(have)),
                                },
-                           new Plm
+                           new Location
                                {                     
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -721,7 +718,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || CanIbj(have)
                                            || have.Contains(ItemType.IceBeam)),
                                },
-                           new Plm
+                           new Location
                                {                  
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -737,7 +734,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.HiJumpBoots)
                                            || CanIbj(have)),
                                },
-                           new Plm
+                           new Location
                                {                  
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -753,7 +750,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.HiJumpBoots)
                                            || CanIbj(have)),
                                },
-                           new Plm
+                           new Location
                                {                 
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -768,7 +765,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.HiJumpBoots)
                                            || CanIbj(have)),
                                },
-                           new Plm
+                           new Location
                                {                       
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -779,7 +776,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessHeatedNorfair(have), 
                                },
-                           new Plm
+                           new Location
                                {                     
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -791,7 +788,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessHeatedNorfair(have), 
                                },
-                           new Plm
+                           new Location
                                {                     
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -803,7 +800,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessHeatedNorfair(have), 
                                },
-                           new Plm
+                           new Location
                                {                      
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -814,7 +811,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessHeatedNorfair(have), 
                                },
-                           new Plm
+                           new Location
                                {                     
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -826,7 +823,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessHeatedNorfair(have)
                                },
-                           new Plm
+                           new Location
                                {                     
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -838,7 +835,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanAccessLowerNorfair(have)
                                        && have.Contains(ItemType.SpaceJump),
                                },
-                           new Plm
+                           new Location
                                {                     
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -850,7 +847,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessLowerNorfair(have),
                                },
-                           new Plm
+                           new Location
                                {                         
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -861,7 +858,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanPassWorstRoomInTheGame(have),
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -872,7 +869,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanPassWorstRoomInTheGame(have),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -883,7 +880,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanPassWorstRoomInTheGame(have),
                                },
-                           new Plm
+                           new Location
                                {                         
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -894,7 +891,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanPassWorstRoomInTheGame(have),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -905,7 +902,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanPassWorstRoomInTheGame(have),
                                },
-                           new Plm
+                           new Location
                                {                         
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -919,7 +916,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && have.Contains(ItemType.ChargeBeam)
                                        && EnergyReserveCount(have) >= 2,
                                },
-                           new Plm
+                           new Location
                                {                        
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -931,7 +928,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessLowerNorfair(have),
                                },
-                           new Plm
+                           new Location
                                {                        
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -942,7 +939,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanPassWorstRoomInTheGame(have),
                                },
-                           new Plm
+                           new Location
                                {                         
                                    NoHidden = false,
                                    GravityOkay = false,  
@@ -953,7 +950,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessWs(have),
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -968,7 +965,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && (have.Contains(ItemType.VariaSuit)
                                            || EnergyReserveCount(have) >= 1)
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = true,
                                    GravityOkay = true,  
@@ -981,7 +978,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && (have.Contains(ItemType.VariaSuit)
                                            || EnergyReserveCount(have) >= 1)
                                },
-                           new Plm
+                           new Location
                                {                          
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -992,7 +989,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDefeatPhantoon(have)
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1010,7 +1007,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || have.Contains(ItemType.SpeedBooster)
                                            || have.Contains(ItemType.SpringBall)),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1021,7 +1018,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDefeatPhantoon(have)
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1032,7 +1029,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDefeatPhantoon(have)
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1046,7 +1043,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && (have.Contains(ItemType.VariaSuit)
                                            || EnergyReserveCount(have) >= 1)
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = true,
                                    GravityOkay = true,  
@@ -1060,7 +1057,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && have.Contains(ItemType.GravitySuit)
                                        && have.Contains(ItemType.SpeedBooster), 
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1071,7 +1068,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessOuterMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1088,7 +1085,7 @@ namespace SuperMetroidRandomizer.Rom
                                            || (have.Contains(ItemType.SpaceJump)
                                                && have.Contains(ItemType.SpringBall))),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1100,7 +1097,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessOuterMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1111,7 +1108,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessInnerMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1122,7 +1119,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessInnerMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1133,7 +1130,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessInnerMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1151,7 +1148,7 @@ namespace SuperMetroidRandomizer.Rom
                                                    || have.Contains(ItemType.HiJumpBoots)
                                                    || CanIbj(have)))),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1162,7 +1159,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessOuterMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1174,7 +1171,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessOuterMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                           
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1185,7 +1182,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanAccessOuterMaridia(have),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1197,7 +1194,7 @@ namespace SuperMetroidRandomizer.Rom
                                        CanAccessOuterMaridia(have)
                                        && have.Contains(ItemType.GravitySuit),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1210,7 +1207,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && have.Contains(ItemType.GravitySuit)
                                        && have.Contains(ItemType.SpeedBooster),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1223,7 +1220,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && have.Contains(ItemType.GravitySuit)
                                        && have.Contains(ItemType.SpeedBooster),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1238,7 +1235,7 @@ namespace SuperMetroidRandomizer.Rom
                                        && (have.Contains(ItemType.IceBeam) 
                                            || have.Contains(ItemType.GrappleBeam)),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1250,7 +1247,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDefeatBotwoon(have),
                                },
-                           new Plm
+                           new Location
                                {                             
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1261,7 +1258,7 @@ namespace SuperMetroidRandomizer.Rom
                                        have =>
                                        CanDefeatBotwoon(have),
                                },
-                           new Plm
+                           new Location
                                {                            
                                    NoHidden = false,
                                    GravityOkay = true,  
@@ -1433,51 +1430,70 @@ namespace SuperMetroidRandomizer.Rom
                 && CanUsePowerBombs(have);
         }
 
-        public RomPlmsMasochist()
+        public RomLocationsMasochist()
         {
-            ResetPlms();
+            ResetLocations();
         }
 
-        public List<Plm> GetAvailablePlms(List<ItemType> haveItems)
+        public List<Location> GetAvailableLocations(List<ItemType> haveItems)
         {
-            return (from Plm plm in Plms where plm.Item == null && plm.CanAccess(haveItems) select plm).ToList();
+            var retVal = (from Location location in Locations where (location.Item == null) && location.CanAccess(haveItems) select location).ToList();
+            var currentWeight = (from item in retVal orderby item.Weight descending select item.Weight).First() + 1;
+
+            foreach (var item in retVal.Where(item => item.Weight == 0))
+            {
+                item.Weight = currentWeight;
+            }
+
+            var addedItems = new List<List<Location>>();
+            for (int i = 1; i < currentWeight; i++)
+            {
+                addedItems.Add(retVal.Where(x => x.Weight > i).ToList());
+            }
+
+            foreach (var list in addedItems)
+            {
+                retVal.AddRange(list);
+            }
+
+            return retVal;
         }
 
-        public List<Plm> GetUnavailablePlms(List<ItemType> haveItems)
+        public List<Location> GetUnavailableLocations(List<ItemType> haveItems)
         {
-            return (from Plm plm in Plms where plm.Item == null && !plm.CanAccess(haveItems) select plm).ToList();
+            return (from Location location in Locations where location.Item == null && !location.CanAccess(haveItems) select location).ToList();
         }
 
-        public void TryInsertCandidateItem(List<Plm> currentPlms, List<ItemType> candidateItemList, ItemType candidateItem)
+        public void TryInsertCandidateItem(List<Location> currentLocations, List<ItemType> candidateItemList, ItemType candidateItem)
         {
 			// only try gravity if gravity is okay in this spot
 			// only insert multiples of an item into the candidate list if we aren't looking at the morph ball slot.
-			if (!(candidateItem == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay)) && (currentPlms.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
+			if (!(candidateItem == ItemType.GravitySuit && !currentLocations.Any(x => x.GravityOkay)) && (currentLocations.All(x => x.Name != "Morphing Ball") || !candidateItemList.Contains(candidateItem)))
             {
                 candidateItemList.Add(candidateItem);
             }
         }
 
-        public int GetInsertedPlm(List<Plm> currentPlms, ItemType insertedItem, SeedRandom random)
+        public int GetInsertedLocation(List<Location> currentLocations, ItemType insertedItem, SeedRandom random)
         {
             int retVal;
 
             do
             {
-                retVal = random.Next(currentPlms.Count);
-            } while (insertedItem == ItemType.GravitySuit && !currentPlms[retVal].GravityOkay);
+                retVal = random.Next(currentLocations.Count);
+            } while (insertedItem == ItemType.GravitySuit && !currentLocations[retVal].GravityOkay);
 
             return retVal;
         }
 
-        public ItemType GetInsertedItem(List<Plm> currentPlms, List<ItemType> itemPool, SeedRandom random)
+        public ItemType GetInsertedItem(List<Location> currentLocations, List<ItemType> itemPool, SeedRandom random)
         {
             ItemType retVal;
 
             do
             {
                 retVal = itemPool[random.Next(itemPool.Count)];
-            } while (retVal == ItemType.GravitySuit && !currentPlms.Any(x => x.GravityOkay));
+            } while (retVal == ItemType.GravitySuit && !currentLocations.Any(x => x.GravityOkay));
 
             return retVal;
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using SuperMetroidRandomizer.Net;
 using SuperMetroidRandomizer.Rom;
 
@@ -9,88 +10,97 @@ namespace SuperMetroidRandomizer.IO
 {
     public class RandomizerLog
     {
-        private readonly List<Plm> generatedItems;
-        private readonly List<Plm> orderedItems;
+        private readonly List<Location> generatedItems;
+        private readonly List<Location> orderedItems;
         private readonly string seed;
 
         public RandomizerLog(string seed)
         {
-            generatedItems = new List<Plm>();
-            orderedItems = new List<Plm>();
+            generatedItems = new List<Location>();
+            orderedItems = new List<Location>();
             this.seed = seed;
         }
 
-        public void AddOrderedItem(Plm plm)
+        public void AddOrderedItem(Location location)
         {
-            orderedItems.Add(plm);
+            orderedItems.Add(location);
         }
 
-        public void AddGeneratedItems(List<Plm> plms)
+        public void AddGeneratedItems(List<Location> locations)
         {
-            generatedItems.AddRange(plms);        
+            generatedItems.AddRange(locations);        
         }
 
         public void WriteLog(string filename)
         {
             using (var writer = new StreamWriter(string.Format("{0}.spoilers.txt", filename)))
             {
-                writer.WriteLine("Super Metroid Randomizer Log");
-                writer.WriteLine("----------------------------");
-                writer.WriteLine("Version: {0}", RandomizerVersion.CurrentDisplay);
-                writer.WriteLine("Creation Date: {0}", DateTime.Now);
-                writer.WriteLine("Seed: {0}", seed);
-                writer.WriteLine();
-                writer.WriteLine("Generated Item Order");
-                writer.WriteLine("--------------------");
-                foreach (var plm in orderedItems)
-                {
-                    writer.WriteLine("{0}{1}", plm.Name.PadRight(47, '.'), GetItemName(plm.Item));
-                }
-                writer.WriteLine();
-                writer.WriteLine();
-                writer.WriteLine();
-                writer.WriteLine("Crateria");
-                writer.WriteLine("--------");
-                foreach (var plm in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Crateria))
-                {
-                    writer.WriteLine("{0}{1}", plm.Name.PadRight(47, '.'), GetItemName(plm.Item));
-                }
-                writer.WriteLine();
-                writer.WriteLine("Brinstar");
-                writer.WriteLine("--------");
-                foreach (var plm in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Brinstar))
-                {
-                    writer.WriteLine("{0}{1}", plm.Name.PadRight(47, '.'), GetItemName(plm.Item));
-                }
-                writer.WriteLine();
-                writer.WriteLine("Norfair");
-                writer.WriteLine("-------");
-                foreach (var plm in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Norfair))
-                {
-                    writer.WriteLine("{0}{1}", plm.Name.PadRight(47, '.'), GetItemName(plm.Item));
-                }
-                writer.WriteLine();
-                writer.WriteLine("Wrecked Ship");
-                writer.WriteLine("------------");
-                foreach (var plm in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.WreckedShip))
-                {
-                    writer.WriteLine("{0}{1}", plm.Name.PadRight(47, '.'), GetItemName(plm.Item));
-                }
-                writer.WriteLine();
-                writer.WriteLine("Maridia");
-                writer.WriteLine("-------");
-                foreach (var plm in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Maridia))
-                {
-                    writer.WriteLine("{0}{1}", plm.Name.PadRight(47, '.'), GetItemName(plm.Item));
-                }
-                writer.WriteLine();
-                writer.WriteLine("Lower Norfair");
-                writer.WriteLine("-------------");
-                foreach (var plm in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.LowerNorfair))
-                {
-                    writer.WriteLine("{0}{1}", plm.Name.PadRight(47, '.'), GetItemName(plm.Item));
-                }
+                writer.Write(GetLogOutput());
             }
+        }
+
+        public string GetLogOutput()
+        {
+            var writer = new StringBuilder();
+
+            writer.AppendLine("Super Metroid Randomizer Log");
+            writer.AppendLine("----------------------------");
+            writer.AppendLine(string.Format("Version: {0}", RandomizerVersion.CurrentDisplay));
+            writer.AppendLine(string.Format("Creation Date: {0}", DateTime.Now));
+            writer.AppendLine(string.Format("Seed: {0}", seed));
+            writer.AppendLine();
+            writer.AppendLine("Generated Item Order");
+            writer.AppendLine("--------------------");
+            foreach (var location in orderedItems)
+            {
+                writer.AppendLine(string.Format("{0}{1}", location.Name.PadRight(47, '.'), GetItemName(location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine();
+            writer.AppendLine("Crateria");
+            writer.AppendLine("--------");
+            foreach (var location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Crateria))
+            {
+                writer.AppendLine(string.Format("{0}{1}", location.Name.PadRight(47, '.'), GetItemName(location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Brinstar");
+            writer.AppendLine("--------");
+            foreach (var location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Brinstar))
+            {
+                writer.AppendLine(string.Format("{0}{1}", location.Name.PadRight(47, '.'), GetItemName(location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Norfair");
+            writer.AppendLine("-------");
+            foreach (var location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Norfair))
+            {
+                writer.AppendLine(string.Format("{0}{1}", location.Name.PadRight(47, '.'), GetItemName(location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Wrecked Ship");
+            writer.AppendLine("------------");
+            foreach (var location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.WreckedShip))
+            {
+                writer.AppendLine(string.Format("{0}{1}", location.Name.PadRight(47, '.'), GetItemName(location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Maridia");
+            writer.AppendLine("-------");
+            foreach (var location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.Maridia))
+            {
+                writer.AppendLine(string.Format("{0}{1}", location.Name.PadRight(47, '.'), GetItemName(location.Item)));
+            }
+            writer.AppendLine();
+            writer.AppendLine("Lower Norfair");
+            writer.AppendLine("-------------");
+            foreach (var location in generatedItems.Where(x => x.Item.Type != ItemType.Nothing && x.Region == Region.LowerNorfair))
+            {
+                writer.AppendLine(string.Format("{0}{1}", location.Name.PadRight(47, '.'), GetItemName(location.Item)));
+            }
+
+            return writer.ToString();
         }
 
         private string GetItemName(Item item)
