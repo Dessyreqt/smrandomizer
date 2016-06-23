@@ -649,7 +649,7 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {                   
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
                                    Name = "Missile (above Crocomire)",
@@ -883,7 +883,7 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
                                    Name = "Power Bomb (lower Norfair above fire flea room)",

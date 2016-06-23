@@ -630,7 +630,7 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,
                                    Region = Region.Norfair,
                                    Name = "Missile (above Crocomire)",
@@ -872,7 +872,7 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,
                                    Region = Region.LowerNorfair,
                                    Name = "Power Bomb (lower Norfair above fire flea room)",
@@ -1524,34 +1524,44 @@ namespace SuperMetroidRandomizer.Rom
                                          ItemType.ReserveTank,
                                      },
                                  };
-            var possibleAdditions = new List<List<ItemType>>
+            var possibleSuit = new List<List<ItemType>>
+                               {
+                                   new List<ItemType>
+                                   {
+                                       ItemType.GravitySuit,
+                                   },
+                                   new List<ItemType>
+                                   {
+                                       ItemType.VariaSuit,
+                                   },
+                               };
+            var possibleGravity = new List<List<ItemType>>
                                        {
                                            new List<ItemType>
                                            {
-                                               ItemType.GravitySuit,
                                                ItemType.IceBeam,
                                            },
                                            new List<ItemType>
                                            {
-                                               ItemType.GravitySuit,
                                                ItemType.SpeedBooster,
                                            },
                                            new List<ItemType>
                                            {
-                                               ItemType.VariaSuit,
-                                               ItemType.IceBeam,
-                                               ItemType.HiJumpBoots,
-                                               ItemType.GrappleBeam,
-                                               ItemType.SpringBall,
-                                           },
-                                           new List<ItemType>
-                                           {
-                                               ItemType.GravitySuit,
                                                ItemType.PowerBomb,
                                                ItemType.PowerBomb,
                                            }
                                        };
             var possibleVaria = new List<List<ItemType>>
+                                       {
+                                           new List<ItemType>
+                                           {
+                                               ItemType.IceBeam,
+                                               ItemType.HiJumpBoots,
+                                               ItemType.GrappleBeam,
+                                               ItemType.SpringBall,
+                                           },
+                                       };
+            var possibleMotherBrain = new List<List<ItemType>>
                                 {
                                     new List<ItemType>
                                     {
@@ -1575,7 +1585,15 @@ namespace SuperMetroidRandomizer.Rom
 
             retVal.AddRange(coreItems);
             retVal.AddRange(possibleEnergy[random.Next(possibleEnergy.Count)]);
-            retVal.AddRange(possibleAdditions[random.Next(possibleAdditions.Count)]);
+            retVal.AddRange(possibleSuit[random.Next(possibleSuit.Count)]);
+            if (retVal.Contains(ItemType.GravitySuit))
+            {
+                retVal.AddRange(possibleGravity[random.Next(possibleGravity.Count)]);
+            }
+            else if (retVal.Contains(ItemType.VariaSuit))
+            {
+                retVal.AddRange(possibleVaria[random.Next(possibleVaria.Count)]);
+            }
 
             // Enable Crystal Flash
             if (retVal.Count(item => item == ItemType.PowerBomb) == 3)
@@ -1662,7 +1680,7 @@ namespace SuperMetroidRandomizer.Rom
 
             if (!retVal.Contains(ItemType.VariaSuit))
             {
-                retVal.AddRange(possibleVaria[random.Next(possibleVaria.Count)]);
+                retVal.AddRange(possibleMotherBrain[random.Next(possibleMotherBrain.Count)]);
             }
 
             return retVal;
