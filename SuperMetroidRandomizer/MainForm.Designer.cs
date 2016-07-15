@@ -40,6 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.randomSpoiler = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.createSpoilerLog = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -55,7 +56,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
-            this.randomSpoiler = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -208,6 +208,17 @@
             this.tabPage1.Text = "Current Randomizer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // randomSpoiler
+            // 
+            this.randomSpoiler.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.randomSpoiler.Location = new System.Drawing.Point(8, 315);
+            this.randomSpoiler.Name = "randomSpoiler";
+            this.randomSpoiler.Size = new System.Drawing.Size(100, 23);
+            this.randomSpoiler.TabIndex = 35;
+            this.randomSpoiler.Text = "Random Spoiler";
+            this.randomSpoiler.UseVisualStyleBackColor = true;
+            this.randomSpoiler.Click += new System.EventHandler(this.randomSpoiler_Click);
+            // 
             // btnReport
             // 
             this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -245,8 +256,7 @@
             this.randomizerDifficulty.Items.AddRange(new object[] {
             "Casual",
             "Speedrunner",
-            "Masochist",
-            "Insane"});
+            "Masochist"});
             this.randomizerDifficulty.Location = new System.Drawing.Point(64, 6);
             this.randomizerDifficulty.Name = "randomizerDifficulty";
             this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);
@@ -380,17 +390,6 @@
             this.save.TabIndex = 7;
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
-            // 
-            // randomSpoiler
-            // 
-            this.randomSpoiler.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.randomSpoiler.Location = new System.Drawing.Point(8, 315);
-            this.randomSpoiler.Name = "randomSpoiler";
-            this.randomSpoiler.Size = new System.Drawing.Size(100, 23);
-            this.randomSpoiler.TabIndex = 35;
-            this.randomSpoiler.Text = "Random Spoiler";
-            this.randomSpoiler.UseVisualStyleBackColor = true;
-            this.randomSpoiler.Click += new System.EventHandler(this.randomSpoiler_Click);
             // 
             // MainForm
             // 

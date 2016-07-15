@@ -216,12 +216,12 @@ namespace SuperMetroidRandomizer
                 seedV11.Text = seedV11.Text.ToUpper().Replace("M", "");
                 difficulty = RandomizerDifficulty.Masochist;
             }
-            else if (seedV11.Text.ToUpper().Contains("I"))
-            {
-                randomizerDifficulty.SelectedItem = "Insane";
-                seedV11.Text = seedV11.Text.ToUpper().Replace("I", "");
-                difficulty = RandomizerDifficulty.Insane;
-            }
+            //else if (seedV11.Text.ToUpper().Contains("I"))
+            //{
+            //    randomizerDifficulty.SelectedItem = "Insane";
+            //    seedV11.Text = seedV11.Text.ToUpper().Replace("I", "");
+            //    difficulty = RandomizerDifficulty.Insane;
+            //}
             else
             {
                 switch (randomizerDifficulty.SelectedItem.ToString())
@@ -235,9 +235,9 @@ namespace SuperMetroidRandomizer
                     case "Masochist":
                         difficulty = RandomizerDifficulty.Masochist;
                         break;
-                    case "Insane":
-                        difficulty = RandomizerDifficulty.Insane;
-                        break;
+                    //case "Insane":
+                    //    difficulty = RandomizerDifficulty.Insane;
+                    //    break;
                     default:
                         MessageBox.Show("Please select a difficulty.", "Select Difficulty", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         WriteOutputV11("Please select a difficulty.");

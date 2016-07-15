@@ -6,7 +6,7 @@ namespace SuperMetroidRandomizer.Net
 {
     public static class RandomizerVersion
     {
-        public static string Current = "21P4";
+        public static string Current = "21";
 
         public static string CurrentDisplay
         {
@@ -23,14 +23,15 @@ namespace SuperMetroidRandomizer.Net
             }
         }
 
-        private const int checkVersion = 20;
-        private static readonly string updateAddress = "http://dessyreqt.github.io/smrandomizer/?" + DateTime.Now.Ticks;
+        private const int checkVersion = 21;
+        private static readonly string checkAddress = "http://dessyreqt.github.io/smrandomizer/?" + DateTime.Now.Ticks;
+        private const string updateAddress = "http://dessyreqt.github.io/smrandomizer/";
 
         public static void CheckUpdate()
         {
             try
             {
-                var response = GetResponse(updateAddress);
+                var response = GetResponse(checkAddress);
 
                 if (string.IsNullOrWhiteSpace(response))
                     return;
