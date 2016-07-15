@@ -1374,7 +1374,8 @@ namespace SuperMetroidRandomizer.Rom
 
         private bool CanAccessKraid(List<ItemType> have)
         {
-            return CanAccessRedBrinstar(have);
+            return CanAccessRedBrinstar(have)
+                && CanPassBombPassages(have);
         }
 
         private bool CanAccessRedBrinstar(List<ItemType> have)

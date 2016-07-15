@@ -1330,7 +1330,8 @@ namespace SuperMetroidRandomizer.Rom
         {
             return CanAccessRedBrinstar(have)
                 && (have.Contains(ItemType.SpaceJump) 
-                    || have.Contains(ItemType.HiJumpBoots));
+                    || have.Contains(ItemType.HiJumpBoots))
+                && CanPassBombPassages(have);
         }
 
         private bool CanAccessRedBrinstar(List<ItemType> have)
