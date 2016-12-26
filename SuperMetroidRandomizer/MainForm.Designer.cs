@@ -41,7 +41,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.randomSpoiler = new System.Windows.Forms.Button();
-            this.btnReport = new System.Windows.Forms.Button();
+            this.report = new System.Windows.Forms.Button();
             this.createSpoilerLog = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.randomizerDifficulty = new System.Windows.Forms.ComboBox();
@@ -188,7 +188,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.randomSpoiler);
-            this.tabPage1.Controls.Add(this.btnReport);
+            this.tabPage1.Controls.Add(this.report);
             this.tabPage1.Controls.Add(this.createSpoilerLog);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.randomizerDifficulty);
@@ -219,16 +219,16 @@
             this.randomSpoiler.UseVisualStyleBackColor = true;
             this.randomSpoiler.Click += new System.EventHandler(this.randomSpoiler_Click);
             // 
-            // btnReport
+            // report
             // 
-            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReport.Location = new System.Drawing.Point(428, 315);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(92, 23);
-            this.btnReport.TabIndex = 22;
-            this.btnReport.Text = "Report an issue";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            this.report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.report.Location = new System.Drawing.Point(428, 315);
+            this.report.Name = "report";
+            this.report.Size = new System.Drawing.Size(92, 23);
+            this.report.TabIndex = 22;
+            this.report.Text = "Report an issue";
+            this.report.UseVisualStyleBackColor = true;
+            this.report.Click += new System.EventHandler(this.report_Click);
             // 
             // createSpoilerLog
             // 
@@ -439,7 +439,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox randomizerDifficulty;
         private System.Windows.Forms.CheckBox createSpoilerLog;
-        private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Button report;
         private System.Windows.Forms.Button randomSpoiler;
     }
 }

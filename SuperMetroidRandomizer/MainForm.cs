@@ -316,7 +316,7 @@ namespace SuperMetroidRandomizer
             }
         }
 
-        private void btnReport_Click(object sender, EventArgs e)
+        private void report_Click(object sender, EventArgs e)
         {
             Help.ShowHelp(null, string.Format("https://gitreports.com/issue/Dessyreqt/smrandomizer?issue_title=[v{0}]%20Anonymous%20Issue&details=[v{0}]%0A%0A", RandomizerVersion.CurrentDisplay));
         }

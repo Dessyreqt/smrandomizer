@@ -1,4 +1,4 @@
-# Current Version: 21 ([download](https://github.com/Dessyreqt/smrandomizer/releases/tag/v20))
+# Current Version: 21 ([download](https://github.com/Dessyreqt/smrandomizer/releases/tag/v21))
 
 # About Super Metroid Randomizer
 This is a simple program that moves around items in Super Metroid. It is used for racing the game.
