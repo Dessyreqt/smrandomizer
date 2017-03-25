@@ -35,5 +35,32 @@
     <Setting Name="CreateSpoilerLog" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="CustomNormalMissiles" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">230</Value>
+    </Setting>
+    <Setting Name="CustomSuperMissiles" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="CustomPowerBombs" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="CustomEnergyTanks" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="CustomHiddenItems" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomRandomBlanks" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomRandomNoBlanks" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseCustomSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomRouteGen" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Casual</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

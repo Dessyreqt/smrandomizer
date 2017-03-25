@@ -12,7 +12,7 @@ namespace SuperMetroidRandomizer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -152,6 +152,114 @@ namespace SuperMetroidRandomizer.Properties {
             }
             set {
                 this["CreateSpoilerLog"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("230")]
+        public decimal CustomNormalMissiles {
+            get {
+                return ((decimal)(this["CustomNormalMissiles"]));
+            }
+            set {
+                this["CustomNormalMissiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public decimal CustomSuperMissiles {
+            get {
+                return ((decimal)(this["CustomSuperMissiles"]));
+            }
+            set {
+                this["CustomSuperMissiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public decimal CustomPowerBombs {
+            get {
+                return ((decimal)(this["CustomPowerBombs"]));
+            }
+            set {
+                this["CustomPowerBombs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public decimal CustomEnergyTanks {
+            get {
+                return ((decimal)(this["CustomEnergyTanks"]));
+            }
+            set {
+                this["CustomEnergyTanks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CustomHiddenItems {
+            get {
+                return ((bool)(this["CustomHiddenItems"]));
+            }
+            set {
+                this["CustomHiddenItems"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CustomRandomBlanks {
+            get {
+                return ((bool)(this["CustomRandomBlanks"]));
+            }
+            set {
+                this["CustomRandomBlanks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CustomRandomNoBlanks {
+            get {
+                return ((bool)(this["CustomRandomNoBlanks"]));
+            }
+            set {
+                this["CustomRandomNoBlanks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseCustomSettings {
+            get {
+                return ((bool)(this["UseCustomSettings"]));
+            }
+            set {
+                this["UseCustomSettings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Casual")]
+        public string CustomRouteGen {
+            get {
+                return ((string)(this["CustomRouteGen"]));
+            }
+            set {
+                this["CustomRouteGen"] = value;
             }
         }
     }

@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using SuperMetroidRandomizer.Random;
+using SuperMetroidRandomizer.Properties;
 
 namespace SuperMetroidRandomizer.Rom
 {
     public class RomLocationsCasual : IRomLocations
     {
         public List<Location> Locations { get; set; }
-        public string DifficultyName { get { return "Casual"; } }
-        public string SeedFileString { get { return "C{0:0000000}"; } }
-        public string SeedRomString { get { return "SMRv{0} C{1}"; } }
+        public string DifficultyName { get { return (!Settings.Default.UseCustomSettings) ? "Casual" : "Casual (Custom)"; } }
+        public string SeedFileString { get { return (!Settings.Default.UseCustomSettings) ? "C{0:0000000}" : "X{0:0000000}"; } }
+        public string SeedRomString { get { return (!Settings.Default.UseCustomSettings) ? "SMRv{0} C{1}" : "SMRv{0} X{1}"; } }
 
         public void ResetLocations()
         {
