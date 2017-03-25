@@ -74,7 +74,7 @@
             0});
             this.NormalMissiles.Location = new System.Drawing.Point(163, 71);
             this.NormalMissiles.Maximum = new decimal(new int[] {
-            500,
+            390,
             0,
             0,
             0});
@@ -107,7 +107,12 @@
             0});
             this.SuperMissiles.Location = new System.Drawing.Point(163, 96);
             this.SuperMissiles.Maximum = new decimal(new int[] {
-            500,
+            395,
+            0,
+            0,
+            0});
+            this.SuperMissiles.Minimum = new decimal(new int[] {
+            5,
             0,
             0,
             0});
@@ -140,7 +145,12 @@
             0});
             this.PowerBombs.Location = new System.Drawing.Point(163, 121);
             this.PowerBombs.Maximum = new decimal(new int[] {
-            500,
+            395,
+            0,
+            0,
+            0});
+            this.PowerBombs.Minimum = new decimal(new int[] {
+            5,
             0,
             0,
             0});
@@ -167,10 +177,16 @@
             // EnergyTanks
             // 
             this.EnergyTanks.Location = new System.Drawing.Point(163, 148);
+            this.EnergyTanks.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
             this.EnergyTanks.Name = "EnergyTanks";
             this.EnergyTanks.ReadOnly = true;
             this.EnergyTanks.Size = new System.Drawing.Size(42, 20);
             this.EnergyTanks.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.EnergyTanks, "Warning: Increase at own risk. Numbers higher than 14 can cause glitchy results.");
             this.EnergyTanks.Value = new decimal(new int[] {
             14,
             0,
