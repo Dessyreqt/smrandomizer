@@ -374,7 +374,11 @@ namespace SuperMetroidRandomizer
 
         private void CustomV11_Click(object sender, EventArgs e)
         {
-            var customizeDialog = new Customize(GetRandomizerDifficulty());
+            Customize customizeDialog = null;
+            if (randomizerDifficulty.SelectedItem.ToString() == "Custom")
+                customizeDialog = new Customize(RandomizerDifficulty.None);
+            else
+                customizeDialog = new Customize(GetRandomizerDifficulty());
             customizeDialog.ShowDialog();
 
             if (Settings.Default.UseCustomSettings)
