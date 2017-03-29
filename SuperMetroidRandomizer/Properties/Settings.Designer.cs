@@ -262,5 +262,53 @@ namespace SuperMetroidRandomizer.Properties {
                 this["CustomRouteGen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("230")]
+        public decimal CustomNormalMissilesMax {
+            get {
+                return ((decimal)(this["CustomNormalMissilesMax"]));
+            }
+            set {
+                this["CustomNormalMissilesMax"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public decimal CustomSuperMissilesMax {
+            get {
+                return ((decimal)(this["CustomSuperMissilesMax"]));
+            }
+            set {
+                this["CustomSuperMissilesMax"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public decimal CustomPowerBombsMax {
+            get {
+                return ((decimal)(this["CustomPowerBombsMax"]));
+            }
+            set {
+                this["CustomPowerBombsMax"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public decimal CustomEnergyTanksMax {
+            get {
+                return ((decimal)(this["CustomEnergyTanksMax"]));
+            }
+            set {
+                this["CustomEnergyTanksMax"] = value;
+            }
+        }
     }
 }

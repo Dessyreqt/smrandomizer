@@ -39,6 +39,10 @@
             this.EnergyTanks = new System.Windows.Forms.NumericUpDown();
             this.AllowHiddenItems = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.RandomBlanks = new System.Windows.Forms.RadioButton();
+            this.RandomNoBlanks = new System.Windows.Forms.RadioButton();
+            this.label7 = new System.Windows.Forms.Label();
+            this.NoFill = new System.Windows.Forms.RadioButton();
             this.ResetControls = new System.Windows.Forms.Button();
             this.CustomSave = new System.Windows.Forms.Button();
             this.CustomCancel = new System.Windows.Forms.Button();
@@ -46,24 +50,30 @@
             this.Percent = new System.Windows.Forms.Label();
             this.RouteGen = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.RandomBlanks = new System.Windows.Forms.RadioButton();
-            this.RandomNoBlanks = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.NoFill = new System.Windows.Forms.RadioButton();
+            this.Minlbl = new System.Windows.Forms.Label();
+            this.Maxlbl = new System.Windows.Forms.Label();
+            this.NormalMissilesMax = new System.Windows.Forms.NumericUpDown();
+            this.SuperMissilesMax = new System.Windows.Forms.NumericUpDown();
+            this.PowerBombsMax = new System.Windows.Forms.NumericUpDown();
+            this.EnergyTanksMax = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.NormalMissiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SuperMissiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PowerBombs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnergyTanks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NormalMissilesMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SuperMissilesMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PowerBombsMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyTanksMax)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 73);
+            this.label1.Location = new System.Drawing.Point(40, 96);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Max Missiles";
+            this.label1.Text = "Missiles";
             // 
             // NormalMissiles
             // 
@@ -72,7 +82,7 @@
             0,
             0,
             0});
-            this.NormalMissiles.Location = new System.Drawing.Point(163, 71);
+            this.NormalMissiles.Location = new System.Drawing.Point(146, 94);
             this.NormalMissiles.Maximum = new decimal(new int[] {
             390,
             0,
@@ -92,11 +102,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 98);
+            this.label2.Location = new System.Drawing.Point(40, 121);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.Size = new System.Drawing.Size(74, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Max Super Missiles";
+            this.label2.Text = "Super Missiles";
             // 
             // SuperMissiles
             // 
@@ -105,7 +115,7 @@
             0,
             0,
             0});
-            this.SuperMissiles.Location = new System.Drawing.Point(163, 96);
+            this.SuperMissiles.Location = new System.Drawing.Point(146, 119);
             this.SuperMissiles.Maximum = new decimal(new int[] {
             395,
             0,
@@ -130,11 +140,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 123);
+            this.label3.Location = new System.Drawing.Point(40, 146);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 13);
+            this.label3.Size = new System.Drawing.Size(72, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Max Power Bombs";
+            this.label3.Text = "Power Bombs";
             // 
             // PowerBombs
             // 
@@ -143,7 +153,7 @@
             0,
             0,
             0});
-            this.PowerBombs.Location = new System.Drawing.Point(163, 121);
+            this.PowerBombs.Location = new System.Drawing.Point(146, 144);
             this.PowerBombs.Maximum = new decimal(new int[] {
             395,
             0,
@@ -168,15 +178,15 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 150);
+            this.label4.Location = new System.Drawing.Point(40, 173);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 13);
+            this.label4.Size = new System.Drawing.Size(73, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Max Energy Tanks";
+            this.label4.Text = "Energy Tanks";
             // 
             // EnergyTanks
             // 
-            this.EnergyTanks.Location = new System.Drawing.Point(163, 148);
+            this.EnergyTanks.Location = new System.Drawing.Point(146, 171);
             this.EnergyTanks.Maximum = new decimal(new int[] {
             40,
             0,
@@ -197,7 +207,7 @@
             // AllowHiddenItems
             // 
             this.AllowHiddenItems.AutoSize = true;
-            this.AllowHiddenItems.Location = new System.Drawing.Point(43, 272);
+            this.AllowHiddenItems.Location = new System.Drawing.Point(43, 295);
             this.AllowHiddenItems.Name = "AllowHiddenItems";
             this.AllowHiddenItems.Size = new System.Drawing.Size(88, 17);
             this.AllowHiddenItems.TabIndex = 8;
@@ -205,10 +215,58 @@
             this.toolTip1.SetToolTip(this.AllowHiddenItems, "If checked, allows items to be hidden.");
             this.AllowHiddenItems.UseVisualStyleBackColor = true;
             // 
+            // RandomBlanks
+            // 
+            this.RandomBlanks.AutoSize = true;
+            this.RandomBlanks.Location = new System.Drawing.Point(43, 240);
+            this.RandomBlanks.Name = "RandomBlanks";
+            this.RandomBlanks.Size = new System.Drawing.Size(81, 17);
+            this.RandomBlanks.TabIndex = 18;
+            this.RandomBlanks.Text = "With blanks";
+            this.toolTip1.SetToolTip(this.RandomBlanks, "Random Items have a chance of being blank.");
+            this.RandomBlanks.UseVisualStyleBackColor = true;
+            this.RandomBlanks.CheckedChanged += new System.EventHandler(this.ValueChanged);
+            // 
+            // RandomNoBlanks
+            // 
+            this.RandomNoBlanks.AutoSize = true;
+            this.RandomNoBlanks.Location = new System.Drawing.Point(43, 264);
+            this.RandomNoBlanks.Name = "RandomNoBlanks";
+            this.RandomNoBlanks.Size = new System.Drawing.Size(74, 17);
+            this.RandomNoBlanks.TabIndex = 19;
+            this.RandomNoBlanks.Text = "No Blanks";
+            this.toolTip1.SetToolTip(this.RandomNoBlanks, "Random items will never be blank.");
+            this.RandomNoBlanks.UseVisualStyleBackColor = true;
+            this.RandomNoBlanks.CheckedChanged += new System.EventHandler(this.ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(40, 201);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(62, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Random Fill";
+            this.toolTip1.SetToolTip(this.label7, "Randomly fill the remaining item locations with Missiles, Super Missiles, Power B" +
+        "ombs, or Energy Tanks.");
+            // 
+            // NoFill
+            // 
+            this.NoFill.AutoSize = true;
+            this.NoFill.Checked = true;
+            this.NoFill.Location = new System.Drawing.Point(43, 217);
+            this.NoFill.Name = "NoFill";
+            this.NoFill.Size = new System.Drawing.Size(54, 17);
+            this.NoFill.TabIndex = 21;
+            this.NoFill.TabStop = true;
+            this.NoFill.Text = "No Fill";
+            this.toolTip1.SetToolTip(this.NoFill, "Disables this feature. (default)");
+            this.NoFill.UseVisualStyleBackColor = true;
+            // 
             // ResetControls
             // 
             this.ResetControls.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.ResetControls.Location = new System.Drawing.Point(77, 361);
+            this.ResetControls.Location = new System.Drawing.Point(77, 396);
             this.ResetControls.Name = "ResetControls";
             this.ResetControls.Size = new System.Drawing.Size(94, 23);
             this.ResetControls.TabIndex = 9;
@@ -219,7 +277,7 @@
             // CustomSave
             // 
             this.CustomSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.CustomSave.Location = new System.Drawing.Point(43, 390);
+            this.CustomSave.Location = new System.Drawing.Point(43, 425);
             this.CustomSave.Name = "CustomSave";
             this.CustomSave.Size = new System.Drawing.Size(75, 23);
             this.CustomSave.TabIndex = 10;
@@ -230,7 +288,7 @@
             // CustomCancel
             // 
             this.CustomCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.CustomCancel.Location = new System.Drawing.Point(130, 390);
+            this.CustomCancel.Location = new System.Drawing.Point(130, 425);
             this.CustomCancel.Name = "CustomCancel";
             this.CustomCancel.Size = new System.Drawing.Size(75, 23);
             this.CustomCancel.TabIndex = 11;
@@ -242,7 +300,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 305);
+            this.label5.Location = new System.Drawing.Point(12, 340);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(225, 23);
             this.label5.TabIndex = 12;
@@ -253,7 +311,7 @@
             // 
             this.Percent.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Percent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Percent.Location = new System.Drawing.Point(15, 328);
+            this.Percent.Location = new System.Drawing.Point(15, 363);
             this.Percent.Name = "Percent";
             this.Percent.Size = new System.Drawing.Size(222, 23);
             this.Percent.TabIndex = 13;
@@ -283,62 +341,147 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Route Generation";
             // 
-            // RandomBlanks
+            // Minlbl
             // 
-            this.RandomBlanks.AutoSize = true;
-            this.RandomBlanks.Enabled = false;
-            this.RandomBlanks.Location = new System.Drawing.Point(43, 217);
-            this.RandomBlanks.Name = "RandomBlanks";
-            this.RandomBlanks.Size = new System.Drawing.Size(81, 17);
-            this.RandomBlanks.TabIndex = 18;
-            this.RandomBlanks.Text = "With blanks";
-            this.toolTip1.SetToolTip(this.RandomBlanks, "Random Items have a chance of being blank.");
-            this.RandomBlanks.UseVisualStyleBackColor = true;
-            this.RandomBlanks.CheckedChanged += new System.EventHandler(this.ValueChanged);
+            this.Minlbl.AutoSize = true;
+            this.Minlbl.Location = new System.Drawing.Point(150, 78);
+            this.Minlbl.Name = "Minlbl";
+            this.Minlbl.Size = new System.Drawing.Size(24, 13);
+            this.Minlbl.TabIndex = 22;
+            this.Minlbl.Text = "Min";
+            this.Minlbl.Visible = false;
             // 
-            // RandomNoBlanks
+            // Maxlbl
             // 
-            this.RandomNoBlanks.AutoSize = true;
-            this.RandomNoBlanks.Enabled = false;
-            this.RandomNoBlanks.Location = new System.Drawing.Point(43, 241);
-            this.RandomNoBlanks.Name = "RandomNoBlanks";
-            this.RandomNoBlanks.Size = new System.Drawing.Size(74, 17);
-            this.RandomNoBlanks.TabIndex = 19;
-            this.RandomNoBlanks.Text = "No Blanks";
-            this.toolTip1.SetToolTip(this.RandomNoBlanks, "Random items will never be blank.");
-            this.RandomNoBlanks.UseVisualStyleBackColor = true;
-            this.RandomNoBlanks.CheckedChanged += new System.EventHandler(this.ValueChanged);
+            this.Maxlbl.AutoSize = true;
+            this.Maxlbl.Location = new System.Drawing.Point(197, 78);
+            this.Maxlbl.Name = "Maxlbl";
+            this.Maxlbl.Size = new System.Drawing.Size(27, 13);
+            this.Maxlbl.TabIndex = 23;
+            this.Maxlbl.Text = "Max";
+            this.Maxlbl.Visible = false;
             // 
-            // label7
+            // NormalMissilesMax
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 178);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Random Fill";
-            this.toolTip1.SetToolTip(this.label7, "Randomly fill the remaining item locations with Missiles, Super Missiles, Power B" +
-        "ombs, or Energy Tanks.");
+            this.NormalMissilesMax.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.NormalMissilesMax.Location = new System.Drawing.Point(195, 93);
+            this.NormalMissilesMax.Maximum = new decimal(new int[] {
+            390,
+            0,
+            0,
+            0});
+            this.NormalMissilesMax.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.NormalMissilesMax.Name = "NormalMissilesMax";
+            this.NormalMissilesMax.ReadOnly = true;
+            this.NormalMissilesMax.Size = new System.Drawing.Size(42, 20);
+            this.NormalMissilesMax.TabIndex = 24;
+            this.NormalMissilesMax.Value = new decimal(new int[] {
+            230,
+            0,
+            0,
+            0});
+            this.NormalMissilesMax.Visible = false;
+            this.NormalMissilesMax.ValueChanged += new System.EventHandler(this.ValueChanged);
             // 
-            // NoFill
+            // SuperMissilesMax
             // 
-            this.NoFill.AutoSize = true;
-            this.NoFill.Checked = true;
-            this.NoFill.Enabled = false;
-            this.NoFill.Location = new System.Drawing.Point(43, 194);
-            this.NoFill.Name = "NoFill";
-            this.NoFill.Size = new System.Drawing.Size(54, 17);
-            this.NoFill.TabIndex = 21;
-            this.NoFill.TabStop = true;
-            this.NoFill.Text = "No Fill";
-            this.toolTip1.SetToolTip(this.NoFill, "Disables this feature. (default)");
-            this.NoFill.UseVisualStyleBackColor = true;
+            this.SuperMissilesMax.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.SuperMissilesMax.Location = new System.Drawing.Point(195, 118);
+            this.SuperMissilesMax.Maximum = new decimal(new int[] {
+            395,
+            0,
+            0,
+            0});
+            this.SuperMissilesMax.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.SuperMissilesMax.Name = "SuperMissilesMax";
+            this.SuperMissilesMax.ReadOnly = true;
+            this.SuperMissilesMax.Size = new System.Drawing.Size(42, 20);
+            this.SuperMissilesMax.TabIndex = 25;
+            this.SuperMissilesMax.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SuperMissilesMax.Visible = false;
+            this.SuperMissilesMax.ValueChanged += new System.EventHandler(this.ValueChanged);
+            // 
+            // PowerBombsMax
+            // 
+            this.PowerBombsMax.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.PowerBombsMax.Location = new System.Drawing.Point(195, 143);
+            this.PowerBombsMax.Maximum = new decimal(new int[] {
+            395,
+            0,
+            0,
+            0});
+            this.PowerBombsMax.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.PowerBombsMax.Name = "PowerBombsMax";
+            this.PowerBombsMax.ReadOnly = true;
+            this.PowerBombsMax.Size = new System.Drawing.Size(42, 20);
+            this.PowerBombsMax.TabIndex = 26;
+            this.PowerBombsMax.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.PowerBombsMax.Visible = false;
+            this.PowerBombsMax.ValueChanged += new System.EventHandler(this.ValueChanged);
+            // 
+            // EnergyTanksMax
+            // 
+            this.EnergyTanksMax.Location = new System.Drawing.Point(195, 170);
+            this.EnergyTanksMax.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.EnergyTanksMax.Name = "EnergyTanksMax";
+            this.EnergyTanksMax.ReadOnly = true;
+            this.EnergyTanksMax.Size = new System.Drawing.Size(42, 20);
+            this.EnergyTanksMax.TabIndex = 27;
+            this.EnergyTanksMax.Value = new decimal(new int[] {
+            14,
+            0,
+            0,
+            0});
+            this.EnergyTanksMax.Visible = false;
+            this.EnergyTanksMax.ValueChanged += new System.EventHandler(this.ValueChanged);
             // 
             // Customize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 425);
+            this.ClientSize = new System.Drawing.Size(249, 460);
+            this.Controls.Add(this.EnergyTanksMax);
+            this.Controls.Add(this.PowerBombsMax);
+            this.Controls.Add(this.SuperMissilesMax);
+            this.Controls.Add(this.NormalMissilesMax);
+            this.Controls.Add(this.Maxlbl);
+            this.Controls.Add(this.Minlbl);
             this.Controls.Add(this.NoFill);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.RandomNoBlanks);
@@ -370,6 +513,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.SuperMissiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PowerBombs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnergyTanks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NormalMissilesMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SuperMissilesMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PowerBombsMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EnergyTanksMax)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,5 +545,11 @@
         private System.Windows.Forms.RadioButton RandomNoBlanks;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RadioButton NoFill;
+        private System.Windows.Forms.Label Minlbl;
+        private System.Windows.Forms.Label Maxlbl;
+        private System.Windows.Forms.NumericUpDown NormalMissilesMax;
+        private System.Windows.Forms.NumericUpDown SuperMissilesMax;
+        private System.Windows.Forms.NumericUpDown PowerBombsMax;
+        private System.Windows.Forms.NumericUpDown EnergyTanksMax;
     }
 }

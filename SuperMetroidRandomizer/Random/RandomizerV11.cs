@@ -283,29 +283,10 @@ namespace SuperMetroidRandomizer.Random
                     pool.AddRange(new List<ItemType>
                                     {
                                         ItemType.MorphingBall, ItemType.Bomb, ItemType.ChargeBeam,
-                                        ItemType.ChargeBeam, ItemType.ChargeBeam, ItemType.ChargeBeam,
                                         ItemType.Spazer, ItemType.VariaSuit, ItemType.HiJumpBoots,
                                         ItemType.SpeedBooster, ItemType.WaveBeam, ItemType.GrappleBeam,
                                         ItemType.SpringBall, ItemType.IceBeam, ItemType.XRayScope,
                                         ItemType.ReserveTank
-                                    });
-                    break;
-                case "Speedrunner":
-                    pool.AddRange(new List<ItemType>
-                                    {
-                                        ItemType.ChargeBeam, ItemType.ChargeBeam, ItemType.ChargeBeam
-                                    });
-                    goto case "Casual";
-                case "Casual":
-                    pool.AddRange(new List<ItemType>
-                                    {
-                                        ItemType.MorphingBall, ItemType.Bomb, ItemType.ChargeBeam,
-                                        ItemType.Spazer, ItemType.VariaSuit, ItemType.HiJumpBoots,
-                                        ItemType.SpeedBooster, ItemType.WaveBeam, ItemType.GrappleBeam,
-                                        ItemType.GravitySuit, ItemType.SpaceJump, ItemType.SpringBall,
-                                        ItemType.PlasmaBeam, ItemType.IceBeam, ItemType.ScrewAttack,
-                                        ItemType.XRayScope, ItemType.ReserveTank, ItemType.ReserveTank,
-                                        ItemType.ReserveTank, ItemType.ReserveTank
                                     });
                     break;
                 default:
@@ -323,9 +304,13 @@ namespace SuperMetroidRandomizer.Random
             }
 
             decimal addMissiles = Settings.Default.CustomNormalMissiles / 5;
+            decimal addMissilesMax = Settings.Default.CustomNormalMissilesMax / 5;
             decimal addSMissiles = Settings.Default.CustomSuperMissiles / 5;
+            decimal addSMissilesMax = Settings.Default.CustomSuperMissilesMax / 5;
             decimal addPBombs = Settings.Default.CustomPowerBombs / 5;
+            decimal addPBombsMax = Settings.Default.CustomPowerBombsMax / 5;
             decimal addETanks = Settings.Default.CustomEnergyTanks;
+            decimal addETanksMax = Settings.Default.CustomEnergyTanksMax;
 
             for (int i = 0; i < addMissiles; i++)
                 pool.Add(ItemType.Missile);
@@ -335,32 +320,47 @@ namespace SuperMetroidRandomizer.Random
                 pool.Add(ItemType.PowerBomb);
             for (int i = 0; i < addETanks; i++)
                 pool.Add(ItemType.EnergyTank);
-
-            decimal ItemsRemaining = 100 - pool.Count;
-            if (ItemsRemaining > 0 && (Settings.Default.CustomRandomBlanks || Settings.Default.CustomRandomNoBlanks))
+            
+            if (pool.Count < 100 && (Settings.Default.CustomRandomBlanks || Settings.Default.CustomRandomNoBlanks))
             {
-                for (int i = 0; i < ItemsRemaining; i++)
+                while (pool.Count < 100)
                 {
                     int rand = 0; 
                     if (Settings.Default.CustomRandomBlanks)
-                        rand = random.Next(5);
+                        rand = random.Next(8);
                     else if (Settings.Default.CustomRandomNoBlanks)
                         rand = random.Next(4);
                     switch (rand)
                     {
                         case 0:
-                            pool.Add(ItemType.Missile);
+                            if (addMissiles < addMissilesMax)
+                            {
+                                pool.Add(ItemType.Missile);
+                                ++addMissiles;
+                            }
                             break;
                         case 1:
-                            pool.Add(ItemType.SuperMissile);
+                            if (addSMissiles < addSMissilesMax)
+                            {
+                                pool.Add(ItemType.SuperMissile);
+                                ++addSMissiles;
+                            }
                             break;
                         case 2:
-                            pool.Add(ItemType.PowerBomb);
+                            if (addPBombs < addPBombsMax)
+                            {
+                                pool.Add(ItemType.PowerBomb);
+                                ++addPBombs;
+                            }
                             break;
                         case 3:
-                            pool.Add(ItemType.EnergyTank);
+                            if (addETanks < addETanksMax)
+                            {
+                                pool.Add(ItemType.EnergyTank);
+                                ++addETanks;
+                            }
                             break;
-                        case 4:
+                        default:
                             pool.Add(ItemType.Nothing);
                             break;
                     }

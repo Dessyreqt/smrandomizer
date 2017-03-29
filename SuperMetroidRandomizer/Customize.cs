@@ -14,13 +14,13 @@ namespace SuperMetroidRandomizer
     public partial class Customize : Form
     {
         // Used to set starting values based on difficulty chosen
-        RandomizerDifficulty DifficultyDefault;
+        string DifficultyDefault;
 
         public Customize()
         {
             InitializeComponent();
         }
-        public Customize(RandomizerDifficulty diff)
+        public Customize(string diff)
         {
             InitializeComponent();
             DifficultyDefault = diff;
@@ -35,27 +35,39 @@ namespace SuperMetroidRandomizer
         {
             switch(DifficultyDefault)
             {
-                case RandomizerDifficulty.Casual:
+                case "Casual":
                     NormalMissiles.Value = 230;
+                    NormalMissilesMax.Value = 230;
                     SuperMissiles.Value = 50;
+                    SuperMissilesMax.Value = 50;
                     PowerBombs.Value = 50;
+                    PowerBombsMax.Value = 50;
                     EnergyTanks.Value = 14;
+                    EnergyTanksMax.Value = 14;
                     AllowHiddenItems.Checked = false;
                     RouteGen.SelectedItem = "Casual";
                     break;
-                case RandomizerDifficulty.Speedrunner:
+                case "Speedrunner":
                     NormalMissiles.Value = 50;
+                    NormalMissilesMax.Value = 50;
                     SuperMissiles.Value = 30;
+                    SuperMissilesMax.Value = 30;
                     PowerBombs.Value = 20;
+                    PowerBombsMax.Value = 20;
                     EnergyTanks.Value = 7;
+                    EnergyTanksMax.Value = 7;
                     AllowHiddenItems.Checked = true;
                     RouteGen.SelectedItem = "Speedrunner";
                     break;
-                case RandomizerDifficulty.Masochist:
+                case "Masochist":
                     NormalMissiles.Value = 15;
+                    NormalMissilesMax.Value = 15;
                     SuperMissiles.Value = 15;
+                    SuperMissilesMax.Value = 15;
                     PowerBombs.Value = 15;
+                    PowerBombsMax.Value = 15;
                     EnergyTanks.Value = 3;
+                    EnergyTanksMax.Value = 3;
                     AllowHiddenItems.Checked = true;
                     RouteGen.SelectedItem = "Masochist";
                     break;
@@ -64,6 +76,10 @@ namespace SuperMetroidRandomizer
                     SuperMissiles.Value = Settings.Default.CustomSuperMissiles;
                     PowerBombs.Value = Settings.Default.CustomPowerBombs;
                     EnergyTanks.Value = Settings.Default.CustomEnergyTanks;
+                    NormalMissilesMax.Value = Settings.Default.CustomNormalMissilesMax;
+                    SuperMissilesMax.Value = Settings.Default.CustomSuperMissilesMax;
+                    PowerBombsMax.Value = Settings.Default.CustomPowerBombsMax;
+                    EnergyTanksMax.Value = Settings.Default.CustomEnergyTanksMax;
                     AllowHiddenItems.Checked = Settings.Default.CustomHiddenItems;
                     RouteGen.SelectedItem = Settings.Default.CustomRouteGen;
                     break;
@@ -76,6 +92,10 @@ namespace SuperMetroidRandomizer
             Settings.Default.CustomSuperMissiles = SuperMissiles.Value;
             Settings.Default.CustomPowerBombs = PowerBombs.Value;
             Settings.Default.CustomEnergyTanks = EnergyTanks.Value;
+            Settings.Default.CustomNormalMissilesMax = NormalMissilesMax.Value;
+            Settings.Default.CustomSuperMissilesMax = SuperMissilesMax.Value;
+            Settings.Default.CustomPowerBombsMax = PowerBombsMax.Value;
+            Settings.Default.CustomEnergyTanksMax = EnergyTanksMax.Value;
             Settings.Default.CustomHiddenItems = AllowHiddenItems.Checked;
             Settings.Default.CustomRouteGen = RouteGen.SelectedItem.ToString();
 
@@ -109,36 +129,37 @@ namespace SuperMetroidRandomizer
 
         private void ValueChanged(object sender, EventArgs e)
         {
+            if (sender == NormalMissilesMax && NormalMissilesMax.Value < NormalMissiles.Value)
+                NormalMissilesMax.Value = NormalMissiles.Value;
+            else if (sender == SuperMissilesMax && SuperMissilesMax.Value < SuperMissiles.Value)
+                SuperMissilesMax.Value = SuperMissiles.Value;
+            else if (sender == PowerBombsMax && PowerBombsMax.Value < PowerBombs.Value)
+                PowerBombsMax.Value = PowerBombs.Value;
+            else if (sender == EnergyTanksMax && EnergyTanksMax.Value < EnergyTanks.Value)
+                EnergyTanksMax.Value = EnergyTanks.Value;
+
             decimal percent = CalculatePercentage();
-            if (percent > 100)
-                NoFill.Enabled = RandomBlanks.Enabled = RandomNoBlanks.Enabled = CustomSave.Enabled = false;
-            else if (percent == 100)
-            {
-                NoFill.Enabled = RandomBlanks.Enabled = RandomNoBlanks.Enabled = false;
-                CustomSave.Enabled = true;
-            }
+            if (percent > 100 && !RandomNoBlanks.Checked)
+                CustomSave.Enabled = false;
             else
-                NoFill.Enabled = RandomBlanks.Enabled = RandomNoBlanks.Enabled = CustomSave.Enabled = true;
+                CustomSave.Enabled = true;
 
             if (NoFill.Enabled && !NoFill.Checked)
             {
-                label1.Text = label1.Text.Replace("Max", "Min");
-                label2.Text = label2.Text.Replace("Max", "Min");
-                label3.Text = label3.Text.Replace("Max", "Min");
-                label4.Text = label4.Text.Replace("Max", "Min");
+                Minlbl.Visible = Maxlbl.Visible = NormalMissilesMax.Visible = SuperMissilesMax.Visible = PowerBombsMax.Visible = EnergyTanksMax.Visible = true;
             }
             else
-            {
-                label1.Text = label1.Text.Replace("Min", "Max");
-                label2.Text = label2.Text.Replace("Min", "Max");
-                label3.Text = label3.Text.Replace("Min", "Max");
-                label4.Text = label4.Text.Replace("Min", "Max");
-            }
+                Minlbl.Visible = Maxlbl.Visible = NormalMissilesMax.Visible = SuperMissilesMax.Visible = PowerBombsMax.Visible = EnergyTanksMax.Visible = false;
 
             if (RandomBlanks.Enabled && RandomBlanks.Checked)
                 Percent.Text = "??%";
             else if (RandomNoBlanks.Enabled && RandomNoBlanks.Checked)
-                Percent.Text = "100%";
+            {
+                if (percent > 100)
+                    Percent.Text = "100%";
+                else
+                    Percent.Text = string.Format("{0}%", percent);
+            }
             else
                 Percent.Text = string.Format("{0}%", percent);
         }
@@ -148,14 +169,14 @@ namespace SuperMetroidRandomizer
             decimal start = 0;
             switch(DifficultyDefault)
             {
-                case RandomizerDifficulty.Casual:
+                case "Casual":
                     start = 20;
                     break;
-                case RandomizerDifficulty.Speedrunner:
-                    start = 23;
+                case "Speedrunner":
+                    start = 20;
                     break;
-                case RandomizerDifficulty.Masochist:
-                    start = 16;
+                case "Masochist":
+                    start = 13;
                     break;
                 default:
                     start = 20;
@@ -163,6 +184,11 @@ namespace SuperMetroidRandomizer
             }
 
             start += (NormalMissiles.Value / 5) + (SuperMissiles.Value / 5) + (PowerBombs.Value / 5) + EnergyTanks.Value;
+            if (RandomNoBlanks.Checked)
+            {
+                start += ((NormalMissilesMax.Value - NormalMissiles.Value) / 5) + ((SuperMissilesMax.Value - SuperMissiles.Value) / 5);
+                start += ((PowerBombsMax.Value - PowerBombs.Value) / 5) + (EnergyTanksMax.Value - EnergyTanks.Value);
+            }
             return start;
         }
     }

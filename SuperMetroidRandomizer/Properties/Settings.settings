@@ -62,5 +62,17 @@
     <Setting Name="CustomRouteGen" Type="System.String" Scope="User">
       <Value Profile="(Default)">Casual</Value>
     </Setting>
+    <Setting Name="CustomNormalMissilesMax" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">230</Value>
+    </Setting>
+    <Setting Name="CustomSuperMissilesMax" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="CustomPowerBombsMax" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="CustomEnergyTanksMax" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
