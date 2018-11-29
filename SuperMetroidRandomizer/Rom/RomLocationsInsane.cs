@@ -846,7 +846,9 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessLowerNorfair(have),
+                                       CanAccessLowerNorfair(have)
+                                       && (have.Contains(ItemType.SpeedBooster)
+                                           || have.Contains(ItemType.SpringBall)),
                                },
                            new Location
                                {
@@ -927,7 +929,9 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessLowerNorfair(have),
+                                       CanAccessLowerNorfair(have)
+                                       && (have.Contains(ItemType.SpeedBooster)
+                                           || have.Contains(ItemType.SpringBall)),
                                },
                            new Location
                                {
