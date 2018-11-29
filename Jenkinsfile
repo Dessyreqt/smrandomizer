@@ -3,6 +3,6 @@ node {
 		checkout scm
 
 	stage 'Build'
-		bat 'dotnet restore SuperMetroidRandomizer.sln'
-		bat 'dotnet build SuperMetroidRandomizer.sln -c Release'
+		bat 'nuget restore SuperMetroidRandomizer.sln'
+		bat "\"${tool 'MSBuild'}\" SuperMetroidRandomizer.sln /p:Configuration=Release"
 }
