@@ -114,7 +114,10 @@ namespace SuperMetroidRandomizer
             filenameV11.Text = Settings.Default.OutputFileV11;
             createSpoilerLog.Checked = Settings.Default.CreateSpoilerLog;
             Text = string.Format("Super Metroid Randomizer v{0}", RandomizerVersion.CurrentDisplay);
-            randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
+            if (Settings.Default.UseCustomSettings)
+                randomizerDifficulty.SelectedItem = "Custom";
+            else
+                randomizerDifficulty.SelectedItem = Settings.Default.RandomizerDifficulty;
             RunCheckUpdate();
         }
 
@@ -201,20 +204,33 @@ namespace SuperMetroidRandomizer
             if (seedV11.Text.ToUpper().Contains("C"))
             {
                 randomizerDifficulty.SelectedItem = "Casual";
+                Settings.Default.RandomizerDifficulty = "Casual";
                 seedV11.Text = seedV11.Text.ToUpper().Replace("C", "");
                 difficulty = RandomizerDifficulty.Casual;
+                Settings.Default.UseCustomSettings = false;
             }
             else if (seedV11.Text.ToUpper().Contains("S"))
             {
                 randomizerDifficulty.SelectedItem = "Speedrunner";
+                Settings.Default.RandomizerDifficulty = "Speedrunner";
                 seedV11.Text = seedV11.Text.ToUpper().Replace("S", "");
                 difficulty = RandomizerDifficulty.Speedrunner;
+                Settings.Default.UseCustomSettings = false;
             }
             else if (seedV11.Text.ToUpper().Contains("M"))
             {
                 randomizerDifficulty.SelectedItem = "Masochist";
+                Settings.Default.RandomizerDifficulty = "Masochist";
                 seedV11.Text = seedV11.Text.ToUpper().Replace("M", "");
                 difficulty = RandomizerDifficulty.Masochist;
+                Settings.Default.UseCustomSettings = false;
+            }
+            else if (seedV11.Text.ToUpper().Contains("X"))
+            {
+                randomizerDifficulty.SelectedItem = "Custom";
+                seedV11.Text = seedV11.Text.ToUpper().Replace("X", "");
+                difficulty = GetDifficultyFromString(Settings.Default.CustomRouteGen);
+                Settings.Default.UseCustomSettings = true;
             }
             //else if (seedV11.Text.ToUpper().Contains("I"))
             //{
@@ -228,12 +244,19 @@ namespace SuperMetroidRandomizer
                 {
                     case "Casual":
                         difficulty = RandomizerDifficulty.Casual;
+                        Settings.Default.UseCustomSettings = false;
                         break;
                     case "Speedrunner":
                         difficulty = RandomizerDifficulty.Speedrunner;
+                        Settings.Default.UseCustomSettings = false;
                         break;
                     case "Masochist":
                         difficulty = RandomizerDifficulty.Masochist;
+                        Settings.Default.UseCustomSettings = false;
+                        break;
+                    case "Custom":
+                        difficulty = GetDifficultyFromString(Settings.Default.CustomRouteGen);
+                        Settings.Default.UseCustomSettings = true;
                         break;
                     //case "Insane":
                     //    difficulty = RandomizerDifficulty.Insane;
@@ -245,6 +268,21 @@ namespace SuperMetroidRandomizer
                 }
             }
             return difficulty;
+        }
+
+        public RandomizerDifficulty GetDifficultyFromString(string str)
+        {
+            switch (str)
+            {
+                case "Casual":
+                    return RandomizerDifficulty.Casual;
+                case "Speedrunner":
+                    return RandomizerDifficulty.Speedrunner;
+                case "Masochist":
+                    return RandomizerDifficulty.Masochist;
+                default:
+                    return RandomizerDifficulty.Casual;
+            }
         }
 
         private void SetSeedBasedOnDifficulty()
@@ -259,6 +297,9 @@ namespace SuperMetroidRandomizer
                     break;
                 case "Insane":
                     seedV11.Text = string.Format("I{0:0000000}", (new SeedRandom()).Next(10000000));
+                    break;
+                case "Custom":
+                    seedV11.Text = string.Format("X{0:0000000}", (new SeedRandom()).Next(10000000));
                     break;
                 default:
                     seedV11.Text = string.Format("S{0:0000000}", (new SeedRandom()).Next(10000000));
@@ -329,6 +370,16 @@ namespace SuperMetroidRandomizer
 
             var difficulty = GetRandomizerDifficulty();
             CreateSpoilerLog(difficulty);
+        }
+
+        private void CustomV11_Click(object sender, EventArgs e)
+        {
+            Customize customizeDialog = null;
+            customizeDialog = new Customize(randomizerDifficulty.SelectedItem.ToString());
+            customizeDialog.ShowDialog();
+
+            if (Settings.Default.UseCustomSettings)
+                randomizerDifficulty.SelectedItem = "Custom";
         }
     }
 }

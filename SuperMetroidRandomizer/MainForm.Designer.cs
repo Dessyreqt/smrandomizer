@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.output = new System.Windows.Forms.TextBox();
             this.process = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -46,7 +47,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.randomizerDifficulty = new System.Windows.Forms.ComboBox();
             this.controlsV11 = new System.Windows.Forms.Button();
-            this.browseV11 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.outputV11 = new System.Windows.Forms.TextBox();
             this.seedV11 = new System.Windows.Forms.TextBox();
@@ -55,7 +55,10 @@
             this.filenameV11 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.controls = new System.Windows.Forms.Button();
+            this.CustomV11 = new System.Windows.Forms.Button();
+            this.browseV11 = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -187,6 +190,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.CustomV11);
             this.tabPage1.Controls.Add(this.randomSpoiler);
             this.tabPage1.Controls.Add(this.report);
             this.tabPage1.Controls.Add(this.createSpoilerLog);
@@ -233,7 +237,7 @@
             // createSpoilerLog
             // 
             this.createSpoilerLog.AutoSize = true;
-            this.createSpoilerLog.Location = new System.Drawing.Point(192, 7);
+            this.createSpoilerLog.Location = new System.Drawing.Point(407, 0);
             this.createSpoilerLog.Name = "createSpoilerLog";
             this.createSpoilerLog.Size = new System.Drawing.Size(113, 17);
             this.createSpoilerLog.TabIndex = 21;
@@ -256,7 +260,8 @@
             this.randomizerDifficulty.Items.AddRange(new object[] {
             "Casual",
             "Speedrunner",
-            "Masochist"});
+            "Masochist",
+            "Custom"});
             this.randomizerDifficulty.Location = new System.Drawing.Point(64, 6);
             this.randomizerDifficulty.Name = "randomizerDifficulty";
             this.randomizerDifficulty.Size = new System.Drawing.Size(121, 21);
@@ -272,17 +277,6 @@
             this.controlsV11.Text = "Controls";
             this.controlsV11.UseVisualStyleBackColor = true;
             this.controlsV11.Click += new System.EventHandler(this.controlsV11_Click);
-            // 
-            // browseV11
-            // 
-            this.browseV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseV11.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
-            this.browseV11.Location = new System.Drawing.Point(495, 82);
-            this.browseV11.Name = "browseV11";
-            this.browseV11.Size = new System.Drawing.Size(25, 25);
-            this.browseV11.TabIndex = 15;
-            this.browseV11.UseVisualStyleBackColor = true;
-            this.browseV11.Click += new System.EventHandler(this.browseV11_Click);
             // 
             // label3
             // 
@@ -380,6 +374,28 @@
             this.controls.UseVisualStyleBackColor = true;
             this.controls.Click += new System.EventHandler(this.controls_Click);
             // 
+            // CustomV11
+            // 
+            this.CustomV11.Location = new System.Drawing.Point(191, 5);
+            this.CustomV11.Name = "CustomV11";
+            this.CustomV11.Size = new System.Drawing.Size(88, 23);
+            this.CustomV11.TabIndex = 36;
+            this.CustomV11.Text = "Customize...";
+            this.toolTip1.SetToolTip(this.CustomV11, "Select difficulty first to start with a template.");
+            this.CustomV11.UseVisualStyleBackColor = true;
+            this.CustomV11.Click += new System.EventHandler(this.CustomV11_Click);
+            // 
+            // browseV11
+            // 
+            this.browseV11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.browseV11.Image = global::SuperMetroidRandomizer.Properties.Resources.MenuFileSaveIcon;
+            this.browseV11.Location = new System.Drawing.Point(495, 82);
+            this.browseV11.Name = "browseV11";
+            this.browseV11.Size = new System.Drawing.Size(25, 25);
+            this.browseV11.TabIndex = 15;
+            this.browseV11.UseVisualStyleBackColor = true;
+            this.browseV11.Click += new System.EventHandler(this.browseV11_Click);
+            // 
             // save
             // 
             this.save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -441,6 +457,8 @@
         private System.Windows.Forms.CheckBox createSpoilerLog;
         private System.Windows.Forms.Button report;
         private System.Windows.Forms.Button randomSpoiler;
+        private System.Windows.Forms.Button CustomV11;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

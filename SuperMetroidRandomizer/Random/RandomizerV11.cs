@@ -58,6 +58,8 @@ namespace SuperMetroidRandomizer.Random
         {
             string usedFilename = FileName.Fix(filename, string.Format(romLocations.SeedFileString, seed));
             var hideLocations = !(romLocations is RomLocationsCasual);
+            if (Settings.Default.UseCustomSettings && !Settings.Default.CustomHiddenItems)
+                hideLocations = false;
 
             using (var rom = new FileStream(usedFilename, FileMode.OpenOrCreate))
             {
@@ -259,13 +261,113 @@ namespace SuperMetroidRandomizer.Random
         {
             romLocations.ResetLocations();
             haveItems = new List<ItemType>();
-            itemPool = romLocations.GetItemPool(random);
+            if (Settings.Default.UseCustomSettings)
+                itemPool = CreateItemPool(random);
+            else
+                itemPool = romLocations.GetItemPool(random);
             var unavailableLocations = romLocations.GetUnavailableLocations(itemPool);
 
             for (int i = itemPool.Count; i < 100 - unavailableLocations.Count; i++)
             {
                 itemPool.Add(ItemType.Nothing);
             }
+        }
+
+        private List<ItemType> CreateItemPool(SeedRandom random)
+        {
+            List<ItemType> pool = new List<ItemType>();
+
+            switch (Settings.Default.CustomRouteGen)
+            {
+                case "Masochist":
+                    pool.AddRange(new List<ItemType>
+                                    {
+                                        ItemType.MorphingBall, ItemType.Bomb, ItemType.ChargeBeam,
+                                        ItemType.Spazer, ItemType.VariaSuit, ItemType.HiJumpBoots,
+                                        ItemType.SpeedBooster, ItemType.WaveBeam, ItemType.GrappleBeam,
+                                        ItemType.SpringBall, ItemType.IceBeam, ItemType.XRayScope,
+                                        ItemType.ReserveTank
+                                    });
+                    break;
+                default:
+                    pool.AddRange(new List<ItemType>
+                                    {
+                                        ItemType.MorphingBall, ItemType.Bomb, ItemType.ChargeBeam,
+                                        ItemType.Spazer, ItemType.VariaSuit, ItemType.HiJumpBoots,
+                                        ItemType.SpeedBooster, ItemType.WaveBeam, ItemType.GrappleBeam,
+                                        ItemType.GravitySuit, ItemType.SpaceJump, ItemType.SpringBall,
+                                        ItemType.PlasmaBeam, ItemType.IceBeam, ItemType.ScrewAttack,
+                                        ItemType.XRayScope, ItemType.ReserveTank, ItemType.ReserveTank,
+                                        ItemType.ReserveTank, ItemType.ReserveTank
+                                    });
+                    break;
+            }
+
+            decimal addMissiles = Settings.Default.CustomNormalMissiles / 5;
+            decimal addMissilesMax = Settings.Default.CustomNormalMissilesMax / 5;
+            decimal addSMissiles = Settings.Default.CustomSuperMissiles / 5;
+            decimal addSMissilesMax = Settings.Default.CustomSuperMissilesMax / 5;
+            decimal addPBombs = Settings.Default.CustomPowerBombs / 5;
+            decimal addPBombsMax = Settings.Default.CustomPowerBombsMax / 5;
+            decimal addETanks = Settings.Default.CustomEnergyTanks;
+            decimal addETanksMax = Settings.Default.CustomEnergyTanksMax;
+
+            for (int i = 0; i < addMissiles; i++)
+                pool.Add(ItemType.Missile);
+            for (int i = 0; i < addSMissiles; i++)
+                pool.Add(ItemType.SuperMissile);
+            for (int i = 0; i < addPBombs; i++)
+                pool.Add(ItemType.PowerBomb);
+            for (int i = 0; i < addETanks; i++)
+                pool.Add(ItemType.EnergyTank);
+            
+            if (pool.Count < 100 && (Settings.Default.CustomRandomBlanks || Settings.Default.CustomRandomNoBlanks))
+            {
+                while (pool.Count < 100)
+                {
+                    int rand = 0; 
+                    if (Settings.Default.CustomRandomBlanks)
+                        rand = random.Next(8);
+                    else if (Settings.Default.CustomRandomNoBlanks)
+                        rand = random.Next(4);
+                    switch (rand)
+                    {
+                        case 0:
+                            if (addMissiles < addMissilesMax)
+                            {
+                                pool.Add(ItemType.Missile);
+                                ++addMissiles;
+                            }
+                            break;
+                        case 1:
+                            if (addSMissiles < addSMissilesMax)
+                            {
+                                pool.Add(ItemType.SuperMissile);
+                                ++addSMissiles;
+                            }
+                            break;
+                        case 2:
+                            if (addPBombs < addPBombsMax)
+                            {
+                                pool.Add(ItemType.PowerBomb);
+                                ++addPBombs;
+                            }
+                            break;
+                        case 3:
+                            if (addETanks < addETanksMax)
+                            {
+                                pool.Add(ItemType.EnergyTank);
+                                ++addETanks;
+                            }
+                            break;
+                        default:
+                            pool.Add(ItemType.Nothing);
+                            break;
+                    }
+                }
+            }
+
+            return pool;
         }
     }
 }
