@@ -32,4 +32,4 @@ This is a technique allowing you to open green gates and wave gates without wave
 You can also open right facing gates from the "wrong" side in certain circumstances, as shown here: http://www.twitch.tv/dessyreqt/c/4390398
 
 ## Zebetite Glitch
-Probably you will want to know this with how little ammo there is in randomizer nowadays. Here's an entire article on the subject: http://deanyd.net/sm/index.php?title=Zebetite_Glitch
+Probably you will want to know this with how little ammo there is in randomizer nowadays. Here's an entire article on the subject: https://wiki.supermetroid.run/Mother_Brain_Room#Zebetite_Glitch
